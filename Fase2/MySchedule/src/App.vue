@@ -3,76 +3,92 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
+<<<<<<< HEAD
+  <div class="app-container">
+    <aside class="sidebar">
+      <nav class="nav-links">
+        <RouterLink to="/perfil">Perfil</RouterLink>
+        <RouterLink to="/unidades">Unidades Curriculares</RouterLink>
+        <RouterLink to="/horarios-dc">Horário</RouterLink>
+        <RouterLink to="/caderno">Caderno</RouterLink>
+        <RouterLink to="/mensagens">Mensagens</RouterLink>
+        <RouterLink to="/gestao">Gestão</RouterLink>
+        <RouterLink to="/terminar">Terminar Sessão</RouterLink>
       </nav>
-    </div>
-  </header>
+    </aside>
 
-  <RouterView />
+    <div class="main-wrapper">
+      <main class="main-content">
+        <RouterView />
+      </main>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Sem scroll geral */
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
-nav {
+.sidebar {
+  width: 150px;
+  background-color: #373737;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  font-size: 12px;
+}
+
+.nav-links a {
+  padding: 1.5rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
   text-align: center;
-  margin-top: 2rem;
+  border-bottom: 1px solid #444;
+  transition: background-color 0.3s;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.nav-links a:hover {
+  background-color: #555; 
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-links a.router-link-exact-active {
+  background-color: #ffffff; 
+  color: black;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.main-wrapper {
+  width: calc(100% - 150px);
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #fff;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.main-content {
+  width: 100%;
+  max-width: 1400px; /* Opcional para limitar muito grandes */
 }
 </style>
