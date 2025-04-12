@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HorariosDC from '@/views/HorariosDC.vue'
 import Mensagens from '@/views/Mensagens.vue' 
 
+import uc_DC from '@/views/uc_DC.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,11 +16,18 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
     },
     {
+
       path: '/mensagens',
       name: 'Mensagens',
       component: Mensagens  // Componente Mensagens.vue
+
+      path: '/unidades',
+      name: 'UnidadesC',
+      component: uc_DC,
+
     },
   ],
 })
+
 
 export default router
