@@ -1,0 +1,91 @@
+{
+    "anos": [
+      {
+        "titulo": "1°ano - 1°semestre",
+        "ano": 1,
+        "semestre": 1,
+        "horas": [
+          "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
+        ],
+        "dias": ["segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira"],
+        "aulas": [
+          {
+            "dia": "segunda-feira",
+            "hora": "11:00",
+            "disciplina": "Cálculo para Engenharia",
+            "sala": "Ed.3 - 2.03",
+            "tp": "TP5",
+            "capacidade": "parcial",
+            "duracao": 2
+          },
+          {
+            "dia": "segunda-feira",
+            "hora": "09:00",
+            "disciplina": "Programação Funcional",
+            "sala": "Ed.3 - 1.04",
+            "tp": "TP3",
+            "capacidade": "livre",
+            "duracao": 2
+          },
+          {
+            "dia": "quarta-feira",
+            "hora": "11:00",
+            "disciplina": "Tópicos de Matemática Discreta",
+            "sala": "Ed.2 - 2.05",
+            "tp": "TP1",
+            "capacidade": "total",
+            "duracao": 2
+          },
+          {
+            "dia": "sexta-feira",
+            "hora": "09:00",
+            "disciplina": "Programação Funcional",
+            "sala": "Ed.1 - 2.17",
+            "tp": "TP1",
+            "capacidade": "parcial",
+            "duracao": 2
+          }
+        ]
+      },
+      {
+        "titulo": "2°ano - 1°semestre",
+        "ano": 2,
+        "semestre": 1,
+        "horas": [
+          "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
+        ],
+        "dias": ["segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira"],
+        "aulas": [
+          {
+            "dia": "segunda-feira",
+            "hora": "09:00",
+            "disciplina": "Programação Funcional",
+            "sala": "Ed.3 - 1.04",
+            "tp": "TP3",
+            "capacidade": "total",
+            "duracao": 2
+            }
+        ]
+      },
+      {
+        "titulo": "3°ano - 1°semestre",
+        "ano": 3,
+        "semestre": 1,
+        "horas": [
+          "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
+        ],
+        "dias": ["segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira"],
+        "aulas": [
+          {
+            "dia": "segunda-feira",
+            "hora": "09:00",
+            "disciplina": "Programação Funcional",
+            "sala": "Ed.3 - 1.04",
+            "tp": "TP3",
+            "capacidade": "total",
+            "duracao": 2
+         }
+        ]
+    }
+]
+}
