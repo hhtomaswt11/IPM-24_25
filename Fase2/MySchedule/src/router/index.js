@@ -11,20 +11,16 @@ const router = createRouter({
       path: '/horarios-dc',
       name: 'Horarios',
       component: HorariosDC,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
     },
     {
-
       path: '/mensagens',
       name: 'Mensagens',
-      component: Mensagens  // Componente Mensagens.vue
-
+      component: Mensagens,
+    },
+    {
       path: '/unidades',
       name: 'UnidadesC',
       component: uc_DC,
-
     },
   ],
 })
