@@ -1,7 +1,9 @@
 <template>
-    <div class="messages-container">
-      <!-- Barra de pesquisa -->
+  <div class="messages-container">
+    <div class="top-bar">
+      <Botao label="Nova Mensagem" />
       <SearchBar />
+    </div>
   
       <div class="messages-boxes">
         <!-- Caixa de Mensagens Recebidas -->
@@ -25,6 +27,7 @@
   
   <script setup>
   import SearchBar from '@/components/BarraPesquisa.vue';
+  import Botao from '@/components/Botao.vue';
   </script>
   
   <style scoped>
@@ -35,12 +38,23 @@
     padding: 20px;
     margin-left: 60px; /* Espaço suficiente para a barra de navegação */
   }
+
+  .top-bar {
+  display: flex;
+  width: 100%; /* Ocupar toda a largura disponível */
+  justify-content: flex-end;
+  gap: 20px; /* Adiciona espaço entre o botão e a barra */
+  align-items: center; /* Centralizar verticalmente */
+  margin-bottom: 20px; /* Espaço abaixo antes das caixas */
+}
   
   .messages-boxes {
     display: flex;
     gap: 150px; /* Espaçamento entre os retângulos */
-    margin-top: 100px; /* Distância da barra de navegação */
+    margin-top: 50px; /* Distância da barra de navegação */
   }
+
+
   
   /* Caixa de mensagens */
   .message-box {
