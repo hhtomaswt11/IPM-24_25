@@ -1,6 +1,8 @@
 <template>
   <button class="botao" @click="onClick">
-    {{ label }}
+    <slot>
+      {{ label }}
+    </slot>
   </button>
 </template>
 
@@ -34,6 +36,10 @@ function onClick() {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .botao:hover {
