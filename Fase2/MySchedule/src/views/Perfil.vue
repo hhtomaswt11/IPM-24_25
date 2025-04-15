@@ -46,7 +46,7 @@
               <div class="label">Cargos</div>
               <div class="valor">
                 Diretor do curso de Engenharia Informática<br />
-                Docente do Ensino Superior
+                Regente da UC Robótica Inteligente
               </div>
             </div>
             <div class="campo">
