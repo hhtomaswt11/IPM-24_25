@@ -1,28 +1,21 @@
 <template>
-    <div class="secao-horario">
-      <h2 class="titulo-horario">{{ titulo }}</h2>
-      <TabelaHorario :horario="horario" />
-    </div>
+  <div class="seccao-horario">
+    <h2 class="titulo-horario">{{ titulo }}</h2>
+    <TabelaHorario :horario="horario" />
+  </div>
 </template>
-  
+
 <script setup>
-  import TabelaHorario from './TabelaHorario.vue'
-  
-  const props = defineProps({
-    titulo: {
-        type: String,
-        required: true
-    },
-    horario: {
-        type: Object,
-        required: true
-    }
-    })
-    
+import TabelaHorario from './TabelaHorario.vue';
+
+defineProps({
+  titulo: String,
+  horario: Object
+});
 </script>
-  
+
   <style scoped>
-  .secao-horario {
+  .seccao-horario {
     margin-bottom: 2.5rem;
   }
   

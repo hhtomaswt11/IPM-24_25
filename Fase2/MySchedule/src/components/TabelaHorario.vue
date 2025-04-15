@@ -3,8 +3,8 @@
     <table class="tabela-horario">
       <thead>
         <tr>
-          <th></th>
-          <th v-for="dia in horario.dias" :key="dia">{{ dia }}</th>
+          <th class="divisao"></th>
+          <th class="dias" v-for="dia in horario.dias" :key="dia">{{ dia }}</th>
         </tr>
       </thead>
       <tbody>
@@ -12,16 +12,17 @@
           <td class="hora-coluna">{{ hora }}</td>
           <template v-for="(dia, diaIndex) in horario.dias" :key="dia">
             <td v-if="!isCelulaOcupada(horaIndex, diaIndex)" :rowspan="getRowspan(hora, dia)">
-              <div 
-                  v-for="(aula, index) in getAulas(hora, dia)" :key="index" class="aula" :class="{
+              <div class="aulas-container">
+                <div v-for="(aula, index) in getAulas(hora, dia)" :key="index" class="aula" :class="{
                     'aula-total': aula.capacidade === 'total',
                     'aula-parcial': aula.capacidade === 'parcial',
                     'aula-livre': !aula.capacidade || aula.capacidade === 'livre'
                   }"
                 >
-                <strong>{{ aula.disciplina }}</strong><br />
-                {{ aula.tp }}<br />
-                <small>{{ aula.sala }}</small>
+                  {{ aula.disciplina }}<br />
+                  {{ aula.tp }}<br />
+                  {{ aula.sala }}
+                </div>
               </div>
             </td>
           </template>
@@ -36,18 +37,19 @@ import { computed } from 'vue';
 
 const props = defineProps(['horario']);
 
-// Marcar células ocupadas por rowspans de aulas
+// Marca as células ocupadas por rowspans de aulas
 const celulaOcupada = computed(() => {
   const matriz = {};
 
-  if (!props.horario || !props.horario.aulas) return matriz;
+  if (!props.horario || !props.horario.shifts) return matriz;
 
-  props.horario.aulas.forEach(aula => {
-    const horaIndex = props.horario.horas.indexOf(aula.hora);
-    const diaIndex = props.horario.dias.indexOf(aula.dia);
+  props.horario.shifts.forEach(shift => {
+    const horaIndex = props.horario.horas.indexOf(`${shift.from}:00`);
+    const diaIndex = props.horario.dias.indexOf(shift.day);
 
     if (horaIndex >= 0 && diaIndex >= 0) {
-      for (let i = 1; i < aula.duracao; i++) {
+      const duracao = shift.to - shift.from;
+      for (let i = 1; i < duracao; i++) {
         const key = `${horaIndex + i}-${diaIndex}`;
         matriz[key] = true;
       }
@@ -62,7 +64,31 @@ function isCelulaOcupada(horaIndex, diaIndex) {
 }
 
 function getAulas(hora, dia) {
-  return props.horario.aulas.filter(a => a.hora === hora && a.dia === dia);
+  if (!props.horario || !props.horario.shifts) return [];
+  
+  const horaNum = parseInt(hora.split(':')[0]);
+  
+  return props.horario.shifts
+    .filter(shift => shift.from === horaNum && shift.day === dia)
+    .map(shift => {
+      // Encontrar informações relacionadas
+      const course = props.horario.courses.find(c => c.id === shift.courseId) || {};
+      const classroom = props.horario.classrooms.find(c => c.id === shift.classroomId) || {};
+      
+      // Determinar capacidade com base em totalStudentsRegistered
+      let capacidade = 'livre';
+      if (shift.totalStudentsRegistered > 50) {
+        capacidade = shift.totalStudentsRegistered >= classroom.capacity ? 'total' : 'parcial';
+      }
+      
+      return {
+        disciplina: course.abbreviation || 'Unknown',
+        tp: `${shift.name}`,
+        sala: classroom.name || 'Unknown',
+        capacidade: shift.capacity,
+        duracao: shift.to - shift.from
+      };
+    });
 }
 
 function getRowspan(hora, dia) {
@@ -75,37 +101,62 @@ function getRowspan(hora, dia) {
 <style scoped>
 .tabela-wrapper {
   overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 60px;
 }
 
 .tabela-horario {
+  table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
   text-align: center;
   font-size: 0.875rem;
+  color: #000000;
 }
 
 th,
 td {
-  border: 1px solid #ccc;
+  width: 120px;
+  height: 60px;
+  border: 1px solid #727272;
+  overflow: hidden;
   padding: 6px;
   vertical-align: top;
-  height: 60px;
+}
+
+.divisao{
+  background-color: white;
+  border : 0px;
+}
+
+.dias{
+  font-weight: bold;
+  background-color: #B9B9B9;
 }
 
 .hora-coluna {
   font-weight: bold;
-  background-color: #f1f1f1;
+  background-color: #B9B9B9;
   width: 80px;
 }
 
-.aula {
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+.aulas-container {
+  display: flex;
+  gap: 5px;
   height: 100%;
+  width: 100%;
+}
+
+.aula {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .aula-total {
@@ -117,6 +168,6 @@ td {
 }
 
 .aula-livre {
-  background-color: #d1d5db;
+  background-color: #EBE7E1;
 }
 </style>
