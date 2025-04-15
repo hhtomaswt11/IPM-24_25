@@ -5,7 +5,6 @@ import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sid
 
 <template>
   <div class="app-container">
-    <!-- Barra de navegação como componente -->
     <Sidebar />
 
     <div class="main-wrapper">
@@ -16,12 +15,12 @@ import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sid
   </div>
 </template>
 
-<style scoped>
+<style >
 html, body, #app {
   height: 100%;
-  margin: 0;
+  width: 100%;
+  margin: 10;
   padding: 0;
-  overflow: hidden; /* Sem scroll geral */
 }
 
 .app-container {
@@ -31,7 +30,7 @@ html, body, #app {
 }
 
 .main-wrapper {
-  width: calc(100% - 150px);
+  flex: 1;  
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
