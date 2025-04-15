@@ -37,6 +37,15 @@
             "duracao": 2
           },
           {
+            "dia": "quarta-feira",
+            "hora": "11:00",
+            "disciplina": "Tópicos de Matemática Discreta",
+            "sala": "Ed.2 - 2.05",
+            "tp": "TP1",
+            "capacidade": "total",
+            "duracao": 2
+          },
+          {
             "dia": "sexta-feira",
             "hora": "09:00",
             "disciplina": "Programação Funcional",
