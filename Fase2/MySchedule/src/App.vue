@@ -31,7 +31,7 @@ html, body, #app {
 }
 
 .main-wrapper {
-  margin-left: 150px; /* 👈 Isto empurra o conteúdo para a direita da sidebar */
+  margin-left: 150px; 
   width: calc(100% - 150px);
   height: 100vh;
   overflow-y: auto;
