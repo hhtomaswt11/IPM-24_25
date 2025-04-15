@@ -22,20 +22,20 @@
   </script>
   
   <style scoped>
-  .navegacao {
-    width: 150px;
-    background-color: #373737;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 90px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    justify-content: flex-start;
-    z-index: 9999; /* Garantir que a sidebar fique por cima de tudo */
-  }
+.navegacao {
+  width: 150px;
+  background-color: #373737;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: flex-start;
+  z-index: 9999;
+}
   
   .nav-links {
     display: flex;

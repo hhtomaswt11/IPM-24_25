@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sidebar
+import { RouterView } from 'vue-router'
+import Sidebar from '@/components/Navegacao.vue'
 </script>
 
 <template>
   <div class="app-container">
     <Sidebar />
-
     <div class="main-wrapper">
       <main class="main-content">
         <RouterView />
@@ -17,20 +16,23 @@ import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sid
 
 <style >
 html, body, #app {
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
-  margin: 10;
-  padding: 0;
+  overflow: hidden;
 }
 
 .app-container {
   display: flex;
+  width: 100%;
   height: 100vh;
-  width: 100vw;
+  overflow: hidden;
 }
 
 .main-wrapper {
-  flex: 1;  
+  margin-left: 150px; 
+  width: calc(100% - 150px);
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -41,6 +43,5 @@ html, body, #app {
 
 .main-content {
   width: 100%;
-  max-width: 1400px;
 }
 </style>
