@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sidebar
+import { RouterView } from 'vue-router'
+import Sidebar from '@/components/Navegacao.vue'
 </script>
 
 <template>
   <div class="app-container">
-    <!-- Barra de navegação como componente -->
     <Sidebar />
-
     <div class="main-wrapper">
       <main class="main-content">
         <RouterView />
@@ -18,19 +16,22 @@ import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sid
 
 <style scoped>
 html, body, #app {
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Sem scroll geral */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .app-container {
   display: flex;
+  width: 100%;
   height: 100vh;
-  width: 100vw;
+  overflow: hidden;
 }
 
 .main-wrapper {
+  margin-left: 150px; /* 👈 Isto empurra o conteúdo para a direita da sidebar */
   width: calc(100% - 150px);
   height: 100vh;
   overflow-y: auto;
@@ -42,6 +43,5 @@ html, body, #app {
 
 .main-content {
   width: 100%;
-  max-width: 1400px;
 }
 </style>

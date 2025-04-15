@@ -29,7 +29,7 @@ function onClick() {
   height: 53px;
   background-color: #FFFBFB;
   border: 1px solid #CEC9C9;
-  color: rgba(2, 2, 2, 0.6);
+  color: #02020299;
   font-family: 'Meera Inimai', sans-serif;
   font-size: 16px;
   font-weight: bold;
