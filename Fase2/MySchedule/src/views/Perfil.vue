@@ -1,6 +1,5 @@
 <template>
     <div class="perfil-container">
-      <!-- Top bar com ícone, nome e botão -->
       <div class="top-bar">
         <div class="perfil-info">
           <User class="user-icon" />
