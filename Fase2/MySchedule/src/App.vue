@@ -14,7 +14,7 @@ import Sidebar from '@/components/Navegacao.vue'
   </div>
 </template>
 
-<style scoped>
+<style >
 html, body, #app {
   margin: 0;
   padding: 0;
