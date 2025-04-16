@@ -1,77 +1,77 @@
 <template>
-    <transition name="fade" @after-leave="emitFechado">
-      <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
-        <div class="overlay-content">
-          <!-- Ícones canto superior direito -->
-          <div class="top-icons">
-            <Reply class="icon reply-icon" @click="emitResponder" />
-            <Trash2 class="icon trash-icon" @click="apagarMensagem" />
+  <transition name="fade" @after-leave="emit('fechado')">
+    <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
+      <div class="overlay-content">
+        <!-- Ícones canto superior direito -->
+        <div class="top-icons">
+          <Reply class="icon reply-icon" @click="emitResponder" />
+          <Trash2 class="icon trash-icon" @click="apagarMensagem" />
+        </div>
+
+        <!-- Caixa cinza com os dados -->
+        <div class="caixa-cinza">
+          <div class="campos-superiores">
+            <!-- Campo De -->
+            <div class="campo">
+              <div class="label-caixa">De</div>
+              <div class="linha-span">{{ de }}</div>
+            </div>
+
+            <!-- Campo Assunto -->
+            <div class="campo">
+              <div class="label-caixa">Assunto</div>
+              <div class="linha-span">{{ assunto }}</div>
+            </div>
           </div>
-  
-          <!-- Caixa cinza com os dados -->
-          <div class="caixa-cinza">
-            <div class="campos-superiores">
-              <!-- Campo De -->
-              <div class="campo">
-                <div class="label-caixa">De</div>
-                <div class="linha-span">{{ de }}</div>
-              </div>
-  
-              <!-- Campo Assunto -->
-              <div class="campo">
-                <div class="label-caixa">Assunto</div>
-                <div class="linha-span">{{ assunto }}</div>
-              </div>
-            </div>
-  
-            <!-- Mensagem -->
-            <div class="mensagem-conteudo">
-              {{ conteudo }}
-            </div>
+
+          <!-- Mensagem -->
+          <div class="mensagem-conteudo">
+            {{ conteudo }}
           </div>
         </div>
       </div>
-    </transition>
-  </template>
-  
-  <script setup>
-  import { defineProps, defineEmits } from 'vue';
-  import { Reply, Trash2 } from 'lucide-vue-next';
-  
-  const props = defineProps({
-    modelValue: Boolean,
-    de: String,
-    assunto: String,
-    conteudo: String
-  });
-  
-  const emit = defineEmits(['update:modelValue', 'apagar', 'responder']);
-  
-  function handleBackgroundClick(event) {
-    if (event.target.classList.contains('overlay')) {
-      emit('update:modelValue', false);
-    }
-  }
-  
-  function apagarMensagem() {
-    emit('apagar');
+    </div>
+  </transition>
+</template>
+
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+import { Reply, Trash2 } from 'lucide-vue-next';
+
+const props = defineProps({
+  modelValue: Boolean,
+  de: String,
+  assunto: String,
+  conteudo: String
+});
+
+const emit = defineEmits(['update:modelValue', 'apagar', 'responder']);
+
+function handleBackgroundClick(event) {
+  if (event.target.classList.contains('overlay')) {
     emit('update:modelValue', false);
   }
-
-  function emitResponder() {
-  emit('update:modelValue', false); // fecha o overlay atual
-  emit('responder', de); // envia o valor de "de" para o componente pai
 }
 
+function apagarMensagem() {
+  emit('apagar');
+  emit('update:modelValue', false);
+}
 
-  </script>
+function emitResponder() {
+  console.log("Emitindo responder com de:", props.de);
+  emit('update:modelValue', false);
+  emit('responder', props.de); 
+}
+</script>
+
   
   <style scoped>
   .overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100vw; 
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;

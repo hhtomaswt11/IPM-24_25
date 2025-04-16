@@ -110,7 +110,7 @@ function abrirMensagem(mensagem) {
   mostrarMensagem.value = true;
 }
 
-// Função que elimina a mensagem
+// Função que elimina a mensagem  
 function eliminarMensagem(id) {
   mensagensRecebidas.value = mensagensRecebidas.value.filter(m => m.id !== id);
 }
