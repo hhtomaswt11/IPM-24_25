@@ -8,7 +8,32 @@
     <div class="messages-boxes">
       <div class="message-box received">
         <div class="header">Recebidas</div>
-        <div class="message-list"></div>
+        <div class="message-list">
+          <div
+            v-for="mensagem in mensagensRecebidas"
+            :key="mensagem.id"
+            :class="['message-item', { lida: mensagem.lida }]"
+            @click="abrirMensagem(mensagem)"
+          >
+            <div class="message-content">
+              <p><strong>De:</strong> {{ mensagem.de }}</p>
+              <p><strong>Assunto:</strong> {{ mensagem.assunto }}</p>
+              <p>{{ mensagem.conteudo }}</p>
+            </div>
+            <div class="message-actions" @click.stop>
+              <button
+                v-if="!mensagem.lida"
+                class="icon-button"
+                title="Mensagem não lida"
+              >
+                <MailWarning :size="22" />
+              </button>
+              <button class="icon-button trash" title="Apagar mensagem">
+                <Trash2 :size="26" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="message-box sent">
@@ -17,17 +42,32 @@
       </div>
     </div>
 
-    <!-- Usa o componente NovaMensagem -->
-    <EnviarMensagem v-model="showOverlay">
-    </EnviarMensagem>
-  </div>
+    <!-- Overlays -->
+    <EnviarMensagem 
+      v-model="showOverlay" 
+      @notificar="mostrarNotificacaoTemporaria"
+    />
+    <Mensagem
+      v-model="mostrarMensagem"
+      :de="mensagemSelecionada.de"
+      :assunto="mensagemSelecionada.assunto"
+      :conteudo="mensagemSelecionada.conteudo"
+    />
+
+    <!-- Notificação de sucesso -->
+    <div v-if="showNotificacao" class="notificacao">
+      Mensagem enviada
+    </div>
+    </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
-import EnviarMensagem from '@/components/EnviarMensagem.vue'; // Importa o componente que criaste!
+import EnviarMensagem from '@/components/EnviarMensagem.vue';
+import Mensagem from '@/components/Mensagem.vue'; // <-- importar componente
 
 const showOverlay = ref(false);
 
@@ -35,20 +75,59 @@ function abrirOverlay() {
   showOverlay.value = true;
 }
 
-function fecharOverlay() {
-  showOverlay.value = false;
+const showNotificacao = ref(false);
+
+function mostrarNotificacaoTemporaria() {
+  showNotificacao.value = true;
+  setTimeout(() => {
+    showNotificacao.value = false;
+  }, 3000); // esconde após 3 segundos
 }
+
+const mostrarMensagem = ref(false);
+const mensagemSelecionada = ref({ de: '', assunto: '' });
+
+function abrirMensagem(mensagem) {
+
+  mensagem.lida = true;
+
+  mensagemSelecionada.value = {
+    de: mensagem.de,
+    assunto: mensagem.assunto,
+    conteudo: mensagem.conteudo
+  };
+  mostrarMensagem.value = true;
+}
+
+// Mensagens de exemplo (para depois ligar à base de dados)
+const mensagensRecebidas = ref([
+  {
+    id: 1,
+    de: 'João Pedro',
+    assunto: 'Troca de Turno - Programação Funcional T2→T1',
+    conteudo:
+    'Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?',
+    lida: false
+  },
+  {
+    id: 2,
+    de: 'Maria Lopes',
+    assunto: 'Dúvida sobre o projeto final',
+    conteudo:  `Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final
+    `,
+    lida: true
+  }
+]);
 </script>
 
 <style scoped>
-/* Container principal */
+/* (mantém o CSS como está, sem alterações nesta parte) */
 .messages-container {
   display: flex;
   flex-direction: column;
   padding: 20px;
   margin-left: 60px;
 }
-
 .top-bar {
   display: flex;
   width: 100%;
@@ -57,14 +136,11 @@ function fecharOverlay() {
   align-items: center;
   margin-bottom: 20px;
 }
-
 .messages-boxes {
   display: flex;
   gap: 150px;
   margin-top: 50px;
 }
-
-/* Caixa de mensagens */
 .message-box {
   width: 488px;
   height: 535px;
@@ -73,7 +149,6 @@ function fecharOverlay() {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   position: relative;
 }
-
 .message-box .header {
   width: 146px;
   height: 32px;
@@ -89,30 +164,61 @@ function fecharOverlay() {
   left: 0;
   border-radius: 10px 10px 0 0;
 }
-
 .message-list {
   padding: 15px;
   max-height: 400px;
   overflow-y: auto;
 }
-
 .message-item {
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background-color: #fceace;
+  border: 1px solid #c9c3c3;
+  padding: 6px 10px;
+  margin-bottom: 0px;
+  min-height: 60px;
+  font-size: 13px;
 }
-
+.message-item.lida {
+  background-color: #faf6ea;
+}
+.message-item:not(:first-child) {
+  margin-top: 4px;
+}
+.message-content {
+  max-width: 85%;
+  color: #000;
+}
+.message-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.icon-button.trash:hover {
+  color: #ba7070;
+  transition: color 0.3s ease;
+}
+.message-content strong {
+  font-size: 13px;
+  font-weight: bold;
+}
 .received .header {
   background-color: #ba7070;
 }
-
 .sent .header {
   background-color: #ba7070;
 }
-
-/* Barra de navegação */
 .sidebar {
   position: fixed;
   top: 0;
@@ -126,13 +232,11 @@ function fecharOverlay() {
   padding-top: 90px;
   justify-content: flex-start;
 }
-
 .nav-links {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-
 .nav-link {
   padding: 1.5rem;
   text-decoration: none;
@@ -142,14 +246,46 @@ function fecharOverlay() {
   border-bottom: 1px solid #444;
   transition: background-color 0.3s, color 0.3s;
 }
-
 .nav-link:hover {
   background-color: #ffffff;
   color: #373737;
 }
-
 .nav-link.router-link-exact-active {
   background-color: #ffffff;
   color: #373737;
 }
+.message-content p:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  max-width: 100%;
+}
+
+.notificacao {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background-color: #8CC378;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: fadein 0.4s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 </style>
