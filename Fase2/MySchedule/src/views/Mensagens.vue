@@ -28,7 +28,11 @@
               >
                 <MailWarning :size="22" />
               </button>
-              <button class="icon-button trash" title="Apagar mensagem">
+              <button
+                class="icon-button trash"
+                title="Apagar mensagem"
+                @click="eliminarMensagem(mensagem.id)"
+              >
                 <Trash2 :size="26" />
               </button>
             </div>
@@ -44,21 +48,27 @@
 
     <!-- Overlays -->
     <EnviarMensagem 
+      v-if="showOverlay"
       v-model="showOverlay" 
+      :paraInicial="destinatarioResposta"
       @notificar="mostrarNotificacaoTemporaria"
     />
     <Mensagem
+      v-if="mostrarMensagem"
       v-model="mostrarMensagem"
       :de="mensagemSelecionada.de"
       :assunto="mensagemSelecionada.assunto"
       :conteudo="mensagemSelecionada.conteudo"
+      @apagar="eliminarMensagem(mensagemSelecionada.id)"
+      @responder="responderMensagem"
+      @fechado="continuarResposta"
     />
 
     <!-- Notificação de sucesso -->
     <div v-if="showNotificacao" class="notificacao">
       Mensagem enviada
     </div>
-    </div>
+  </div>
 </template>
 
 <script setup>
@@ -67,31 +77,32 @@ import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
 import EnviarMensagem from '@/components/EnviarMensagem.vue';
-import Mensagem from '@/components/Mensagem.vue'; // <-- importar componente
+import Mensagem from '@/components/Mensagem.vue';
 
 const showOverlay = ref(false);
+const showNotificacao = ref(false);
+const mostrarMensagem = ref(false);
+const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
+const destinatarioResposta = ref('');
 
+// Função que abre o overlay de nova mensagem
 function abrirOverlay() {
   showOverlay.value = true;
 }
 
-const showNotificacao = ref(false);
-
+// Função que mostra a notificação
 function mostrarNotificacaoTemporaria() {
   showNotificacao.value = true;
   setTimeout(() => {
     showNotificacao.value = false;
-  }, 3000); // esconde após 3 segundos
+  }, 3000);
 }
 
-const mostrarMensagem = ref(false);
-const mensagemSelecionada = ref({ de: '', assunto: '' });
-
+// Função que abre a mensagem
 function abrirMensagem(mensagem) {
-
   mensagem.lida = true;
-
   mensagemSelecionada.value = {
+    id: mensagem.id,
     de: mensagem.de,
     assunto: mensagem.assunto,
     conteudo: mensagem.conteudo
@@ -99,29 +110,37 @@ function abrirMensagem(mensagem) {
   mostrarMensagem.value = true;
 }
 
-// Mensagens de exemplo (para depois ligar à base de dados)
+// Função que elimina a mensagem
+function eliminarMensagem(id) {
+  mensagensRecebidas.value = mensagensRecebidas.value.filter(m => m.id !== id);
+}
+
+// Função que recebe o destinatário da mensagem e abre o overlay de envio
+function responderMensagem(destinatario) {
+  destinatarioResposta.value = destinatario; // Armazena o destinatário
+  showOverlay.value = true; // Abre o overlay de EnviarMensagem
+  mostrarMensagem.value = false; // Fecha a mensagem atual
+}
+
 const mensagensRecebidas = ref([
   {
     id: 1,
     de: 'João Pedro',
     assunto: 'Troca de Turno - Programação Funcional T2→T1',
-    conteudo:
-    'Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?',
+    conteudo: 'Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?',
     lida: false
   },
   {
     id: 2,
     de: 'Maria Lopes',
     assunto: 'Dúvida sobre o projeto final',
-    conteudo:  `Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final
-    `,
+    conteudo: `Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.`,
     lida: true
   }
 ]);
 </script>
 
 <style scoped>
-/* (mantém o CSS como está, sem alterações nesta parte) */
 .messages-container {
   display: flex;
   flex-direction: column;
@@ -261,12 +280,11 @@ const mensagensRecebidas = ref([
   display: block;
   max-width: 100%;
 }
-
 .notificacao {
   position: fixed;
   top: 30px;
   right: 30px;
-  background-color: #8CC378;
+  background-color: #8cc378;
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
@@ -275,7 +293,6 @@ const mensagensRecebidas = ref([
   z-index: 9999;
   animation: fadein 0.4s ease;
 }
-
 @keyframes fadein {
   from {
     opacity: 0;
@@ -286,6 +303,4 @@ const mensagensRecebidas = ref([
     transform: translateY(0);
   }
 }
-
-
 </style>

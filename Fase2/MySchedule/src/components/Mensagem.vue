@@ -1,7 +1,13 @@
 <template>
-    <transition name="fade">
+    <transition name="fade" @after-leave="emitFechado">
       <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
         <div class="overlay-content">
+          <!-- Ícones canto superior direito -->
+          <div class="top-icons">
+            <Reply class="icon reply-icon" @click="emitResponder" />
+            <Trash2 class="icon trash-icon" @click="apagarMensagem" />
+          </div>
+  
           <!-- Caixa cinza com os dados -->
           <div class="caixa-cinza">
             <div class="campos-superiores">
@@ -30,6 +36,7 @@
   
   <script setup>
   import { defineProps, defineEmits } from 'vue';
+  import { Reply, Trash2 } from 'lucide-vue-next';
   
   const props = defineProps({
     modelValue: Boolean,
@@ -38,13 +45,25 @@
     conteudo: String
   });
   
-  const emit = defineEmits(['update:modelValue']);
+  const emit = defineEmits(['update:modelValue', 'apagar', 'responder']);
   
   function handleBackgroundClick(event) {
     if (event.target.classList.contains('overlay')) {
       emit('update:modelValue', false);
     }
   }
+  
+  function apagarMensagem() {
+    emit('apagar');
+    emit('update:modelValue', false);
+  }
+
+  function emitResponder() {
+  emit('update:modelValue', false); // fecha o overlay atual
+  emit('responder', de); // envia o valor de "de" para o componente pai
+}
+
+
   </script>
   
   <style scoped>
@@ -72,6 +91,26 @@
     max-height: 90%;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+  }
+  
+  /* Ícones no topo */
+  .top-icons {
+    position: absolute;
+    top: 45px;
+    right: 60px;
+    display: flex;
+    gap: 20px;
+  }
+  .icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+  .reply-icon {
+    color: black;
+  }
+  .trash-icon {
+    color: #BA7070;
   }
   
   .caixa-cinza {
@@ -147,4 +186,3 @@
     opacity: 1;
   }
   </style>
-  

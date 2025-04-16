@@ -43,20 +43,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { defineEmits, defineProps } from 'vue';
 import { SendHorizontal } from 'lucide-vue-next';
 import Botao from '@/components/Botao.vue';
 
 const props = defineProps({
   modelValue: Boolean,
+  paraInicial: String
 });
 
 const emit = defineEmits(['update:modelValue', 'send', 'notificar']);
 
 const mensagem = ref('');
-const para = ref('');
+const para = ref(props.paraInicial || '');
 const assunto = ref('');
+
+watch(() => props.paraInicial, (novoValor) => {
+  para.value = novoValor || '';
+});
+
 
 function handleBackgroundClick(event) {
   if (event.target.classList.contains('overlay')) {
