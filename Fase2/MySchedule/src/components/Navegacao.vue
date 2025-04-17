@@ -5,7 +5,10 @@
         <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
         <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
         <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
-        <RouterLink to="/mensagens" class="nav-link">Mensagens</RouterLink>
+        <RouterLink to="/mensagens" class="nav-link mensagens-link">
+  Mensagens
+  <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
+</RouterLink>
         <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
         <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
       </nav>
@@ -19,6 +22,10 @@
   
   <script setup>
     defineEmits(['abrir-caderno']);
+
+    defineProps({
+      mensagensNaoLidas: Number
+    });
 </script>
   
   <style scoped>
@@ -83,5 +90,23 @@
     width: 150px;
     height: auto;
   }
-  </style>
+
+  .mensagens-link {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  background-color: #F6E7B8;
+  color: #373737;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+</style>
   

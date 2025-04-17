@@ -87,7 +87,7 @@
       :enviada="mensagemSelecionada.enviada"
       @apagar="eliminarMensagem(mensagemSelecionada.id)"
       @responder="responderMensagem"
-      @fechado="continuarResposta"
+      @fechado="mostrarMensagem = false"
     />
 
     <!-- Notificação de sucesso -->
@@ -96,88 +96,22 @@
     </div>
   </div>
 </template>
+
 <script setup>
-import { ref , computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
 import EnviarMensagem from '@/components/EnviarMensagem.vue';
 import Mensagem from '@/components/Mensagem.vue';
 
+const emit = defineEmits(['atualizar-contador']);
 const showOverlay = ref(false);
 const showNotificacao = ref(false);
 const mostrarMensagem = ref(false);
 const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
-
 const termoPesquisa = ref('');
-
-// para funcionar com assentos
-function normalizar(texto) {
-  return texto
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase();
-}
-
-
-
-const mensagensRecebidasFiltradas = computed(() =>
-  mensagens.value.filter(
-    m =>
-      !m.enviada &&
-      (termoPesquisa.value === '' ||
-      normalizar(m.de).includes(normalizar(termoPesquisa.value)))
-  )
-);
-
-const mensagensEnviadasFiltradas = computed(() =>
-  mensagens.value.filter(
-    m =>
-      m.enviada &&
-      (termoPesquisa.value === '' ||
-      normalizar(m.para).includes(normalizar(termoPesquisa.value)))
-  )
-);
-
-// Função que abre o overlay de nova mensagem
-function abrirOverlay() {
-  showOverlay.value = true;
-}
-
-// Função que mostra a notificação
-function mostrarNotificacaoTemporaria() {
-  showNotificacao.value = true;
-  setTimeout(() => {
-    showNotificacao.value = false;
-  }, 3000);
-}
-
-// Função que abre a mensagem
-function abrirMensagem(mensagem) {
-  mensagem.lida = true;
-  mensagemSelecionada.value = {
-    id: mensagem.id,
-    de: mensagem.de,
-    para: mensagem.para, // novo campo
-    assunto: mensagem.assunto,
-    conteudo: mensagem.conteudo,
-    enviada: mensagem.enviada // novo campo
-  };
-  mostrarMensagem.value = true;
-}
-
-// Função que elimina a mensagem
-function eliminarMensagem(id) {
-  mensagens.value = mensagens.value.filter(m => m.id !== id);
-}
-
-// Função que recebe o destinatário da mensagem e abre o overlay de envio
-function responderMensagem(destinatario) {
-  destinatarioResposta.value = destinatario;
-  showOverlay.value = true;
-  mostrarMensagem.value = false;
-}
 
 const mensagens = ref([
   {
@@ -213,7 +147,83 @@ const mensagens = ref([
     lida: true
   }
 ]);
+
+const mensagensNaoLidas = computed(() =>
+  mensagens.value.filter(m => !m.enviada && !m.lida).length
+);
+
+function atualizarContador() {
+  emit('atualizar-contador', mensagensNaoLidas.value);
+}
+
+watch(mensagens, atualizarContador, { deep: true });
+onMounted(atualizarContador);
+
+function normalizar(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+}
+
+const mensagensRecebidasFiltradas = computed(() =>
+  mensagens.value.filter(
+    m =>
+      !m.enviada &&
+      (termoPesquisa.value === '' ||
+      normalizar(m.de).includes(normalizar(termoPesquisa.value)))
+  )
+);
+
+const mensagensEnviadasFiltradas = computed(() =>
+  mensagens.value.filter(
+    m =>
+      m.enviada &&
+      (termoPesquisa.value === '' ||
+      normalizar(m.para).includes(normalizar(termoPesquisa.value)))
+  )
+);
+
+function abrirOverlay() {
+  showOverlay.value = true;
+}
+
+function mostrarNotificacaoTemporaria() {
+  showNotificacao.value = true;
+  setTimeout(() => {
+    showNotificacao.value = false;
+  }, 3000);
+}
+
+function abrirMensagem(mensagem) {
+  if (!mensagem.lida) {
+    mensagem.lida = true;
+    atualizarContador();
+  }
+  mensagemSelecionada.value = {
+    id: mensagem.id,
+    de: mensagem.de,
+    para: mensagem.para,
+    assunto: mensagem.assunto,
+    conteudo: mensagem.conteudo,
+    enviada: mensagem.enviada
+  };
+  mostrarMensagem.value = true;
+}
+
+function eliminarMensagem(id) {
+  mensagens.value = mensagens.value.filter(m => m.id !== id);
+  atualizarContador();
+}
+
+function responderMensagem(destinatario) {
+  destinatarioResposta.value = destinatario;
+  showOverlay.value = true;
+  mostrarMensagem.value = false;
+}
 </script>
+
+
 
 
 <style scoped>
