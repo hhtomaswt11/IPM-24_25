@@ -4,7 +4,7 @@
         <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
         <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
         <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
-        <RouterLink to="/caderno" class="nav-link">Caderno</RouterLink>
+        <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
         <RouterLink to="/mensagens" class="nav-link">Mensagens</RouterLink>
         <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
         <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
@@ -18,8 +18,8 @@
   </template>
   
   <script setup>
-  // Não há necessidade de lógica no componente navegacao
-  </script>
+    defineEmits(['abrir-caderno']);
+</script>
   
   <style scoped>
 .navegacao {
@@ -44,25 +44,34 @@
   }
   
   .nav-link {
-    padding: 1.5rem;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #444;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .nav-link:hover {
-    background-color: #ffffff;
-    color: #373737;
-  }
-  
-  .nav-link.router-link-exact-active {
-    background-color: #ffffff;
-    color: #373737;
-  }
-  
+  padding: 1.5rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #444;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #373737;
+  width: 100%;
+  display: block;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+.nav-link:hover {
+  background-color: #ffffff;
+  color: #373737;
+}
+
+.nav-link.router-link-exact-active {
+  background-color: #ffffff;
+  color: #373737;
+}
+
   .app-icon {
     position: absolute;
     left: 50%;

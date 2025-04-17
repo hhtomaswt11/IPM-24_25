@@ -1,17 +1,31 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterView } from 'vue-router'
 import Sidebar from '@/components/Navegacao.vue'
+import Caderno from '@/components/Caderno.vue';
+
+const mostrarCaderno = ref(false);
+
+function toggleCaderno() {
+  mostrarCaderno.value = !mostrarCaderno.value;
+}
 </script>
 
 <template>
   <div class="app-container">
-    <Sidebar />
+    <!-- Sidebar com evento para abrir o caderno -->
+    <Sidebar @abrir-caderno="toggleCaderno" />
+
+    <!-- Conteúdo principal -->
     <div class="main-wrapper">
       <main class="main-content">
         <RouterView />
       </main>
     </div>
-  </div>
+
+    <!-- Caderno Overlay -->
+    <Caderno v-if="mostrarCaderno" @fechar="toggleCaderno" />
+  </div>  
 </template>
 
 <style >
