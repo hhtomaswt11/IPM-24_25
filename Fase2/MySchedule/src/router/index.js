@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HorariosDC from '@/views/HorariosDC.vue'
-import Mensagens from '@/views/Mensagens.vue' 
+import Mensagens from '@/views/Mensagens.vue'
 import Perfil from '@/views/Perfil.vue'
-
-import uc_DC from '@/views/uc_DC.vue'
-import { preProcessFile } from 'typescript'
+import DetalheUC from '@/views/DetalheUC.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,9 +18,9 @@ const router = createRouter({
       component: Mensagens,
     },
     {
-      path: '/unidades',
-      name: 'UnidadesC',
-      component: uc_DC,
+      path: '/unidades/:nome',
+      name: 'DetalheUC',
+      component: DetalheUC,
     },
     {
       path: '/perfil',
@@ -31,6 +29,5 @@ const router = createRouter({
     },
   ],
 })
-
 
 export default router
