@@ -112,41 +112,7 @@ const mostrarMensagem = ref(false);
 const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
 const termoPesquisa = ref('');
-
-const mensagens = ref([
-  {
-    id: 1,
-    enviada: false,
-    de: 'João Pedro',
-    assunto: 'Troca de Turno - Programação Funcional T2→T1',
-    conteudo: 'Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?',
-    lida: false
-  },
-  {
-    id: 2,
-    enviada: false,
-    de: 'Maria Lopes',
-    assunto: 'Dúvida sobre o projeto final',
-    conteudo: 'Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.',
-    lida: true
-  },
-  {
-    id: 3,
-    enviada: true,
-    para: 'João Pedro',
-    assunto: 'Troca de Turno - Programação Funcional T2→T1',
-    conteudo: 'Foi trocado.',
-    lida: true
-  },
-  {
-    id: 4,
-    enviada: true,
-    para: 'Maria Lopes',
-    assunto: 'Dúvida sobre o projeto final',
-    conteudo: 'Olá, as tuas dúvidas são muito pertinentes.',
-    lida: true
-  }
-]);
+const mensagens = ref([]);
 
 const mensagensNaoLidas = computed(() =>
   mensagens.value.filter(m => !m.enviada && !m.lida).length
@@ -156,31 +122,32 @@ function atualizarContador() {
   emit('atualizar-contador', mensagensNaoLidas.value);
 }
 
-watch(mensagens, atualizarContador, { deep: true });
-onMounted(atualizarContador);
+function carregarMensagens() {
+  fetch('http://localhost:3000/mensagens')
+    .then(res => res.json())
+    .then(data => {
+      mensagens.value = data;
+      atualizarContador();
+    });
+}
+
+onMounted(() => {
+  carregarMensagens();
+});
 
 function normalizar(texto) {
-  return texto
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase();
+  return texto.normalize("NFD").replace(/\p{Diacritic}/gu, '').toLowerCase();
 }
 
 const mensagensRecebidasFiltradas = computed(() =>
   mensagens.value.filter(
-    m =>
-      !m.enviada &&
-      (termoPesquisa.value === '' ||
-      normalizar(m.de).includes(normalizar(termoPesquisa.value)))
+    m => !m.enviada && (termoPesquisa.value === '' || normalizar(m.de).includes(normalizar(termoPesquisa.value)))
   )
 );
 
 const mensagensEnviadasFiltradas = computed(() =>
   mensagens.value.filter(
-    m =>
-      m.enviada &&
-      (termoPesquisa.value === '' ||
-      normalizar(m.para).includes(normalizar(termoPesquisa.value)))
+    m => m.enviada && (termoPesquisa.value === '' || normalizar(m.para).includes(normalizar(termoPesquisa.value)))
   )
 );
 
@@ -197,23 +164,26 @@ function mostrarNotificacaoTemporaria() {
 
 function abrirMensagem(mensagem) {
   if (!mensagem.lida) {
-    mensagem.lida = true;
-    atualizarContador();
+    fetch(`http://localhost:3000/mensagens/${mensagem.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lida: true })
+    }).then(() => {
+      mensagem.lida = true;
+      atualizarContador();
+    });
   }
-  mensagemSelecionada.value = {
-    id: mensagem.id,
-    de: mensagem.de,
-    para: mensagem.para,
-    assunto: mensagem.assunto,
-    conteudo: mensagem.conteudo,
-    enviada: mensagem.enviada
-  };
+  mensagemSelecionada.value = { ...mensagem };
   mostrarMensagem.value = true;
 }
 
 function eliminarMensagem(id) {
-  mensagens.value = mensagens.value.filter(m => m.id !== id);
-  atualizarContador();
+  fetch(`http://localhost:3000/mensagens/${id}`, {
+    method: 'DELETE'
+  }).then(() => {
+    mensagens.value = mensagens.value.filter(m => m.id !== id);
+    atualizarContador();
+  });
 }
 
 function responderMensagem(destinatario) {
@@ -222,9 +192,6 @@ function responderMensagem(destinatario) {
   mostrarMensagem.value = false;
 }
 </script>
-
-
-
 
 <style scoped>
 .messages-container {
