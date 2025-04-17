@@ -98,42 +98,29 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
 import EnviarMensagem from '@/components/EnviarMensagem.vue';
 import Mensagem from '@/components/Mensagem.vue';
+import { useMensagensStore } from '@/stores/useMensagensStore';
 
-const emit = defineEmits(['atualizar-contador']);
+const store = useMensagensStore();
+
 const showOverlay = ref(false);
 const showNotificacao = ref(false);
 const mostrarMensagem = ref(false);
 const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
 const termoPesquisa = ref('');
-const mensagens = ref([]);
-
-const mensagensNaoLidas = computed(() =>
-  mensagens.value.filter(m => !m.enviada && !m.lida).length
-);
-
-function atualizarContador() {
-  emit('atualizar-contador', mensagensNaoLidas.value);
-}
-
-function carregarMensagens() {
-  fetch('http://localhost:3000/mensagens')
-    .then(res => res.json())
-    .then(data => {
-      mensagens.value = data;
-      atualizarContador();
-    });
-}
 
 onMounted(() => {
-  carregarMensagens();
+  store.carregarMensagens();
 });
+
+const mensagens = computed(() => store.mensagens);
+const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
 
 function normalizar(texto) {
   return texto.normalize("NFD").replace(/\p{Diacritic}/gu, '').toLowerCase();
@@ -164,26 +151,14 @@ function mostrarNotificacaoTemporaria() {
 
 function abrirMensagem(mensagem) {
   if (!mensagem.lida) {
-    fetch(`http://localhost:3000/mensagens/${mensagem.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ lida: true })
-    }).then(() => {
-      mensagem.lida = true;
-      atualizarContador();
-    });
+    store.marcarComoLida(mensagem.id);
   }
   mensagemSelecionada.value = { ...mensagem };
   mostrarMensagem.value = true;
 }
 
 function eliminarMensagem(id) {
-  fetch(`http://localhost:3000/mensagens/${id}`, {
-    method: 'DELETE'
-  }).then(() => {
-    mensagens.value = mensagens.value.filter(m => m.id !== id);
-    atualizarContador();
-  });
+  store.eliminarMensagem(id);
 }
 
 function responderMensagem(destinatario) {
