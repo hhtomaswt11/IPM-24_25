@@ -1,25 +1,33 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { RouterView } from 'vue-router';
 import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
 
-// Store
 const store = useMensagensStore();
 const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
-
-// Carrega mensagens ao iniciar app
-onMounted(() => {
-  store.carregarMensagens();
-});
 
 const mostrarCaderno = ref(false);
 
 function toggleCaderno() {
   mostrarCaderno.value = !mostrarCaderno.value;
 }
+
+let intervalo: number;
+
+onMounted(() => {
+  store.carregarMensagens(); // Atualiza no início
+  intervalo = setInterval(() => {
+    store.carregarMensagens(); // Atualiza a cada 5 segundos
+  }, 5000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalo);
+});
 </script>
+
 
 <template>
   <div class="app-container">

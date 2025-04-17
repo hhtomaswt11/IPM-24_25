@@ -6,9 +6,9 @@
         <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
         <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
         <RouterLink to="/mensagens" class="nav-link mensagens-link">
-  Mensagens
-  <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
-</RouterLink>
+          Mensagens
+          <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
+        </RouterLink>
         <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
         <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
       </nav>
