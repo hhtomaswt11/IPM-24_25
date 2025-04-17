@@ -1,25 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
-import Mensagens from '@/views/Mensagens.vue';
+import { useMensagensStore } from '@/stores/useMensagensStore';
+
+// Store
+const store = useMensagensStore();
+const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
+
+// Carrega mensagens ao iniciar app
+onMounted(() => {
+  store.carregarMensagens();
+});
 
 const mostrarCaderno = ref(false);
-const mensagensNaoLidas = ref(0);
 
 function toggleCaderno() {
   mostrarCaderno.value = !mostrarCaderno.value;
-}
-
-function atualizarContadorMensagens(valor : number) {
-  mensagensNaoLidas.value = valor;
 }
 </script>
 
 <template>
   <div class="app-container">
-    <Sidebar :mensagensNaoLidas="mensagensNaoLidas" @abrir-caderno="toggleCaderno" />
+    <Sidebar
+      :mensagensNaoLidas="mensagensNaoLidas"
+      @abrir-caderno="toggleCaderno"
+    />
 
     <div class="main-wrapper">
       <main class="main-content">
@@ -28,12 +35,8 @@ function atualizarContadorMensagens(valor : number) {
     </div>
 
     <Caderno v-if="mostrarCaderno" @fechar="toggleCaderno" />
-
-    <!-- Componente Mensagens oculto mas ativo só para emitir o número -->
-    <Mensagens @atualizar-contador="atualizarContadorMensagens" style="display: none;" />
   </div>
 </template>
-
 
 <style>
 html, body, #app {
@@ -52,7 +55,7 @@ html, body, #app {
 }
 
 .main-wrapper {
-  margin-left: 150px; 
+  margin-left: 150px;
   width: calc(100% - 150px);
   height: 100vh;
   overflow-y: auto;
