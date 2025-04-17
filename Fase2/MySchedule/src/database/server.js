@@ -15,6 +15,8 @@ app.use(express.json());
 const loadDB = () => JSON.parse(readFileSync(DB_PATH, 'utf-8'));
 const saveDB = (db) => writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf-8');
 
+// -------------------- MENSAGENS --------------------
+
 app.get('/mensagens', (req, res) => {
   const db = loadDB();
   res.json(db.mensagens || []);
@@ -40,6 +42,45 @@ app.delete('/mensagens/:id', (req, res) => {
   res.status(204).end();
 });
 
+// -------------------- DIRETOR --------------------
+
+// GET diretor com id fixo = 1
+app.get('/director', (req, res) => {
+  const db = loadDB();
+  const diretor = db.directors.find(d => d.id === 1);
+
+  if (!diretor) return res.status(404).json({ error: 'Diretor não encontrado' });
+
+  res.json(diretor);
+});
+
+// PATCH diretor com id fixo = 1
+app.patch('/director', (req, res) => {
+  const db = loadDB();
+  const diretor = db.directors.find(d => d.id === 1);
+
+  if (!diretor) return res.status(404).json({ error: 'Diretor não encontrado' });
+
+  Object.assign(diretor, req.body);
+  saveDB(db);
+  res.json(diretor);
+});
+
+// PATCH por ID (genérico, opcional)
+app.patch('/directors/:id', (req, res) => {
+  const db = loadDB();
+  const id = parseInt(req.params.id);
+  const diretor = db.directors.find(d => d.id === 1);
+
+  if (diretorIndex === -1) return res.status(404).json({ error: 'Diretor não encontrado' });
+
+  Object.assign(diretor, req.body);
+  saveDB(db);
+  res.json(diretor);
+});
+
+// -------------------- START SERVER --------------------
+
 app.listen(PORT, () => {
-  console.log(`Servidor a correr em http://localhost:${PORT}`);
+  console.log(`🚀 Servidor a correr em http://localhost:${PORT}`);
 });

@@ -2,9 +2,18 @@
   "directors": [
     {
       "id": 1,
-      "name": "José",
-      "email": "jose@di.uminho.pt",
-      "password": "123"
+      "name": "José Pedro Castro",
+      "email": "teste@gmail.com",
+      "password": "123",
+      "nascimento": "12-01-1980",
+      "morada": "Rua 10 de Junho, 4704-514 - BRAGA, Portugal",
+      "sexo": "Masculino",
+      "telefone": "(+351) 911321678",
+      "departamento": "Escola de Engenharia",
+      "cargos": [
+        "Diretor do curso de Engenharia Informática",
+        "Regente da UC Robótica Inteligente"
+      ]
     }
   ],
   "teachers": [
@@ -2231,7 +2240,7 @@
       "de": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
-      "lida": false
+      "lida": true
     },
     {
       "id": 2,
