@@ -4,17 +4,21 @@
       <div class="overlay-content">
         <!-- Ícones canto superior direito -->
         <div class="top-icons">
-          <Reply class="icon reply-icon" @click="emitResponder" />
+          <Reply
+            v-if="!enviada"
+            class="icon reply-icon"
+            @click="emitResponder"
+          />
           <Trash2 class="icon trash-icon" @click="apagarMensagem" />
         </div>
 
         <!-- Caixa cinza com os dados -->
         <div class="caixa-cinza">
           <div class="campos-superiores">
-            <!-- Campo De -->
+            <!-- Campo De ou Para -->
             <div class="campo">
-              <div class="label-caixa">De</div>
-              <div class="linha-span">{{ de }}</div>
+              <div class="label-caixa">{{ enviada ? 'Para' : 'De' }}</div>
+              <div class="linha-span">{{ enviada ? para : de }}</div>
             </div>
 
             <!-- Campo Assunto -->
@@ -41,11 +45,13 @@ import { Reply, Trash2 } from 'lucide-vue-next';
 const props = defineProps({
   modelValue: Boolean,
   de: String,
+  para: String,
   assunto: String,
-  conteudo: String
+  conteudo: String,
+  enviada: Boolean
 });
 
-const emit = defineEmits(['update:modelValue', 'apagar', 'responder']);
+const emit = defineEmits(['update:modelValue', 'apagar', 'responder', 'fechado']);
 
 function handleBackgroundClick(event) {
   if (event.target.classList.contains('overlay')) {
@@ -59,7 +65,6 @@ function apagarMensagem() {
 }
 
 function emitResponder() {
-  console.log("Emitindo responder com de:", props.de);
   emit('update:modelValue', false);
   emit('responder', props.de); 
 }

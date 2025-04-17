@@ -2,18 +2,17 @@
   <div class="search-bar">
     <img src="@/components/icons/Lupa.svg" alt="Ícone de Lupa" />
     <input
-      v-model="searchQuery"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       type="text"
-      :placeholder="searchQuery ? '' : 'Pesquise uma mensagem'"
-      @focus="searchQuery = ''"
+      :placeholder="modelValue ? '' : 'Pesquise uma mensagem'"
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-const searchQuery = ref('');
+defineProps(['modelValue']);
+defineEmits(['update:modelValue']);
 </script>
 
 <style scoped>
