@@ -12,7 +12,7 @@ function toggleCaderno() {
   mostrarCaderno.value = !mostrarCaderno.value;
 }
 
-function atualizarContadorMensagens(valor: number) {
+function atualizarContadorMensagens(valor : number) {
   mensagensNaoLidas.value = valor;
 }
 </script>
