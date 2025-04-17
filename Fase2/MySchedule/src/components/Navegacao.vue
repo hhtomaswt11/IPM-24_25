@@ -36,6 +36,7 @@
   justify-content: flex-start;
   z-index: 9999;
 }
+
   
   .nav-links {
     display: flex;
@@ -60,8 +61,7 @@
   font-size: inherit;
   line-height: inherit;
 }
-
-
+  
 .nav-link:hover {
   background-color: #ffffff;
   color: #373737;

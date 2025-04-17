@@ -1,0 +1,166 @@
+<template>
+    <div class="uc-table-container">
+      <table class="uc-table">
+        <thead>
+          <tr>
+            <th>Turno</th>
+            <th>Sala</th>
+            <th>Capacidade</th>
+            <th>Taxa ocupação</th>
+            <th>Nº alunos</th>
+            <th>Hora</th>
+            <th>Dia</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="shift in shifts"
+            :key="shift.id"
+            :class="{ 'highlight': alunoInscrito(shift.id) }"
+          >
+            <td>{{ shift.name }}</td>
+            <td>{{ getClassroomName(shift.classroomId) }}</td>
+            <td>{{ getClassroomCapacity(shift.classroomId) }}</td>
+            <td>
+              <span :class="getOccupancyClass(shift)">
+                {{ calculateOccupancyRate(shift) }}%
+              </span>
+            </td>
+            <td>{{ shift.totalStudentsRegistered }}</td>
+            <td>{{ formatTime(shift.from) }} - {{ formatTime(shift.to) }}</td>
+            <td>{{ translateDay(shift.day) }}</td>
+            <td v-if="!alunoInscrito(shift.id)">
+              <button class="swap-btn">⇄</button>
+            </td>
+            <td v-else></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  
+  <script setup>
+  import db from '@/database/trabalhodb.json'
+  import { ref } from 'vue'
+  
+  const alunoId = 1
+  
+  // Props
+  defineProps({
+    ucId: Number,
+    shifts: Array
+  })
+  
+  // Turnos onde o aluno está inscrito
+  const alunoShifts = db.allocations
+    .filter(a => a.studentId === alunoId)
+    .map(a => a.shiftId)
+  
+  function alunoInscrito(shiftId) {
+    return alunoShifts.includes(shiftId)
+  }
+  
+  function getClassroomName(classroomId) {
+    const room = db.classrooms.find(r => r.id === classroomId)
+    const building = room ? db.buildings.find(b => b.id === room.buildingId) : null
+    return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
+  }
+  
+  function getClassroomCapacity(classroomId) {
+    const room = db.classrooms.find(r => r.id === classroomId)
+    return room ? room.capacity : 0
+  }
+  
+  function calculateOccupancyRate(shift) {
+    const room = db.classrooms.find(r => r.id === shift.classroomId)
+    if (!room || room.capacity === 0) return 0
+    return Math.round((shift.totalStudentsRegistered / room.capacity) * 100)
+  }
+  
+  function getOccupancyClass(shift) {
+    const rate = calculateOccupancyRate(shift)
+    if (rate >= 80) return 'high-occupancy'
+    if (rate >= 50) return 'medium-occupancy'
+    return 'low-occupancy'
+  }
+  
+  function formatTime(hour) {
+    return `${hour.toString().padStart(2, '0')}:00`
+  }
+  
+  function translateDay(day) {
+    const dias = {
+      Monday: 'segunda-feira',
+      Tuesday: 'terça-feira',
+      Wednesday: 'quarta-feira',
+      Thursday: 'quinta-feira',
+      Friday: 'sexta-feira'
+    }
+    return dias[day] || day
+  }
+  </script>
+  
+  <style scoped>
+  .uc-table-container {
+    overflow-x: auto;
+  }
+  
+  .uc-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .uc-table th,
+  .uc-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .uc-table th {
+    background-color: #555;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .uc-table tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  .highlight {
+    background-color: #fef08a !important; /* amarelo claro */
+    font-weight: bold;
+  }
+  
+  .high-occupancy {
+    color: #dc2626;
+    font-weight: bold;
+  }
+  
+  .medium-occupancy {
+    color: #f59e0b;
+    font-weight: bold;
+  }
+  
+  .low-occupancy {
+    color: #10b981;
+    font-weight: bold;
+  }
+  
+  .swap-btn {
+    background-color: #e0b4b4;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .swap-btn:hover {
+    background-color: #cc9b9b;
+  }
+  </style>
+  
+
