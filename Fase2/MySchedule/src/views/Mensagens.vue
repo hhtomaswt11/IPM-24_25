@@ -2,15 +2,16 @@
   <div class="messages-container">
     <div class="top-bar">
       <Botao label="Nova Mensagem" @click="abrirOverlay" />
-      <SearchBar />
+      <SearchBar v-model="termoPesquisa" />
     </div>
 
     <div class="messages-boxes">
+      <!-- RECEBIDAS -->
       <div class="message-box received">
         <div class="header">Recebidas</div>
         <div class="message-list">
           <div
-            v-for="mensagem in mensagensRecebidas"
+            v-for="mensagem in mensagensRecebidasFiltradas"
             :key="mensagem.id"
             :class="['message-item', { lida: mensagem.lida }]"
             @click="abrirMensagem(mensagem)"
@@ -40,9 +41,32 @@
         </div>
       </div>
 
+      <!-- ENVIADAS -->
       <div class="message-box sent">
         <div class="header">Enviadas</div>
-        <div class="message-list"></div>
+        <div class="message-list">
+          <div
+            v-for="mensagem in mensagensEnviadasFiltradas"
+            :key="mensagem.id"
+            :class="['message-item', { lida: mensagem.lida }]"
+            @click="abrirMensagem(mensagem)"
+          >
+            <div class="message-content">
+              <p><strong>Para:</strong> {{ mensagem.para }}</p>
+              <p><strong>Assunto:</strong> {{ mensagem.assunto }}</p>
+              <p>{{ mensagem.conteudo }}</p>
+            </div>
+            <div class="message-actions" @click.stop>
+              <button
+                class="icon-button trash"
+                title="Apagar mensagem"
+                @click="eliminarMensagem(mensagem.id)"
+              >
+                <Trash2 :size="26" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -57,8 +81,10 @@
       v-if="mostrarMensagem"
       v-model="mostrarMensagem"
       :de="mensagemSelecionada.de"
+      :para="mensagemSelecionada.para"
       :assunto="mensagemSelecionada.assunto"
       :conteudo="mensagemSelecionada.conteudo"
+      :enviada="mensagemSelecionada.enviada"
       @apagar="eliminarMensagem(mensagemSelecionada.id)"
       @responder="responderMensagem"
       @fechado="continuarResposta"
@@ -70,9 +96,8 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref } from 'vue';
+import { ref , computed } from 'vue';
 import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
@@ -84,6 +109,36 @@ const showNotificacao = ref(false);
 const mostrarMensagem = ref(false);
 const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
+
+const termoPesquisa = ref('');
+
+// para funcionar com assentos
+function normalizar(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+}
+
+
+
+const mensagensRecebidasFiltradas = computed(() =>
+  mensagens.value.filter(
+    m =>
+      !m.enviada &&
+      (termoPesquisa.value === '' ||
+      normalizar(m.de).includes(normalizar(termoPesquisa.value)))
+  )
+);
+
+const mensagensEnviadasFiltradas = computed(() =>
+  mensagens.value.filter(
+    m =>
+      m.enviada &&
+      (termoPesquisa.value === '' ||
+      normalizar(m.para).includes(normalizar(termoPesquisa.value)))
+  )
+);
 
 // Função que abre o overlay de nova mensagem
 function abrirOverlay() {
@@ -104,27 +159,30 @@ function abrirMensagem(mensagem) {
   mensagemSelecionada.value = {
     id: mensagem.id,
     de: mensagem.de,
+    para: mensagem.para, // novo campo
     assunto: mensagem.assunto,
-    conteudo: mensagem.conteudo
+    conteudo: mensagem.conteudo,
+    enviada: mensagem.enviada // novo campo
   };
   mostrarMensagem.value = true;
 }
 
-// Função que elimina a mensagem  
+// Função que elimina a mensagem
 function eliminarMensagem(id) {
-  mensagensRecebidas.value = mensagensRecebidas.value.filter(m => m.id !== id);
+  mensagens.value = mensagens.value.filter(m => m.id !== id);
 }
 
 // Função que recebe o destinatário da mensagem e abre o overlay de envio
 function responderMensagem(destinatario) {
-  destinatarioResposta.value = destinatario; // Armazena o destinatário
-  showOverlay.value = true; // Abre o overlay de EnviarMensagem
-  mostrarMensagem.value = false; // Fecha a mensagem atual
+  destinatarioResposta.value = destinatario;
+  showOverlay.value = true;
+  mostrarMensagem.value = false;
 }
 
-const mensagensRecebidas = ref([
+const mensagens = ref([
   {
     id: 1,
+    enviada: false,
     de: 'João Pedro',
     assunto: 'Troca de Turno - Programação Funcional T2→T1',
     conteudo: 'Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?',
@@ -132,13 +190,31 @@ const mensagensRecebidas = ref([
   },
   {
     id: 2,
+    enviada: false,
     de: 'Maria Lopes',
     assunto: 'Dúvida sobre o projeto final',
-    conteudo: `Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.`,
+    conteudo: 'Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.',
+    lida: true
+  },
+  {
+    id: 3,
+    enviada: true,
+    para: 'João Pedro',
+    assunto: 'Troca de Turno - Programação Funcional T2→T1',
+    conteudo: 'Foi trocado.',
+    lida: true
+  },
+  {
+    id: 4,
+    enviada: true,
+    para: 'Maria Lopes',
+    assunto: 'Dúvida sobre o projeto final',
+    conteudo: 'Olá, as tuas dúvidas são muito pertinentes.',
     lida: true
   }
 ]);
 </script>
+
 
 <style scoped>
 .messages-container {
