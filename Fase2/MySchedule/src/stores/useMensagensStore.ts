@@ -14,6 +14,21 @@ export const useMensagensStore = defineStore('mensagens', () => {
     }
   }
 
+  async function marcarComoLida(id: number) {
+    try {
+      await fetch(`http://localhost:3000/mensagens/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lida: true })
+      });
+      await carregarMensagens(); // Atualiza a lista após a alteração
+    } catch (error) {
+      console.error('Erro ao marcar como lida:', error);
+    }
+  }
+  
+
+
   // Atualiza automaticamente de X em X segundos
   const iniciarAtualizacaoAutomatica = () => {
     carregarMensagens(); // carregar imediatamente
@@ -29,6 +44,7 @@ export const useMensagensStore = defineStore('mensagens', () => {
   return {
     mensagens,
     mensagensNaoLidas,
-    carregarMensagens
+    carregarMensagens,
+    marcarComoLida
   };
 });

@@ -8,7 +8,7 @@
       "nascimento": "12-01-1980",
       "morada": "Rua 10 de Junho, 4704-514 - BRAGA, Portugal",
       "sexo": "Masculino",
-      "telefone": "(+351) 911321678",
+      "telefone": "(+351) 911321610",
       "departamento": "Escola de Engenharia",
       "cargos": [
         "Diretor do curso de Engenharia Informática",
@@ -2240,7 +2240,7 @@
       "de": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
-      "lida": true
+      "lida": false
     },
     {
       "id": 2,
