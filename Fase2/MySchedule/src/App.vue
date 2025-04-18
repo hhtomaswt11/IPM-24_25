@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import Sidebar from '@/components/Navegacao.vue'; // Importando o componente Sidebar
+import { ref, provide } from 'vue';
+import { RouterView } from 'vue-router';
+import Sidebar from '@/components/Navegacao.vue';
+
+// Simulação do tipo de utilizador: 'aluno' ou 'dc'
+const userType = ref<'aluno' | 'dc'>('aluno'); // troca para 'dc' se quiseres testar o outro
+
+// Disponibiliza o tipo de utilizador globalmente
+provide('userType', userType);
 </script>
 
 <template>

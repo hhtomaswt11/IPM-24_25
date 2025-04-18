@@ -1,6 +1,7 @@
 <template>
     <aside class="navegacao">
       <nav class="nav-links">
+        <template v-if="tipoUtilizador === 'dc'">
         <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
         <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
         <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
@@ -8,6 +9,15 @@
         <RouterLink to="/mensagens" class="nav-link">Mensagens</RouterLink>
         <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
         <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
+      </template>
+
+      <template v-else-if="tipoUtilizador === 'aluno'">
+        <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
+        <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
+        <RouterLink to="/horario-aluno" class="nav-link">Horário</RouterLink>
+        <RouterLink to="/mensagens" class="nav-link">Mensagens</RouterLink>
+        <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
+      </template>
       </nav>
   
       <!-- Ícone da aplicação -->
@@ -18,7 +28,12 @@
   </template>
   
   <script setup>
-  // Não há necessidade de lógica no componente navegacao
+  defineProps({
+    tipoUtilizador: {
+      type: String,
+      required: true
+    }
+  })
   </script>
   
   <style scoped>

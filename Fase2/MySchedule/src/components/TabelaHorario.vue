@@ -16,7 +16,8 @@
                 <div v-for="(aula, index) in getAulas(hora, dia)" :key="index" class="aula" :class="{
                     'aula-total': aula.capacidade === 'total',
                     'aula-parcial': aula.capacidade === 'parcial',
-                    'aula-livre': !aula.capacidade || aula.capacidade === 'livre'
+                    'aula-livre': !aula.capacidade || aula.capacidade === 'livre',
+                    'aula-pessoal': props.tipo === 'pessoal'
                   }"
                 >
                   {{ aula.disciplina }}<br />
@@ -35,7 +36,13 @@
 <script setup>
 import { computed } from 'vue';
 
-const props = defineProps(['horario']);
+const props = defineProps({
+  horario: Object,
+  tipo: {
+    type: String,
+    default: ''
+  }
+});
 
 // Marca as células ocupadas por rowspans de aulas
 const celulaOcupada = computed(() => {
@@ -77,7 +84,7 @@ function getAulas(hora, dia) {
       
       // Determinar capacidade com base em totalStudentsRegistered
       let capacidade = 'livre';
-      if (shift.totalStudentsRegistered > 50) {
+      if (shift.totalStudentsRegistered > 30) {
         capacidade = shift.totalStudentsRegistered >= classroom.capacity ? 'total' : 'parcial';
       }
       
@@ -169,5 +176,10 @@ td {
 
 .aula-livre {
   background-color: #EBE7E1;
+}
+
+.aula-pessoal {
+  background-color: #DFB698;
+  border: 2px solid #3E390A;
 }
 </style>
