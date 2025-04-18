@@ -3,6 +3,7 @@ import HorariosDC from '@/views/HorariosDC.vue'
 import Mensagens from '@/views/Mensagens.vue'
 import Perfil from '@/views/Perfil.vue'
 import DetalheUC from '@/views/DetalheUC.vue'
+import Gestao from '@/views/Gestao.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/perfil',
       name: 'Perfil',
       component: Perfil,
+    },
+    {
+      path: '/gestao',
+      name: 'Gestao',
+      component: Gestao,
     },
   ],
 })
