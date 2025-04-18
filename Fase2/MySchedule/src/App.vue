@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted} from 'vue';
 import { RouterView } from 'vue-router';
 import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
