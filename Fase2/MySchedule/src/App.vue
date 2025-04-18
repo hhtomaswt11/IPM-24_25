@@ -98,4 +98,12 @@ html, body, #app {
   justify-content: center;
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    margin-left: 100px;
+    width: calc(100% - 100px);
+  }
+}
+
 </style>

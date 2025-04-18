@@ -107,6 +107,29 @@
   font-weight: bold;
 }
 
+@media (max-width: 768px) {
+  .navegacao {
+    width: 100px;
+    padding-top: 70px;
+  }
+
+  .nav-link {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-icon {
+    width: 100px;
+  }
+
+  .badge {
+    top: 4px;
+    right: 10px;
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+}
+
 
 </style>
   
