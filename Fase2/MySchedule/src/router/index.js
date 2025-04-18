@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HorariosDC from '@/views/HorariosDC.vue'
 import Mensagens from '@/views/Mensagens.vue' 
 import HorarioAluno from '@/views/HorarioAluno.vue'
-import uc_DC from '@/views/uc_DC.vue'
 
 import Perfil from '@/views/Perfil.vue'
 import DetalheUC from '@/views/DetalheUC.vue'
