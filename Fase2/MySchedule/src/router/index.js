@@ -4,6 +4,11 @@ import Mensagens from '@/views/Mensagens.vue'
 import HorarioAluno from '@/views/HorarioAluno.vue'
 import uc_DC from '@/views/uc_DC.vue'
 
+import Perfil from '@/views/Perfil.vue'
+import DetalheUC from '@/views/DetalheUC.vue'
+import Gestao from '@/views/Gestao.vue'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,9 +23,19 @@ const router = createRouter({
       component: Mensagens,
     },
     {
-      path: '/unidades',
-      name: 'UnidadesC',
-      component: uc_DC,
+      path: '/unidades/:nome',
+      name: 'DetalheUC',
+      component: DetalheUC,
+    },
+    {
+      path: '/perfil',
+      name: 'Perfil',
+      component: Perfil,
+    },
+    {
+      path: '/gestao',
+      name: 'Gestao',
+      component: Gestao,
     },
     {
       path: '/horario-aluno',
@@ -29,6 +44,5 @@ const router = createRouter({
     }
   ],
 })
-
 
 export default router

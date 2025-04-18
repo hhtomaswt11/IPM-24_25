@@ -1,76 +1,86 @@
 <template>
-    <transition name="fade">
-      <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
-        <div class="overlay-content">
-  
-          <!-- Botão Enviar -->
-          <div class="send-button-container">
-            <Botao @click="emitSend">
-              <div class="content-button">
-                <SendHorizontal class="icon" />
-                <span class="text-button">Enviar</span>
-              </div>
-            </Botao>
-          </div>
-  
-          <!-- Retângulo cinza -->
-          <div class="caixa-cinza">
+  <transition name="fade">
+    <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
+      <div class="overlay-content">
+        <!-- Botão Enviar -->
+        <div class="send-button-container">
+          <Botao @click="emitSend">
+            <div class="content-button">
+              <SendHorizontal class="icon" />
+              <span class="text-button">Enviar</span>
+            </div>
+          </Botao>
+        </div>
 
-            <div class="campos-superiores">
-                <!-- Campo Para -->
-                <div class="campo">
-                    <div class="label-caixa">Para</div>
-                        <input v-model="para" type="text" class="linha-input" placeholder=""/>
-                    </div>
+        <!-- Retângulo cinza -->
+        <div class="caixa-cinza">
+          <div class="campos-superiores">
+            <!-- Campo Para -->
+            <div class="campo">
+              <div class="label-caixa">Para</div>
+              <input v-model="para" type="text" class="linha-input" placeholder="" />
+            </div>
 
             <!-- Campo Assunto -->
-                    <div class="campo">
-                        <div class="label-caixa">Assunto</div>
-                        <input v-model="assunto" type="text" class="linha-input" placeholder=""/>
-                        </div>
-                </div>
-
-            <textarea
-              v-model="mensagem"
-              placeholder="Escreva a sua mensagem"
-              class="textarea-mensagem"
-            ></textarea>
+            <div class="campo">
+              <div class="label-caixa">Assunto</div>
+              <input v-model="assunto" type="text" class="linha-input" placeholder="" />
+            </div>
           </div>
-  
-          <!-- Slot -->
-          <slot />
+
+          <textarea
+            v-model="mensagem"
+            placeholder="Escreva a sua mensagem"
+            class="textarea-mensagem"
+          ></textarea>
         </div>
+
+        <!-- Slot -->
+        <slot />
       </div>
-    </transition>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  import { defineEmits, defineProps } from 'vue';
-  import { SendHorizontal } from 'lucide-vue-next';
-  import Botao from '@/components/Botao.vue';
-  
-  const props = defineProps({
-    modelValue: Boolean,
-  });
-  
-  const emit = defineEmits(['update:modelValue', 'send']);
-  
-  const mensagem = ref(''); 
-  const para = ref('');
-  const assunto = ref('');
-  
-  function handleBackgroundClick(event) {
-    if (event.target.classList.contains('overlay')) {
-      emit('update:modelValue', false);
-    }
+    </div>
+  </transition>
+</template>
+
+<script setup>
+import { ref, watch } from 'vue';
+import { defineEmits, defineProps } from 'vue';
+import { SendHorizontal } from 'lucide-vue-next';
+import Botao from '@/components/Botao.vue';
+
+const props = defineProps({
+  modelValue: Boolean,
+  paraInicial: String
+});
+
+const emit = defineEmits(['update:modelValue', 'send', 'notificar']);
+
+const mensagem = ref('');
+const para = ref(props.paraInicial || '');
+const assunto = ref('');
+
+watch(() => props.paraInicial, (novoValor) => {
+  para.value = novoValor || '';
+});
+
+
+function handleBackgroundClick(event) {
+  if (event.target.classList.contains('overlay')) {
+    emit('update:modelValue', false);
   }
-  
-  function emitSend() {
-  emit('send');
-  emit('update:modelValue', false); // Fechar overlay ao enviar
 }
-  </script>
+
+function emitSend() {
+  if (para.value.trim() !== '') {
+    emit('send');
+    emit('update:modelValue', false);
+    emit('notificar');
+  } else {
+    alert('Preencha o campo "Para" antes de enviar.');
+  }
+}
+</script>
+
   
   <style scoped>
   .overlay {
