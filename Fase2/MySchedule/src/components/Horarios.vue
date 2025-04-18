@@ -94,6 +94,13 @@ const processedHorarios = computed(() => {
     align-items: center;
     gap: 0.5rem;
   }
+
+  .legenda-item span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3E3E3E
+  }
   
   .cor-example {
     width: 20px;
