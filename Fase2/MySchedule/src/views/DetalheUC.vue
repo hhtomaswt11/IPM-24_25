@@ -8,7 +8,7 @@
     <TabelaTurnosAl :shifts="ucShifts" />
 
     <div class="uc-footer">
-      <button class="gestao-btn">Gestão da UC</button>
+      <button class="gestao-btn" @click="irParaGestaoUC">Gestão da UC</button>
     </div>
   </div>
 </template>
@@ -32,6 +32,10 @@ const ucShifts = db.shifts.filter(s => s.courseId === uc.id)
 const theoreticalShift = ucShifts.find(s => s.type === 'T')
 const teacher = theoreticalShift ? db.teachers.find(t => t.id === theoreticalShift.teacherId) : null
 const teacherName = teacher ? teacher.name : 'Desconhecido'
+
+function irParaGestaoUC() {
+  router.push(`/gestao-uc/${uc.name}`)
+}
 </script>
 
 <style scoped>
