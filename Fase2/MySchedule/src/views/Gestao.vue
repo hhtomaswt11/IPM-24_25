@@ -35,15 +35,6 @@
     { tipo: 'Troca de sala', numero: 'di100', estatuto: 'Não', uc: 'Interface Pessoa-Máquina', turnoAtual: 'T1', alteracao: 'Seleciona', capacidade: '-----', decisao: 'Atualizar' },
   ];
   
-  function acaoAtualizar(i) {
-    console.log(`Atualizar clicado na linha ${i}`);
-  }
-  function acaoAceitar(i) {
-    console.log(`✔ Aceite na linha ${i}`);
-  }
-  function acaoRejeitar(i) {
-    console.log(`✖ Rejeitado na linha ${i}`);
-  }
   </script>
   
   <style scoped>
@@ -65,5 +56,18 @@
     z-index: 0;
     border-radius: 8px;
   }
+  
+  /* 🔽 Alterações específicas só nesta página */
+  ::v-deep(.uc-cell) {
+    width: 220px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+  
+  ::v-deep(th:nth-child(4)) {
+    width: 220px;
+  }
   </style>
+  
   
