@@ -33,6 +33,7 @@ onUnmounted(() => {
   <div class="app-container">
     <Sidebar
       :mensagensNaoLidas="mensagensNaoLidas"
+      tipoUtilizador="dc"
       @abrir-caderno="toggleCaderno"
     />
 

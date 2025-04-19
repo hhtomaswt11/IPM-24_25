@@ -24,7 +24,7 @@ app.get('/mensagens', (req, res) => {
 
 app.patch('/mensagens/:id', (req, res) => {
   const db = loadDB();
-  const id = parseInt(req.params.id);
+  const id = parseInt(req .params.id);
   const mensagem = db.mensagens.find(m => m.id === id);
 
   if (!mensagem) return res.status(404).json({ error: 'Mensagem não encontrada' });

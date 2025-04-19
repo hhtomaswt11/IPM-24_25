@@ -1,55 +1,87 @@
 <template>
-    <div class="gestao-container">
-      <div class="decoracao-fundo"></div>
-  
-      <h1 class="titulo">{{ titulo }}</h1>
-  
-      <div class="tabela-wrapper">
-        <table class="tabela-gestao">
-          <thead>
-            <tr>
-              <th v-for="(coluna, index) in colunas" :key="index">{{ coluna }}</th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            <tr v-for="(item, index) in dados" :key="index">
-              <td v-for="(campo, i) in campos" :key="i" :class="campo === 'uc' ? 'uc-cell' : ''">
-                <template v-if="campo === 'decisao'">
-                  <span
-                    v-if="item[campo] === 'Atualizar'"
-                    class="acao atualizar"
-                    @click="$emit('atualizar', index)"
-                  >
-                    Atualizar
-                  </span>
-                  <span v-else class="acoes">
-                    <span class="acao aceitar" @click="$emit('aceitar', index)">✔</span>
-                    <span class="acao rejeitar" @click="$emit('rejeitar', index)">✖</span>
-                  </span>
-                </template>
-                <template v-else>
-                  {{ item[campo] }}
-                </template>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="gestao-container">
+    <div class="decoracao-fundo"></div>
+
+    <h1 class="titulo">{{ titulo }}</h1>
+
+    <div class="tabela-wrapper">
+      <table class="tabela-gestao">
+        <thead>
+          <tr>
+            <th v-for="(coluna, index) in colunas" :key="index">{{ coluna }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="(item, index) in dados" :key="index">
+            <td
+              v-for="(campo, i) in campos"
+              :key="i"
+              :class="campo === 'uc' ? 'uc-cell' : ''"
+            >
+              <!-- Decisão -->
+              <template v-if="campo === 'decisao'">
+                <span
+                  v-if="item[campo] === 'Atualizar'"
+                  class="acao atualizar"
+                  @click="$emit('atualizar', index)"
+                >
+                  Atualizar
+                </span>
+                <span v-else class="acoes">
+                  <span class="acao aceitar" @click="$emit('aceitar', index)">✔</span>
+                  <span class="acao rejeitar" @click="$emit('rejeitar', index)">✖</span>
+                </span>
+              </template>
+
+              <!-- Alteração (com dropdown) -->
+              <template v-else-if="campo === 'alteracao' && item[campo] === 'Seleciona'">
+                <select v-model="item[campo]" class="dropdown">
+                  <option disabled value="">Seleciona uma opção</option>
+                  <option value="T1">T1</option>
+                  <option value="T2">T2</option>
+                  <option value="TP3">TP3</option>
+                </select>
+              </template>
+
+              <!-- Capacidade dinâmica após escolha -->
+              <template v-else-if="campo === 'capacidade' && item[campo] === '-----' && item.alteracao !== 'Seleciona'">
+                {{ obterCapacidadeSimulada(item.alteracao) }}
+              </template>
+
+              <!-- Campo normal -->
+              <template v-else>
+                {{ item[campo] }}
+              </template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </template>
-  
-  <script setup>
-  // Props para tornar o componente reutilizável
-  const props = defineProps({
-    titulo: String,
-    colunas: Array,
-    campos: Array,
-    dados: Array
-  });
-  
-  defineEmits(['atualizar', 'aceitar', 'rejeitar']);
-  </script>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  titulo: String,
+  colunas: Array,
+  campos: Array,
+  dados: Array
+});
+
+defineEmits(['atualizar', 'aceitar', 'rejeitar']);
+
+// Capacidade simulada associada ao turno
+function obterCapacidadeSimulada(turno) {
+  const capacidades = {
+    T1: '30/40',
+    T2: '25/30',
+    TP3: '18/25'
+  };
+  return capacidades[turno] || '---';
+}
+</script>
+
   
   <style scoped>
   .gestao-container {
@@ -149,6 +181,14 @@
   .rejeitar:hover {
     color: #B52525;
   }
+
+  .dropdown {
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
+    }
   
   @media (max-width: 768px) {
     .titulo {

@@ -307,5 +307,39 @@
   ],
   "shiftRequests": [
     { "id": 1, "shiftId": 1, "studentId": 1, "response": "ok", "alternativeShiftId": null, "responseSeenByStudent": false }
+  ],
+  "mensagens": [
+    {
+      "id": 1,
+      "enviada": false,
+      "de": "João Pedro",
+      "assunto": "Troca de Turno - Programação Funcional T2→T1",
+      "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
+      "lida": false
+    },
+    {
+      "id": 2,
+      "enviada": false,
+      "de": "Maria Lopes",
+      "assunto": "Dúvida sobre o projeto final",
+      "conteudo": "Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.",
+      "lida": true
+    },
+    {
+      "id": 3,
+      "enviada": true,
+      "para": "João Pedro",
+      "assunto": "Troca de Turno - Programação Funcional T2→T1",
+      "conteudo": "Foi trocado.",
+      "lida": true
+    },
+    {
+      "id": 4,
+      "enviada": true,
+      "para": "Maria Lopes",
+      "assunto": "Dúvida sobre o projeto final",
+      "conteudo": "Olá, as tuas dúvidas são muito pertinentes.",
+      "lida": true
+    }
   ]
 }
