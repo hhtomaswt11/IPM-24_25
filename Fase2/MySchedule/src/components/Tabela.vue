@@ -35,12 +35,12 @@
               </template>
 
               <!-- Alteração (com dropdown) -->
-              <template v-else-if="campo === 'alteracao' && item[campo] === 'Seleciona'">
-                <select v-model="item[campo]" class="dropdown">
+              <template v-else-if="campo === 'alteracao' && Array.isArray(item[campo])">
+                <select v-model="item.escolha" class="dropdown">
                   <option disabled value="">Seleciona uma opção</option>
-                  <option value="T1">T1</option>
-                  <option value="T2">T2</option>
-                  <option value="TP3">TP3</option>
+                  <option v-for="op in item[campo]" :key="op" :value="op">
+                    {{ op }}
+                  </option>
                 </select>
               </template>
 
