@@ -3,6 +3,7 @@ import cors from 'cors';
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { getConflitos } from './conflito.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -12,11 +13,11 @@ const DB_PATH = join(__dirname, 'trabalhodb.json');
 app.use(cors());
 app.use(express.json());
 
-const loadDB = () => JSON.parse(readFileSync(DB_PATH, 'utf-8'));
+// Função para carregar os dados da base de dados
+export const loadDB = () => JSON.parse(readFileSync(DB_PATH, 'utf-8'));
 const saveDB = (db) => writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf-8');
 
 // -------------------- MENSAGENS --------------------
-
 app.get('/mensagens', (req, res) => {
   const db = loadDB();
   res.json(db.mensagens || []);
@@ -24,7 +25,7 @@ app.get('/mensagens', (req, res) => {
 
 app.patch('/mensagens/:id', (req, res) => {
   const db = loadDB();
-  const id = parseInt(req .params.id);
+  const id = parseInt(req.params.id);
   const mensagem = db.mensagens.find(m => m.id === id);
 
   if (!mensagem) return res.status(404).json({ error: 'Mensagem não encontrada' });
@@ -66,21 +67,13 @@ app.patch('/director', (req, res) => {
   res.json(diretor);
 });
 
-// PATCH por ID (genérico, opcional)
-app.patch('/directors/:id', (req, res) => {
-  const db = loadDB();
-  const id = parseInt(req.params.id);
-  const diretor = db.directors.find(d => d.id === 1);
-
-  if (diretorIndex === -1) return res.status(404).json({ error: 'Diretor não encontrado' });
-
-  Object.assign(diretor, req.body);
-  saveDB(db);
-  res.json(diretor);
+// -------------------- CONFLITOS ---------------------
+app.get('/conflitos', (req, res) => {
+  const conflitos = getConflitos(); // Chama a função para obter os conflitos tratados
+  res.json(conflitos);
 });
 
 // -------------------- START SERVER --------------------
-
 app.listen(PORT, () => {
   console.log(`🚀 Servidor a correr em http://localhost:${PORT}`);
 });

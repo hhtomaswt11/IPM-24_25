@@ -39,7 +39,7 @@
   
   <style scoped>
   .gestao-container {
-    padding: 2rem;
+    padding: 1rem;
     position: relative;
     max-width: 100%;
     width: 100%;

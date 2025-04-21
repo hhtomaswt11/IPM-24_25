@@ -52,6 +52,7 @@
     {
       "id": 1,
       "name": "Mafalda",
+      "numero": "a100",
       "email": "a32324@alunos.uminho.pt",
       "password": "123",
       "specialStatus": true,
@@ -66,6 +67,7 @@
     {
       "id": 2,
       "name": "Carlos",
+      "numero": "a101",
       "email": "33232@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -79,6 +81,7 @@
     {
       "id": 3,
       "name": "Joana",
+      "numero": "a102",
       "email": "j32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -92,6 +95,7 @@
     {
       "id": 4,
       "name": "Ricardo",
+      "numero": "a103",
       "email": "r32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -105,6 +109,7 @@
     {
       "id": 5,
       "name": "Sofia",
+      "numero": "a104",
       "email": "s32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -118,6 +123,7 @@
     {
       "id": 6,
       "name": "Tiago",
+      "numero": "a105",
       "email": "t32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -131,6 +137,7 @@
     {
       "id": 7,
       "name": "Inês",
+      "numero": "a106",
       "email": "i32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -144,6 +151,7 @@
     {
       "id": 8,
       "name": "Gonçalo",
+      "numero": "a107",
       "email": "g32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -157,6 +165,7 @@
     {
       "id": 9,
       "name": "Mariana",
+      "numero": "a108",
       "email": "m32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -170,6 +179,7 @@
     {
       "id": 10,
       "name": "Diogo",
+      "numero": "a109",
       "email": "d32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -183,6 +193,7 @@
     {
       "id": 11,
       "name": "Beatriz",
+      "numero": "a110",
       "email": "b32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -196,6 +207,7 @@
     {
       "id": 12,
       "name": "Fábio",
+      "numero": "a111",
       "email": "f32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -209,6 +221,7 @@
     {
       "id": 13,
       "name": "Ana",
+      "numero": "a112",
       "email": "a32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -222,6 +235,7 @@
     {
       "id": 14,
       "name": "Bruno",
+      "numero": "a113",
       "email": "b32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -235,6 +249,7 @@
     {
       "id": 15,
       "name": "Catarina",
+      "numero": "a114",
       "email": "c32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -248,6 +263,7 @@
     {
       "id": 16,
       "name": "Daniel",
+      "numero": "a115",
       "email": "d32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -261,6 +277,7 @@
     {
       "id": 17,
       "name": "Eva",
+      "numero": "a116",
       "email": "e32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -274,6 +291,7 @@
     {
       "id": 18,
       "name": "Filipe",
+      "numero": "a117",
       "email": "f32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -287,6 +305,7 @@
     {
       "id": 19,
       "name": "Gabriela",
+      "numero": "a118",
       "email": "g32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -300,6 +319,7 @@
     {
       "id": 20,
       "name": "Hugo",
+      "numero": "a119",
       "email": "h32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -313,6 +333,7 @@
     {
       "id": 21,
       "name": "Isabel",
+      "numero": "a120",
       "email": "i32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -326,6 +347,7 @@
     {
       "id": 22,
       "name": "Jorge",
+      "numero": "a121",
       "email": "j32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -339,6 +361,7 @@
     {
       "id": 23,
       "name": "Leonor",
+      "numero": "a122",
       "email": "l32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -352,6 +375,7 @@
     {
       "id": 24,
       "name": "Miguel",
+      "numero": "a123",
       "email": "m32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -365,6 +389,7 @@
     {
       "id": 25,
       "name": "Nuno",
+      "numero": "a124",
       "email": "n32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -378,6 +403,7 @@
     {
       "id": 26,
       "name": "Olívia",
+      "numero": "a125",
       "email": "o32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -391,6 +417,7 @@
     {
       "id": 27,
       "name": "Pedro",
+      "numero": "a126",
       "email": "p32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -404,6 +431,7 @@
     {
       "id": 28,
       "name": "Rita",
+      "numero": "a127",
       "email": "r32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -417,6 +445,7 @@
     {
       "id": 29,
       "name": "Sara",
+      "numero": "a128",
       "email": "s32325@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -431,6 +460,7 @@
       "id": 30,
       "name": "Tiago",
       "email": "t32325@alunos.uminho.pt",
+      "numero": "a129",
       "password": "123",
       "enrolled": [
         26,
