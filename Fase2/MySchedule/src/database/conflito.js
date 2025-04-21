@@ -29,6 +29,7 @@ export const getConflitos = () => {
         uc: uc, // Nome da Unidade Curricular
         turnoAtual: '-----', // Exemplo de Turno Atual, será preenchido conforme necessário
         alteracao: turnos, // Pode ser alterado para um dropdown mais tarde
+        escolha: '', 
         capacidade: '-----', // Inicialmente vazio, pode ser atualizado mais tarde
         decisao: 'Atualizar' // Inicialmente com o valor "Atualizar"
       });
