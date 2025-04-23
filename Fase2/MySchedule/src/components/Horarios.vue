@@ -15,9 +15,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import HorarioAno from './HorarioAno.vue';
-import jsonData from '@/database/trabalhodb.json'; 
 
 // Dias da semana para a tabela
 const dias = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -25,51 +24,60 @@ const dias = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 // Horas para a tabela
 const horas = [];
 for (let i = 9; i <= 18; i++) {
-  if(i==9) {
-    horas.push(`0${i}:00`);
-  } else {
-    horas.push(`${i}:00`);
-  }
+  horas.push(i === 9 ? `0${i}:00` : `${i}:00`);
 }
 
-// Processa os horários por ano/semestre
+// Dados carregados do json-server
+const courses = ref([]);
+const shifts = ref([]);
+const classrooms = ref([]);
+
+// Carregar os dados ao montar o componente
+onMounted(async () => {
+  const [resCourses, resShifts, resClassrooms] = await Promise.all([
+    fetch('http://localhost:3000/courses'),
+    fetch('http://localhost:3000/shifts'),
+    fetch('http://localhost:3000/classrooms')
+  ]);
+
+  courses.value = await resCourses.json();
+  shifts.value = await resShifts.json();
+  classrooms.value = await resClassrooms.json();
+});
+
+// Processar horários agrupados por ano/semestre
 const processedHorarios = computed(() => {
   const result = [];
-  
-  // Agrupa cursos por ano
+
   const coursesByYear = {};
-  jsonData.courses.forEach(course => {
+  courses.value.forEach(course => {
     const key = `${course.year}-${course.semester}`;
     if (!coursesByYear[key]) {
       coursesByYear[key] = [];
     }
     coursesByYear[key].push(course);
   });
-  
-  // Cria um horário para cada ano/semestre
+
   Object.keys(coursesByYear).forEach(yearSem => {
     const [year, semester] = yearSem.split('-');
-    
-    // Obter IDs dos cursos para este ano/semestre
+
     const courseIds = coursesByYear[yearSem].map(c => c.id);
-    
-    // Filtrar turnos para estes cursos
-    const yearShifts = jsonData.shifts.filter(s => courseIds.includes(s.courseId));
-    
-    // Adicionar ao resultado
+    const yearShifts = shifts.value.filter(s => courseIds.includes(s.courseId));
+
     result.push({
       titulo: `${year}º Ano - ${semester}º Semestre`,
-      dias: dias,
-      horas: horas,
+      dias,
+      horas,
       shifts: yearShifts,
-      courses: jsonData.courses,
-      classrooms: jsonData.classrooms
+      courses: courses.value,
+      classrooms: classrooms.value
     });
   });
-  
+
   return result;
 });
 </script>
+
   
   <style scoped>
   .pagina-horarios {
