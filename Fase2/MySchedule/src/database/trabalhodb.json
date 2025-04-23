@@ -8,7 +8,7 @@
       "nascimento": "1980-01-12",
       "morada": "Rua 10 de Junho, 4704-514 - BRAGA, Portugal",
       "sexo": "Masculino",
-      "telefone": "(+351) 939999999",
+      "telefone": "(+351) 939999998",
       "departamento": "Escola de Engenharia",
       "cargos": [
         "Diretor do curso de Engenharia Informática",
@@ -52,6 +52,7 @@
     {
       "id": "1",
       "name": "Mafalda",
+      "num": "a100",
       "email": "a32324@alunos.uminho.pt",
       "password": "123",
       "specialStatus": true,
@@ -66,6 +67,7 @@
     {
       "id": "2",
       "name": "Carlos",
+      "num": "a101",
       "email": "33232@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -79,6 +81,7 @@
     {
       "id": "3",
       "name": "Joana",
+      "num": "a103",
       "email": "j32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -92,6 +95,7 @@
     {
       "id": "4",
       "name": "Ricardo",
+      "num": "a104",
       "email": "r32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -105,6 +109,7 @@
     {
       "id": "5",
       "name": "Sofia",
+      "num": "a105",
       "email": "s32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -118,6 +123,7 @@
     {
       "id": "6",
       "name": "Tiago",
+      "num": "a106",
       "email": "t32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -131,6 +137,7 @@
     {
       "id": "7",
       "name": "Inês",
+      "num": "a107",
       "email": "i32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -144,6 +151,7 @@
     {
       "id": "8",
       "name": "Gonçalo",
+      "num": "a108",
       "email": "g32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -157,6 +165,7 @@
     {
       "id": "9",
       "name": "Mariana",
+      "num": "a109",
       "email": "m32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -170,6 +179,7 @@
     {
       "id": "10",
       "name": "Diogo",
+      "num": "a110",
       "email": "d32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -183,6 +193,7 @@
     {
       "id": "11",
       "name": "Beatriz",
+      "num": "a111",
       "email": "b32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
@@ -714,7 +725,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 19
     },
     {
       "id": "3",
@@ -942,7 +953,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
       "id": "22",
@@ -2169,7 +2180,7 @@
     {
       "id": "1",
       "studentId": 1,
-      "courseIDs": [
+      "shiftID": [
         1,
         11
       ]
@@ -2177,7 +2188,7 @@
     {
       "id": "2",
       "studentId": 2,
-      "courseIDs": [
+      "shiftID": [
         6,
         16
       ]
@@ -2185,7 +2196,7 @@
     {
       "id": "3",
       "studentId": 3,
-      "courseIDs": [
+      "shiftID": [
         11,
         21
       ]
@@ -2193,7 +2204,7 @@
     {
       "id": "4",
       "studentId": 4,
-      "courseIDs": [
+      "shiftID": [
         16,
         26
       ]
