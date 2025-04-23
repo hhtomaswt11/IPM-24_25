@@ -91,7 +91,7 @@
     display: flex;
     justify-content: flex-end;  
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     width: 100%;
 }
 
@@ -139,14 +139,18 @@
 
 .course-name {
     padding: 12px 15px;
-    background-color: #ffffff;
+    font-size: 0.5rem;
+    background-color: #ffffff; 
     flex-grow: 1;
+    display: flex;             
+    align-items: center;       
+    justify-content: center;   
 }
 
 .course-name h3 {
     font-size: 1.1rem;
     margin: 0;
-    color: #333;
+    color: #333; 
     font-weight: 600;
     text-decoration: none;
 }

@@ -115,8 +115,13 @@ const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
 const termoPesquisa = ref('');
 
+// Carregar mensagens diretamente do json-server
 onMounted(() => {
-  store.carregarMensagens();
+  fetch('http://localhost:3000/mensagens')
+    .then(res => res.json())
+    .then(data => {
+      store.setMensagens(data); // Assuming setMensagens is a method to store data in Pinia store
+    });
 });
 
 const mensagens = computed(() => store.mensagens);
