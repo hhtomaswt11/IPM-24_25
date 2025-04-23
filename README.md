@@ -50,14 +50,15 @@ Instalar dependências do projeto.
 npm install
 ```
 
-Executar um script personalizado definido no ficheiro package.json
-```text
-npm run format
-```
 
 Iniciar o servidor de desenvolvimento e executar o projeto localmente.
 ```text
 npm run dev
+```
+
+Antes de iniciar o servidor de desenvolvimento, deve-se correr o json-server dentro da diretoria database. 
+```text
+npx json-server trabalhodb.json
 ```
 
 

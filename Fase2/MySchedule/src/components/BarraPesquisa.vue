@@ -5,13 +5,13 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       type="text"
-      :placeholder="modelValue ? '' : 'Pesquise uma mensagem'"
+      :placeholder="placeholderText || 'Pesquise uma mensagem'"
     />
   </div>
 </template>
 
 <script setup>
-defineProps(['modelValue']);
+defineProps(['modelValue', 'placeholderText']); // Definindo a propriedade placeholderText
 defineEmits(['update:modelValue']);
 </script>
 
@@ -20,11 +20,11 @@ defineEmits(['update:modelValue']);
   width: 250px;
   height: 53px;
   background-color: #FFFBFB;
-  border: 1px solid #CEC9C9;
-  border-radius: 10px;
+  border: 1px solid #dad6d6;
+
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 6px;
   position: relative;
 }
 
@@ -33,6 +33,8 @@ defineEmits(['update:modelValue']);
   border: none;
   background: none;
   font-size: 14px;
+  margin-bottom: -2px;
+
   color: #020202;
   outline: none;
   font-family: "Meera Inimai", sans-serif;
@@ -40,15 +42,15 @@ defineEmits(['update:modelValue']);
 }
 
 .search-bar img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px; 
   position: absolute;
   left: 10px;
   opacity: 0.6;
 }
 
 .search-bar input::placeholder {
-  color: #020202;
+  color: #676565;
 }
 
 .search-bar input:focus::placeholder {
