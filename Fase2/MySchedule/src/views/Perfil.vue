@@ -87,38 +87,64 @@ const diretor = ref({
 });
 
 const editando = ref(false);
-const novoEmail = ref('');
-const novoTelefone = ref('');
 
+// Campos editáveis
+const novoNome = ref('');
+const novoEmail = ref('');
+const novoNascimento = ref('');
+const novaMorada = ref('');
+const novoSexo = ref('');
+const novoTelefone = ref('');
+const novoDepartamento = ref('');
+const novosCargos = ref([]);
+
+// Buscar dados do diretor
 onMounted(async () => {
-  const res = await fetch('http://localhost:3000/director');
+  const res = await fetch('http://localhost:3000/directors');
   const data = await res.json();
-  diretor.value = data;
-  novoEmail.value = data.email;
-  novoTelefone.value = data.telefone;
+  diretor.value = data[0];
+
+  // Inicializar campos editáveis
+  novoNome.value = data[0].name;
+  novoEmail.value = data[0].email;
+  novoNascimento.value = data[0].nascimento;
+  novaMorada.value = data[0].morada;
+  novoSexo.value = data[0].sexo;
+  novoTelefone.value = data[0].telefone;
+  novoDepartamento.value = data[0].departamento;
+  novosCargos.value = [...data[0].cargos];
 });
 
+// Ativar modo de edição
 function ativarEdicao() {
   editando.value = true;
 }
 
+// Guardar alterações no servidor
 async function guardarAlteracoes() {
   const atualizados = {
+    name: novoNome.value,
     email: novoEmail.value,
-    telefone: novoTelefone.value
+    nascimento: novoNascimento.value,
+    morada: novaMorada.value,
+    sexo: novoSexo.value,
+    telefone: novoTelefone.value,
+    departamento: novoDepartamento.value,
+    cargos: [...novosCargos.value]
   };
 
-  await fetch('http://localhost:3000/director', {
+  await fetch('http://localhost:3000/directors/1', {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(atualizados)
   });
 
-  diretor.value.email = novoEmail.value;
-  diretor.value.telefone = novoTelefone.value;
+  // Atualizar localmente
+  diretor.value = { ...diretor.value, ...atualizados };
   editando.value = false;
 }
 </script>
+
   
   <style scoped>
   .perfil-container {
