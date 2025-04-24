@@ -216,9 +216,5 @@ export default {
     margin: 0;
 }
 
-h2 {
-  font-weight: bold;
-}
-
-
 </style>
+
