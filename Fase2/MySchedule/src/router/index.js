@@ -9,6 +9,10 @@ import GestaoUC from '@/views/GestaoUC.vue'
 import Login from '@/views/Login.vue' 
 import Unidades from '@/views/Unidades.vue' 
 import BarraPesquisa from '@/components/BarraPesquisa.vue' 
+import DropDownAlternarSem from '@/components/DropDownAlternarSem.vue' 
+import DropDownAlternarAnos from '@/components/DropDownAlternarAnos.vue' 
+import NotFoundPage from '@/components/NotFoundPage.vue'
+import TerminarSessao from '@/components/TerminarSessao.vue'
 
 
 
@@ -44,6 +48,7 @@ const router = createRouter({
       name: 'DetalheUC',
       component: DetalheUC,
     },
+
     {
       path: '/perfil',
       name: 'Perfil',
@@ -63,6 +68,15 @@ const router = createRouter({
       path: '/horario-aluno',
       name: 'HorarioAluno',
       component: HorarioAluno,
+    },
+    {
+      path: '/terminar',
+      name: 'TerminarSessao',
+      component: TerminarSessao,
+    },
+    {
+      path: '/:notFoundPage(.*)',
+      component: NotFoundPage,
     }
   ],
 })

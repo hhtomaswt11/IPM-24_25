@@ -11,10 +11,11 @@ export const useSessionStorage = defineStore('session', {
     department: '',
     gender: '',
     address: '',
-    type: ''
+    type: '',
+    caderno: ''  
   }),
   actions: {
-    login(id: string, name: string, surnames: string, email: string, telephone: string, department: string, address: string, type: string, birthdate: string, gender: string) {
+    login(id: string, name: string, surnames: string, email: string, telephone: string, department: string, address: string, type: string, birthdate: string, gender: string, caderno: string = '') {
       this.id = id
       this.name = name
       this.surnames = surnames
@@ -24,7 +25,8 @@ export const useSessionStorage = defineStore('session', {
       this.email = email 
       this.type = type
       this.birthdate = birthdate
-      this.gender = gender 
+      this.gender = gender
+      this.caderno = caderno 
     },
     logout() {
       this.id = ''
@@ -37,6 +39,10 @@ export const useSessionStorage = defineStore('session', {
       this.type = ''
       this.birthdate = ''
       this.gender = ''
+      this.caderno = ''  
+    },
+    updateCaderno(caderno: string) {
+      this.caderno = caderno  
     }
   },
   getters: {

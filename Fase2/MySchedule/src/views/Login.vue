@@ -3,7 +3,7 @@
     <div class="left">
       <img src="/src/assets/main_logo.png" alt="Login Image" class="background-image" />
     </div>
-     <div class="separator"></div>
+    <div class="separator"></div>
     <!-- Formulário à direita -->
     <div class="right">
       <div class="form-container">
@@ -17,11 +17,10 @@
 
         <!-- Formulário de Login -->
         <form class="login-form" @submit.prevent="login">
-          <!-- Campo de Email -->
           <div class="input-group">
             <label for="email" class="sr-only"></label>
             <div class="input-wrapper">
-               <i class="fas fa-user"></i>
+              <i class="fas fa-user"></i>
               <input
                 type="email"
                 id="email"
@@ -38,7 +37,7 @@
           <div class="input-group">
             <label for="password" class="sr-only"></label>
             <div class="input-wrapper">
-                <i class="fas fa-key"></i>
+              <i class="fas fa-key"></i>
               <input
                 type="password"
                 id="password"
@@ -49,6 +48,11 @@
               />
               <div class="bottom-border-password"></div>
             </div>
+          </div>
+
+          <!-- Mensagem de sucesso -->
+          <div v-if="mensagemTemp" class="success-message">
+            {{ mensagemTemp }}
           </div>
 
           <!-- Botão de Login -->
@@ -62,82 +66,94 @@
   </div>
 </template>
 
-  
-  <script lang="ts">
-  import * as api from '../api.ts'; // funções de login da API
-  import { useSessionStorage } from '@/stores/session.ts'; // store de sessão para guardar o login
-  
-  export default {
-    data() {
-      return {
-        email: '',
-        password: '',
-        error: ''
-      };
-    },
-  
-  
-    methods: {
+
+<script lang="ts">
+import * as api from '../api.ts'; // funções de login da API
+import { useSessionStorage } from '@/stores/session.ts'; // store de sessão para guardar o login
+import { useMensagensStore } from '@/stores/useMensagensStore'; // Importando a store de mensagens
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: ''
+    };
+  },
+
+  computed: {
+    mensagemTemp() {
+      const store = useMensagensStore();
+      return store.mensagemTemp; // A mensagem temporária da store
+    }
+  },
+
+  methods: {
     async login() {
       this.error = '';  // resetar erro ao tentar logar
       try {
         let user = null;
         let userType = '';
-  
+
+        // Tenta autenticar o estudante
         user = await api.loginStudent(this.email, this.password);
-  
         if (user) {
           userType = 'student';
-        } 
-        else if (!user) {
+        }
+
+        // Se não for estudante, tenta autenticar o professor
+        if (!user) {
           user = await api.loginTeacher(this.email, this.password);
           if (user) {
             userType = 'teacher';
           }
         }
-        else if (!user) {
+
+        // Se não for nem estudante nem professor, tenta autenticar o diretor
+        if (!user) {
           user = await api.loginDirector(this.email, this.password);
           if (user) {
             userType = 'director';
           }
         }
-  
+
+        // Se algum tipo de usuário foi encontrado, faz o login e redireciona
         if (user) {
-          // se algum tipo de user for encontrado, fazemos login e redirecionamos para a pagina das ucs 
           this.handleLogin(user, userType);
         } else {
-          // debug 
-          //console.log("Email ou palavra-passe incorretos!"); 
+          // Se não for possível fazer login, exibe a mensagem de erro
           this.error = 'Endereço eletrónico ou palavra-passe inválidos';
         }
       } catch (error) {
-        //console.error("Erro no login:", error);  
+        // Se houver algum erro durante o login, exibe a mensagem de erro
         this.error = 'Ocorreu um erro ao tentar fazer login. Tente novamente.';
       }
     },
-  
+
     handleLogin(user: any, type: string) {
       const session = useSessionStorage();
       // Usando as propriedades reativas diretamente
       session.id = user.id;  // atribuir o id do user à store
       session.name = user.name;  // atribuir o nome do user à store
-  
+
       session.type = type;  // atribuir o tipo de user
-      
-      // console.log("Login bem-sucedido:", user); 
-      this.error = 'Com sucesso';
-  
-      this.$router.push('/unidades'); 
+
+      this.error = ''; // Resetar a mensagem de erro
+
+      // Redireciona para a página de unidades
+      this.$router.push('/unidades');
     }
+  },
+
+  beforeDestroy() {
+    const store = useMensagensStore();
+    store.limparMensagemTemp(); // Limpa a mensagem temporária após ser exibida
   }
-  
-  
-  
-  
-  };
-  </script>
-  
-  <style scoped>
+};
+</script>
+
+
+<style scoped>
 * {
   margin: 0;
   padding: 0;
@@ -218,9 +234,6 @@ html, body {
   vertical-align: super;
 }
 
-
-
-
 .description {
   padding-left: 32%;
   font-size: 1.5rem;
@@ -242,8 +255,6 @@ html, body {
   margin-top: 45px;
   padding-left: 40%;
   width: 140%;
-  
-
 }
 
 .input-wrapper {
@@ -263,7 +274,6 @@ html, body {
   font-size: 1.2rem;
   pointer-events: none; 
 }
-
 
 /* Ajustar a posição do campo do e-mail */
 .input-group:first-of-type {
@@ -301,16 +311,12 @@ html, body {
 
   font-size: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-
 }
 
 .input-field:focus {
   border-color: #6b7280;
   outline: none;
-
 }
-
 
 .login-button {
   
@@ -329,9 +335,7 @@ html, body {
   align-items: center;
   margin-top: 15%;
   margin-left: 65%; 
-
 }
-
 
 .login-button:hover {
   background-color: #4b5563;
@@ -346,6 +350,14 @@ html, body {
   padding-left: 265px;
 }
 
+/* Mensagem de sucesso (sessão terminada) */
+.success-message {
+  font-size: 1rem;
+  color: #c5bda6;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-right: 120px;
+}
 
 .separator {
   width: 15px; 
@@ -370,9 +382,4 @@ html, body {
     width: 50%;
   }
 }
-
-
-
-
-
-  </style>
+</style>

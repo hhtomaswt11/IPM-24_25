@@ -116,3 +116,17 @@ export async function updateShiftRequest(id: number, data: any) {
   const response = await API.patch(`/shiftRequests/${id}`, data)
   return response.data
 }
+
+// Caderno 
+
+// Atualiza as anotações do Diretor
+export async function updateCaderno(id: number, caderno: string) {
+  const response = await API.patch(`/directors/${id}`, { caderno });
+  return response.data;
+}
+
+// Atualiza as anotações do Professor
+export async function updateTeacherCaderno(id: number, caderno: string) {
+  const response = await API.patch(`/teachers/${id}`, { caderno });
+  return response.data;
+}

@@ -1,6 +1,7 @@
 <template>
   <div class="search-bar">
-    <img src="@/components/icons/Lupa.svg" alt="Ícone de Lupa" />
+    <!-- Adicionar cor rosa à lupa -->
+    <Search size="24" class="search-icon" color="#be7979" /> <!-- Cor rosa -->
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -11,13 +12,15 @@
 </template>
 
 <script setup>
-defineProps(['modelValue', 'placeholderText']); // Definindo a propriedade placeholderText
+import { Search } from 'lucide-vue-next'; // Importa o ícone de lupa da biblioteca
+
+defineProps(['modelValue', 'placeholderText']); 
 defineEmits(['update:modelValue']);
 </script>
 
 <style scoped>
 .search-bar {
-  width: 250px;
+  width: 315px;
   height: 53px;
   background-color: #FFFBFB;
   border: 1px solid #dad6d6;
@@ -41,12 +44,11 @@ defineEmits(['update:modelValue']);
   padding-left: 30px;
 }
 
-.search-bar img {
-  width: 24px;
-  height: 24px; 
+.search-icon {
+  width: 21px;
+  height: 21px; 
   position: absolute;
   left: 10px;
-  opacity: 0.6;
 }
 
 .search-bar input::placeholder {
