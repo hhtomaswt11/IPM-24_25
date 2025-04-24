@@ -75,12 +75,10 @@ function getAulas(hora, dia) {
   
   const horaNum = parseInt(hora.split(':')[0]);
   
-  return props.horario.shifts
-    .filter(shift => shift.from === horaNum && shift.day === dia)
-    .map(shift => {
+  return props.horario.shifts.filter(shift => shift.from === horaNum && shift.day === dia).map(shift => {
       // Encontrar informações relacionadas
-      const course = props.horario.courses.find(c => c.id === shift.courseId) || {};
-      const classroom = props.horario.classrooms.find(c => c.id === shift.classroomId) || {};
+      const course = props.horario.courses.find(c => Number(c.id) === shift.courseId) || {};
+      const classroom = props.horario.classrooms.find(c => Number(c.id) === shift.classroomId) || {};
       
       // Determinar capacidade com base em totalStudentsRegistered
       let capacidade = 'livre';
@@ -92,7 +90,7 @@ function getAulas(hora, dia) {
         disciplina: course.abbreviation || 'Unknown',
         tp: `${shift.name}`,
         sala: classroom.name || 'Unknown',
-        capacidade: shift.capacity,
+        capacidade,
         duracao: shift.to - shift.from
       };
     });

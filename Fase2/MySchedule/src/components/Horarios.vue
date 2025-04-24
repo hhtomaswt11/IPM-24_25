@@ -61,7 +61,7 @@ const processedHorarios = computed(() => {
   Object.keys(coursesByYear).forEach(yearSem => {
     const [year, semester] = yearSem.split('-');
 
-    const courseIds = coursesByYear[yearSem].map(c => c.id);
+    const courseIds = coursesByYear[yearSem].map(c => Number(c.id));
     const yearShifts = shifts.value.filter(s => courseIds.includes(s.courseId));
 
     result.push({
