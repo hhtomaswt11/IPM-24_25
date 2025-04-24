@@ -47,7 +47,7 @@ export const useSessionStorage = defineStore('session', {
   },
   getters: {
     isLoggedIn(state) {
-      return state.id && state.name && state.email && state.type && state.surnames && state.department && state.telephone && state.address && state.birthdate && state.gender 
+      return state.id && state.name && state.email && state.type && state.surnames && state.department && state.telephone && state.address && state.birthdate && state.gender && state.caderno
     }
   },
   persist: true
