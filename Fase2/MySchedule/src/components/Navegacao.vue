@@ -111,12 +111,12 @@
 
 .badge {
   position: absolute;
-  top: 8px;
+  top: 3px;
   right: 15px;
   background-color: #F6E7B8;
   color: #373737;
   border-radius: 50%;
-  padding: 4px 8px;
+  padding: 2px 6px;
   font-size: 12px;
   font-weight: bold;
 }

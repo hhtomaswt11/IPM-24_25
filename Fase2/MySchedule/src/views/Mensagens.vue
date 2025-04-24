@@ -105,6 +105,7 @@ import Botao from '@/components/Botao.vue';
 import EnviarMensagem from '@/components/EnviarMensagem.vue';
 import Mensagem from '@/components/Mensagem.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
+import axios from 'axios'; // Importa o Axios
 
 const store = useMensagensStore();
 
@@ -115,8 +116,14 @@ const mensagemSelecionada = ref({ de: '', assunto: '', conteudo: '' });
 const destinatarioResposta = ref('');
 const termoPesquisa = ref('');
 
-onMounted(() => {
-  store.carregarMensagens();
+// Carregar mensagens diretamente do json-server com Axios
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/mensagens');
+    store.setMensagens(response.data); // Assuming setMensagens is a method to store data in Pinia store
+  } catch (error) {
+    console.error('Erro ao carregar as mensagens:', error);
+  }
 });
 
 const mensagens = computed(() => store.mensagens);
