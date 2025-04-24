@@ -20,6 +20,7 @@
 import Tabela from '@/components/Tabela.vue';
 import { ref, onMounted, reactive } from 'vue';
 import { useGestaoStore } from '@/stores/capacidade'; // importa a store
+import axios from 'axios'; // Importa o Axios
 
 const gestaoStore = useGestaoStore(); // instancia a store
 
@@ -43,24 +44,25 @@ function getStudentStatus(studentId) {
 
 onMounted(async () => {
   try {
+    // Fazendo todas as requisições usando axios
     const [conflictsRes, shiftsRes, coursesRes, studentsRes, classroomsRes] = await Promise.all([
-      fetch('http://localhost:3000/conflicts'),
-      fetch('http://localhost:3000/shifts'),
-      fetch('http://localhost:3000/courses'),
-      fetch('http://localhost:3000/students'),
-      fetch('http://localhost:3000/classrooms')
+      axios.get('http://localhost:3000/conflicts'),
+      axios.get('http://localhost:3000/shifts'),
+      axios.get('http://localhost:3000/courses'),
+      axios.get('http://localhost:3000/students'),
+      axios.get('http://localhost:3000/classrooms')
     ]);
 
-    const conflitos = await conflictsRes.json();
-    const shifts = await shiftsRes.json();
-    const courses = await coursesRes.json();
-    estudantes = await studentsRes.json();
-    const classrooms = await classroomsRes.json();
+    const conflitos = conflictsRes.data;
+    const shifts = shiftsRes.data;
+    const courses = coursesRes.data;
+    estudantes = studentsRes.data;
+    const classrooms = classroomsRes.data;
 
-    // Criar mapa de capacidade real por turno (usando o ID do turno como chave!)
+    // Criar mapa de capacidade real por turno (usando o ID do turno como chave)
     const capacidadePorTurno = {};
     shifts.forEach(shift => {
-      const sala = classrooms.find(c => c.id == shift.classroomId); // usa ==
+      const sala = classrooms.find(c => c.id == shift.classroomId);
       if (sala) {
         capacidadePorTurno[Number(shift.id)] = `${shift.totalStudentsRegistered}/${sala.capacity}`;
       }
