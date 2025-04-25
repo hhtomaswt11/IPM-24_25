@@ -10,8 +10,8 @@
       <tbody>
         <tr v-for="(hora, horaIndex) in horario.horas" :key="hora">
           <td class="hora-coluna">{{ hora }}</td>
-          <template v-for="(dia, diaIndex) in horario.dias" :key="dia">
-            <td v-if="!isCelulaOcupada(horaIndex, diaIndex)" :rowspan="getRowspan(hora, dia)">
+          <template v-for="(dia, diaIndex) in horario.dias">
+            <td v-if="!isCelulaOcupada(horaIndex, diaIndex)" :key="`${hora}-${dia}`" :rowspan="getRowspan(horaIndex, diaIndex)">
               <div class="aulas-container">
                 <div v-for="(aula, index) in getAulas(hora, dia)" :key="index" class="aula" :class="{
                     'aula-total': aula.capacidade === 'total',
@@ -44,21 +44,24 @@ const props = defineProps({
   }
 });
 
-// Marca as células ocupadas por rowspans de aulas
+// Matriz de células ocupadas por rowspans
 const celulaOcupada = computed(() => {
   const matriz = {};
 
   if (!props.horario || !props.horario.shifts) return matriz;
 
   props.horario.shifts.forEach(shift => {
-    const horaIndex = props.horario.horas.indexOf(`${shift.from}:00`);
+    const horaInicio = shift.from;
+    const duracao = shift.to - shift.from;
     const diaIndex = props.horario.dias.indexOf(shift.day);
-
-    if (horaIndex >= 0 && diaIndex >= 0) {
-      const duracao = shift.to - shift.from;
-      for (let i = 1; i < duracao; i++) {
-        const key = `${horaIndex + i}-${diaIndex}`;
-        matriz[key] = true;
+    
+    if (duracao > 1 && diaIndex >= 0) {
+      for (let i = 0; i < props.horario.horas.length; i++) {
+        const hora = parseInt(props.horario.horas[i].split(':')[0]);
+        if (hora > horaInicio && hora < shift.to) {
+          const key = `${i}-${diaIndex}`;
+          matriz[key] = true;
+        }
       }
     }
   });
@@ -87,7 +90,7 @@ function getAulas(hora, dia) {
       }
       
       return {
-        disciplina: course.abbreviation || 'Unknown',
+        disciplina: course.name || 'Unknown',
         tp: `${shift.name}`,
         sala: classroom.name || 'Unknown',
         capacidade,
@@ -96,10 +99,19 @@ function getAulas(hora, dia) {
     });
 }
 
-function getRowspan(hora, dia) {
+function getRowspan(horaIndex, diaIndex) {
+  const hora = props.horario.horas[horaIndex];
+  const dia = props.horario.dias[diaIndex];
+  
   const aulas = getAulas(hora, dia);
   if (aulas.length === 0) return 1;
-  return Math.max(...aulas.map(aula => aula.duracao || 1));
+  
+  // Calcula o rowspan para a célula atual
+  const duracaoMaxima = Math.max(...aulas.map(aula => aula.duracao || 1));
+  
+  // Verifica se há horas suficientes na tabela para o rowspan
+  const horasRestantes = props.horario.horas.length - horaIndex;
+  return Math.min(duracaoMaxima, horasRestantes);
 }
 </script>
 

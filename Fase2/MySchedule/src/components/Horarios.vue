@@ -84,7 +84,6 @@ const processedHorarios = computed(() => {
   padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
 }
