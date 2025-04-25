@@ -62,8 +62,8 @@
   }
   
   function getClassroomName(classroomId) {
-    const room = db.classrooms.find(r => r.id === classroomId)
-    const building = room ? db.buildings.find(b => b.id === room.buildingId) : null
+    const room = db.classrooms.find(r => r.id === classroomId.toString())
+    const building = room ? db.buildings.find(b => b.id === room.buildingId.toString()) : null
     return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
   }
   
