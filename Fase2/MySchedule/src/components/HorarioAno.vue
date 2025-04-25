@@ -22,7 +22,7 @@ defineProps({
   .titulo-horario {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     color: #3E3E3E
   }
   </style>
