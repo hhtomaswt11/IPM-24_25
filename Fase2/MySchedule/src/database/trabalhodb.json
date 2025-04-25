@@ -22,31 +22,36 @@
       "id": "1",
       "name": "Pedro",
       "email": "pedro@di.uminho.pt",
-      "password": "123"
+      "password": "123",
+      "caderno": ""
     },
     {
       "id": "2",
       "name": "Ana",
       "email": "ana@di.uminho.pt",
-      "password": "123"
+      "password": "123",
+      "caderno": ""
     },
     {
       "id": "3",
       "name": "Luís",
       "email": "luis@di.uminho.pt",
-      "password": "123"
+      "password": "123",
+      "caderno": ""
     },
     {
       "id": "4",
       "name": "Maria",
       "email": "maria@di.uminho.pt",
-      "password": "123"
+      "password": "123",
+      "caderno": ""
     },
     {
       "id": "5",
       "name": "João",
       "email": "joao@di.uminho.pt",
-      "password": "123"
+      "password": "123",
+      "caderno": ""
     }
   ],
   "students": [
@@ -991,7 +996,7 @@
       "name": "PL3",
       "teacherId": 1,
       "totalStudentsRegistered": 10
-    },
+    },  
     {
       "id": "45",
       "courseId": 11,
@@ -1317,7 +1322,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "71",
+      "id": "72",
       "courseId": 18,
       "classroomId": 3,
       "day": "Tuesday",
@@ -1329,7 +1334,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "72",
+      "id": "73",
       "courseId": 18,
       "classroomId": 1,
       "day": "Wednesday",
@@ -1341,7 +1346,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "73",
+      "id": "74",
       "courseId": 18,
       "classroomId": 1,
       "day": "Monday",
@@ -1353,7 +1358,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "74",
+      "id": "75",
       "courseId": 19,
       "classroomId": 1,
       "day": "Friday",
@@ -1365,7 +1370,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "75",
+      "id": "76",
       "courseId": 19,
       "classroomId": 2,
       "day": "Monday",
@@ -1377,7 +1382,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "76",
+      "id": "77",
       "courseId": 19,
       "classroomId": 2,
       "day": "Thursday",
@@ -1389,7 +1394,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "77",
+      "id": "78",
       "courseId": 19,
       "classroomId": 2,
       "day": "Monday",
@@ -1401,7 +1406,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "78",
+      "id": "79",
       "courseId": 20,
       "classroomId": 2,
       "day": "Wednesday",
@@ -1413,7 +1418,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "78",
+      "id": "80",
       "courseId": 20,
       "classroomId": 2,
       "day": "Friday",
@@ -1425,7 +1430,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "79",
+      "id": "81",
       "courseId": 20,
       "classroomId": 2,
       "day": "Wednesday",
@@ -1437,8 +1442,8 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "80",
-      "courseId": 19,
+      "id": "82",
+      "courseId": 20,
       "classroomId": 2,
       "day": "Thursday",
       "from": 9,
@@ -1447,6 +1452,246 @@
       "name": "PL3",
       "teacherId": 1,
       "totalStudentsRegistered": 10
+    },
+      {
+      "id": "83",
+      "courseId": 21,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "84",
+      "courseId": 21,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "85",
+      "courseId": 22,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "86",
+      "courseId": 22,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "87",
+      "courseId": 23,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "88",
+      "courseId": 23,
+      "classroomId": 1,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "89",
+      "courseId": 24,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "90",
+      "courseId": 24,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "91",
+      "courseId": 25,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "92",
+      "courseId": 25,
+      "classroomId": 3,
+      "day": "Tuesday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "93",
+      "courseId": 26,
+      "classroomId": 1,
+      "day": "Wednesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "94",
+      "courseId": 26,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "95",
+      "courseId": 27,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "96",
+      "courseId": 27,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "97",
+      "courseId": 28,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "98",
+      "courseId": 28,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "99",
+      "courseId": 29,
+      "classroomId": 1,
+      "day": "Thursday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "100",
+      "courseId": 29,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "101",
+      "courseId": 30,
+      "classroomId": 3,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "102",
+      "courseId": 30,
+      "classroomId": 1,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     }
   ],
   "allocations": [
@@ -2289,7 +2534,7 @@
       "de": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
-      "lida": false
+      "lida": true
     },
     {
       "id": "2",

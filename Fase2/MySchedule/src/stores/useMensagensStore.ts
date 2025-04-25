@@ -22,7 +22,7 @@ export const useMensagensStore = defineStore('mensagens', () => {
   }
 
   // Função para marcar uma mensagem como lida
-  async function marcarComoLida(id) {
+  async function marcarComoLida(id:number) {
     try {
       const response = await fetch(`http://localhost:3000/mensagens/${id}`, {
         method: 'PATCH',
