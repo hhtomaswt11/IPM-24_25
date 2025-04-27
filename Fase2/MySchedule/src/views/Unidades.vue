@@ -33,6 +33,7 @@ import BarraPesquisa from "@/components/BarraPesquisa.vue";
 import trabalhodb from "@/database/trabalhodb.json";
 import DropDownAlternarSem from "@/components/DropDownAlternarSem.vue";
 import DropDownAlternarAnos from "@/components/DropDownAlternarAnos.vue";
+import { useSessionStorage } from "@/stores/session.ts"; // importa a sessão
 
 export default {
   components: {
@@ -46,44 +47,65 @@ export default {
       courses: trabalhodb.courses,
       shifts: trabalhodb.shifts,
       teachers: trabalhodb.teachers,
+      students: trabalhodb.students, // necessário para buscar o enrolled
       selectedYear: null,
-      selectedSemester: null, // Adicionado estado para semestre selecionado
+      selectedSemester: null,
+      session: useSessionStorage(), // guarda a sessão aqui
     };
   },
   computed: {
     filteredCourses() {
-      // Se não houver ano selecionado, mostrar todos os cursos
       if (!this.selectedYear && !this.selectedSemester) {
         return this.groupedCourses;
       }
 
       return this.groupedCourses.filter((yearGroup) => {
-        // Filtra por ano se selecionado
         const yearMatch = !this.selectedYear || yearGroup.year === this.selectedYear;
-        
-        // Filtra por semestre se selecionado
-        const semesterMatch = !this.selectedSemester || 
+        const semesterMatch = !this.selectedSemester ||
           yearGroup.courses.some(course => course.semester === this.selectedSemester);
-        
+
         return yearMatch && semesterMatch;
       }).map(yearGroup => {
-        // Filtra os cursos dentro de cada ano pelo semestre selecionado
         return {
           year: yearGroup.year,
-          courses: this.selectedSemester 
+          courses: this.selectedSemester
             ? yearGroup.courses.filter(course => course.semester === this.selectedSemester)
             : yearGroup.courses
         };
-      }).filter(yearGroup => yearGroup.courses.length > 0); // Remove anos sem cursos
+      }).filter(yearGroup => yearGroup.courses.length > 0);
     },
+
     groupedCourses() {
       const years = [1, 2, 3];
+
+      // Verificar tipo do utilizador
+      const userType = this.session.type;
+      const userId = this.session.id;
+
+      let enrolledCourseIds = [];
+
+      if (userType === "student") {
+        // Se for estudante, buscar os cursos em que está inscrito
+        const student = this.students.find(s => s.id === userId);
+        if (student) {
+          enrolledCourseIds = student.enrolled;
+        }
+      }
+
       return years.map((year) => {
-        const coursesForYear = this.courses.filter(
-          (course) =>
-            course.year === year &&
-            course.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
+        const coursesForYear = this.courses.filter((course) => {
+          const matchesYear = course.year === year;
+          const matchesSearch = course.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+          if (userType === "student") {
+            // Se for aluno, só mostrar cursos que ele está inscrito
+            return matchesYear && matchesSearch && enrolledCourseIds.includes(course.id);
+          } else {
+            // Se for diretor, mostrar tudo
+            return matchesYear && matchesSearch;
+          }
+        });
+
         return {
           year,
           courses: coursesForYear,
@@ -104,16 +126,11 @@ export default {
       }
       return "Sem docente atribuído";
     },
-    getShifts(courseId) {
-      const courseShifts = this.shifts.filter((shift) => shift.courseId === courseId);
-      return courseShifts.map((shift) => `${shift.day} ${shift.from}-${shift.to}`).join(", ");
-    },
   },
 };
 </script>
 
 <style scoped>
-/* Estilos mantidos iguais */
 .main-content {
     flex-grow: 1;
     padding: 20px;
