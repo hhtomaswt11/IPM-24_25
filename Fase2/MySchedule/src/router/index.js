@@ -13,6 +13,7 @@ import DropDownAlternarSem from '@/components/DropDownAlternarSem.vue'
 import DropDownAlternarAnos from '@/components/DropDownAlternarAnos.vue' 
 import NotFoundPage from '@/components/NotFoundPage.vue'
 import TerminarSessao from '@/components/TerminarSessao.vue'
+import Caderno from '@/components/Caderno.vue'
 
 
 
@@ -76,6 +77,7 @@ const router = createRouter({
     },
     {
       path: '/:notFoundPage(.*)',
+      name: 'NotFoundPage',
       component: NotFoundPage,
     }
   ],

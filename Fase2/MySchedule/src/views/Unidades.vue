@@ -166,8 +166,7 @@ export default {
 .course-name {
 
     padding: 12px 15px;
-    font-size: 0.5rem;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     flex-grow: 1;
 
         /* Centralizar o conteúdo */
@@ -216,5 +215,9 @@ export default {
     margin: 0;
 }
 
-</style>
+h2 {
+  font-weight: bold;
+}
 
+
+</style>
