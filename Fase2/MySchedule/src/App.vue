@@ -4,11 +4,16 @@ import { RouterView, useRoute } from 'vue-router';
 import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
+import { useSessionStorage } from '@/stores/session.ts'; // IMPORTAR a session
 
 const store = useMensagensStore();
+const session = useSessionStorage(); // Aceder à sessão
 const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
 const mostrarCaderno = ref(false);
 const route = useRoute();
+
+// Dinâmico: tipo do utilizador
+const tipoUtilizador = computed(() => session.type); // student / teacher / director
 
 function toggleCaderno() {
   mostrarCaderno.value = !mostrarCaderno.value;
@@ -28,14 +33,16 @@ onUnmounted(() => {
 });
 </script>
 
+
 <template>
   <div :class="['app-container', { 'no-sidebar': route.name === 'Login' }]">
     <Sidebar
-      v-if="route.name !== 'Login'"
-      :mensagensNaoLidas="mensagensNaoLidas"
-      tipoUtilizador="dc"
-      @abrir-caderno="toggleCaderno"
-    />
+    v-if="route.name !== 'Login'"
+    :mensagensNaoLidas="mensagensNaoLidas"
+    :tipoUtilizador="tipoUtilizador" 
+    @abrir-caderno="toggleCaderno"
+   />
+
 
     <div class="main-wrapper">
       <main class="main-content">

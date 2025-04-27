@@ -1,9 +1,9 @@
 <template>
-    <aside class="navegacao">
-      <nav class="nav-links">
-        <template v-if="tipoUtilizador === 'dc'">
+  <aside class="navegacao">
+    <nav class="nav-links">
+      <template v-if="tipoUtilizador === 'director'">
         <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
-        <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
+        <RouterLink to="/unidades/director" class="nav-link">Unidades Curriculares</RouterLink>
         <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
         <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
         <RouterLink to="/mensagens" class="nav-link mensagens-link">
@@ -14,21 +14,27 @@
         <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
       </template>
 
-      <template v-else-if="tipoUtilizador === 'aluno'">
+      <template v-else-if="tipoUtilizador === 'student'">
         <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
-        <RouterLink to="/unidades" class="nav-link">Unidades Curriculares</RouterLink>
+        <RouterLink to="/unidades/student" class="nav-link">Unidades Curriculares</RouterLink>
         <RouterLink to="/horario-aluno" class="nav-link">Horário</RouterLink>
-        <RouterLink to="/mensagens" class="nav-link">Mensagens</RouterLink>
-        <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
+        <RouterLink to="/mensagens" class="nav-link mensagens-link">
+          Mensagens
+          <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
+        </RouterLink>
+        
+        <!-- <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink> -->
+        <RouterLink to="/terminar" class="nav-link terminar-sessao">Terminar Sessão</RouterLink>
+
       </template>
-      </nav>
-  
-      <!-- Ícone da aplicação -->
-      <div class="app-icon">
-        <img src="@/components/icons/app-icon.png" alt="Ícone da Aplicação" class="footer-icon" />
-      </div>
-    </aside>
-  </template>
+    </nav>
+
+    <div class="app-icon">
+      <img src="@/components/icons/app-icon.png" alt="Ícone da Aplicação" class="footer-icon" />
+    </div>
+  </aside>
+</template>
+
   
   <script setup>
   defineProps({
@@ -88,6 +94,11 @@
   color: #373737;
 }
 
+.nav-link.terminar-sessao {
+  margin-top: 270px; 
+}
+
+
 .nav-link.router-link-exact-active {
   background-color: #ffffff;
   color: #373737;
@@ -120,6 +131,8 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+
 
 @media (max-width: 768px) {
   .navegacao {

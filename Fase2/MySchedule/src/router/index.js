@@ -45,13 +45,23 @@ const router = createRouter({
       component: Mensagens,
     },
 
+    // {
+    //   path: '/unidades/:nome',
+    //   name: 'DetalheUC',
+    //   component: DetalheUC,
+    // },
+
     {
-      path: '/unidades/:nome',
+      path: '/unidades/:userType',
+      name: 'UnidadesPorTipo',
+      component: Unidades,
+    },
+    {
+      path: '/unidades/:userType/:nome',
       name: 'DetalheUC',
       component: DetalheUC,
     },
-
-
+    
     {
       path: '/perfil',
       name: 'Perfil',

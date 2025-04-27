@@ -131,30 +131,20 @@ export default {
     },
 
     handleLogin(user: any, type: string) {
-      const session = useSessionStorage();
-      // Usando as propriedades reativas diretamente
-      session.id = user.id;  // atribuir o id do user à store
-      session.name = user.name;  // atribuir o nome do user à store
+  const session = useSessionStorage();
+  session.id = user.id;
+  session.name = user.name;
+  session.type = type;
 
-      session.type = type;  // atribuir o tipo de user
+  this.error = '';
 
-      this.error = ''; // Resetar a mensagem de erro
+  if (type === 'student' || type === 'teacher' || type === 'director') {
+    this.$router.push(`/unidades/${type}`);
+  } else {
+    this.$router.push('/login');
+  }
+}
 
-      // Redireciona para a página de unidades
-      // this.$router.push('/unidades');
-
-      if (type === 'student') {
-      this.$router.push('/horario-aluno');
-    } else if (type === 'teacher') {
-      this.$router.push('/unidades');
-    } else if (type === 'director') {
-      this.$router.push('/gestao');
-    } else {
-      this.$router.push('/login'); // fallback, no caso de tipo desconhecido
-    }
-
-
-    }
   },
 
   beforeDestroy() {
