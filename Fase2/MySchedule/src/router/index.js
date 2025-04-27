@@ -21,13 +21,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      redirect: '/login'
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login,
-    },
-    {
-      path: '/',
-      redirect: '/login'
     },
     {
       path: '/unidades',
@@ -44,12 +44,13 @@ const router = createRouter({
       name: 'Mensagens',
       component: Mensagens,
     },
-    
+
     {
       path: '/unidades/:nome',
       name: 'DetalheUC',
       component: DetalheUC,
     },
+
 
     {
       path: '/perfil',

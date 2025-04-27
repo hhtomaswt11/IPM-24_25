@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <div class="header">
-      <DropDownAlternarSem />
+      <DropDownAlternarSem @select-semester="selectSemester" />
       <DropDownAlternarAnos v-model:year="selectedYear" />
       <BarraPesquisa v-model="searchQuery" placeholderText="Pesquisar pela Unidade Curricular" />
     </div>
@@ -46,18 +46,35 @@ export default {
       courses: trabalhodb.courses,
       shifts: trabalhodb.shifts,
       teachers: trabalhodb.teachers,
-      selectedYear: null, // Ano selecionado, iniciado como null
+      selectedYear: null,
+      selectedSemester: null, // Adicionado estado para semestre selecionado
     };
   },
   computed: {
-    // Filtrar os cursos com base no ano selecionado
     filteredCourses() {
       // Se não houver ano selecionado, mostrar todos os cursos
-      if (!this.selectedYear) {
+      if (!this.selectedYear && !this.selectedSemester) {
         return this.groupedCourses;
       }
 
-      return this.groupedCourses.filter((yearGroup) => yearGroup.year === this.selectedYear);
+      return this.groupedCourses.filter((yearGroup) => {
+        // Filtra por ano se selecionado
+        const yearMatch = !this.selectedYear || yearGroup.year === this.selectedYear;
+        
+        // Filtra por semestre se selecionado
+        const semesterMatch = !this.selectedSemester || 
+          yearGroup.courses.some(course => course.semester === this.selectedSemester);
+        
+        return yearMatch && semesterMatch;
+      }).map(yearGroup => {
+        // Filtra os cursos dentro de cada ano pelo semestre selecionado
+        return {
+          year: yearGroup.year,
+          courses: this.selectedSemester 
+            ? yearGroup.courses.filter(course => course.semester === this.selectedSemester)
+            : yearGroup.courses
+        };
+      }).filter(yearGroup => yearGroup.courses.length > 0); // Remove anos sem cursos
     },
     groupedCourses() {
       const years = [1, 2, 3];
@@ -71,10 +88,13 @@ export default {
           year,
           courses: coursesForYear,
         };
-      }).filter((yearGroup) => yearGroup.courses.length > 0); // Remover anos sem cursos
+      }).filter((yearGroup) => yearGroup.courses.length > 0);
     },
   },
   methods: {
+    selectSemester(semester) {
+      this.selectedSemester = semester;
+    },
     getTeacherName(courseId) {
       const courseShifts = this.shifts.filter((shift) => shift.courseId === courseId);
       if (courseShifts.length > 0) {
@@ -92,8 +112,8 @@ export default {
 };
 </script>
 
-
-  <style scoped>
+<style scoped>
+/* Estilos mantidos iguais */
 .main-content {
     flex-grow: 1;
     padding: 20px;
@@ -118,22 +138,17 @@ export default {
 }
 
 .year-container h2 {
-
     font-size: 1.65rem;
     color: #000000;
     margin-bottom: 15px;
     padding-bottom: 5px;
-   /* border-bottom: 2px solid #eee; */ 
 }
 
 .year-section {
     background-color: #f9f5f5; 
-    /* border-radius: 8px; */
-  
     padding: 44.2px;
     border: 1px solid #dad6d6;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .courses {
@@ -145,17 +160,14 @@ export default {
 .course-card {
     text-align: center;
     background-color: #ffffff;
-
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
     height: 100%;
-
     border: 1px solid #dad6d6;
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.1);
-
 }
 
 .course-card:hover {
@@ -163,20 +175,16 @@ export default {
 }
 
 .course-name {
-
     padding: 12px 15px;
     background-color: #ffffff;
     flex-grow: 1;
-
-
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    min-height: 80px; /* Ajuste o valor conforme necessário */
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
 }
 
 .course-name h4 {
-
     font-size: 1.1rem;
     margin: 0;
     color: #333;
@@ -185,7 +193,6 @@ export default {
 }
 
 .course-info {
- 
     background-color: #fceace; 
     padding: 10px 15px;
     width: 100%;
@@ -218,6 +225,4 @@ export default {
 h2 {
   font-weight: bold;
 }
-
-
 </style>

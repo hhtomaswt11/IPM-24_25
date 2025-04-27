@@ -5,8 +5,10 @@
       <span>Alternar entre semestres</span>
     </button>
     <div v-if="isOpen" class="dropdown-menu">
-      <button @click="selectSemester('1º Semestre')" class="dropdown-item">1º Semestre</button>
-      <button @click="selectSemester('2º Semestre')" class="dropdown-item">2º Semestre</button>
+      <!-- Opção para "Todos os Semestres" -->
+      <button @click="selectSemester(null)" class="dropdown-item">Todos os Semestres</button>
+      <button @click="selectSemester(1)" class="dropdown-item">1º Semestre</button>
+      <button @click="selectSemester(2)" class="dropdown-item">2º Semestre</button>
     </div>
   </div>
 </template>
@@ -15,27 +17,21 @@
 import { ref, defineEmits } from 'vue';
 import { ChevronDown } from 'lucide-vue-next';
 
-// Emitir o evento para o componente pai
-const emit = defineEmits(['update:semester']);
+const emit = defineEmits(['select-semester']);
+const isOpen = ref(false);
 
-const isOpen = ref(false); // Controle do estado do menu dropdown
-
-// Alternar o menu de opções
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Função para selecionar o semestre
 const selectSemester = (semester) => {
-  emit('update:semester', semester); // Emite o semestre selecionado para o componente pai
-  isOpen.value = false; // Fecha o menu após a seleção
+  emit('select-semester', semester);
+  isOpen.value = false;
 };
 </script>
 
-
-
 <style scoped>
-
+/* Estilos mantidos iguais */
 .dropdown {
   position: relative;
   width: 315px;
@@ -88,7 +84,6 @@ const selectSemester = (semester) => {
   background-color: #f0f0f0;
   color: #676565;
 }
-
 
 .dropdown-icon {
   margin-right: 10px;

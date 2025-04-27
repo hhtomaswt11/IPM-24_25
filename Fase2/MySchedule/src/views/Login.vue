@@ -141,7 +141,19 @@ export default {
       this.error = ''; // Resetar a mensagem de erro
 
       // Redireciona para a página de unidades
+      // this.$router.push('/unidades');
+
+      if (type === 'student') {
+      this.$router.push('/horario-aluno');
+    } else if (type === 'teacher') {
       this.$router.push('/unidades');
+    } else if (type === 'director') {
+      this.$router.push('/gestao');
+    } else {
+      this.$router.push('/login'); // fallback, no caso de tipo desconhecido
+    }
+
+
     }
   },
 
