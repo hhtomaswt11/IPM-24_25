@@ -20,7 +20,6 @@
             <!-- Docente e Turnos -->
             <div class="course-info">
               <p class="teacher-name">Docente: {{ getTeacherName(course.id) }}</p>
-              <!-- <p class="shifts">Turnos: {{ getShifts(course.id) }}</p> --> 
             </div>
           </div>
         </div>
@@ -169,10 +168,11 @@ export default {
     background-color: #ffffff;
     flex-grow: 1;
 
-        /* Centralizar o conteúdo */
-        display: flex;
+
+    display: flex;
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center; /* Centraliza verticalmente */
+    min-height: 80px; /* Ajuste o valor conforme necessário */
 }
 
 .course-name h4 {

@@ -44,6 +44,7 @@ const router = createRouter({
       name: 'Mensagens',
       component: Mensagens,
     },
+    
     {
       path: '/unidades/:nome',
       name: 'DetalheUC',

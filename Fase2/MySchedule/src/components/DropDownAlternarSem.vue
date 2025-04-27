@@ -12,22 +12,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import { ChevronDown } from 'lucide-vue-next';
 
-const isOpen = ref(false); // controlo do estado do menu dropdown
+// Emitir o evento para o componente pai
+const emit = defineEmits(['update:semester']);
 
-// para alternar o menu de opções
+const isOpen = ref(false); // Controle do estado do menu dropdown
+
+// Alternar o menu de opções
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 
-// para selecionar um semestre
+// Função para selecionar o semestre
 const selectSemester = (semester) => {
-  console.log(semester); 
-  isOpen.value = false; 
+  emit('update:semester', semester); // Emite o semestre selecionado para o componente pai
+  isOpen.value = false; // Fecha o menu após a seleção
 };
 </script>
+
+
 
 <style scoped>
 

@@ -5,6 +5,8 @@
       <span>Alternar entre anos</span>
     </button>
     <div v-if="isOpen" class="dropdown-menu">
+      <!-- Opção para "Todos os Anos" -->
+      <button @click="selectYear(null)" class="dropdown-item">Todos os Anos</button>
       <button @click="selectYear(1)" class="dropdown-item">1º Ano</button>
       <button @click="selectYear(2)" class="dropdown-item">2º Ano</button>
       <button @click="selectYear(3)" class="dropdown-item">3º Ano</button>
@@ -27,9 +29,9 @@ const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Função para selecionar o ano
+// Função para selecionar o ano ou "Todos os Anos"
 const selectYear = (year) => {
-  selectedYear.value = year; // atualiza o ano selecionado
+  selectedYear.value = year; // atualiza o ano selecionado ou "null" para todos os anos
   emit('update:year', year); // emite o evento para o componente pai
   isOpen.value = false; // fecha o menu após a seleção
 };
