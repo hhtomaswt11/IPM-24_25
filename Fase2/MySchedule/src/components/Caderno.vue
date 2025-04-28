@@ -23,40 +23,45 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useSessionStorage } from '@/stores/session.ts';
-import { updateCaderno, updateTeacherCaderno } from '../api.ts';  
+import { useSessionStorage } from '@/stores/session.ts'; 
+import axios from 'axios'; // <-- Importa o axios!
+import { updateCaderno } from '@/api.ts'; // <-- Agora importado corretamente
 
 const session = useSessionStorage();
 const usuarioLogado = ref(session); 
 
-const texto = ref(usuarioLogado.value.caderno || ''); 
+const texto = ref(''); // Inicialmente vazio
 const mostrar = ref(false);
 
-// determina se o user pode acessar as anotações
 const podeAcessar = computed(() => {
-  return usuarioLogado.value.type === 'teacher' || usuarioLogado.value.type === 'director';
+  return usuarioLogado.value.type === 'director';
 });
+
+
 
 const emit = defineEmits(['fechar']);
 
-onMounted(() => {
+onMounted(async () => {
   mostrar.value = true;
+
+  try {
+    if (usuarioLogado.value.type === 'director') {
+      const response = await axios.get(`http://localhost:3000/directors/${usuarioLogado.value.id}`);
+      texto.value = response.data.caderno || '';
+      session.updateCaderno(texto.value); // Atualiza também a sessão
+    }
+  } catch (error) {
+    console.error('Erro ao carregar o caderno:', error);
+  }
 });
 
 function fechar() {
   mostrar.value = false;
 
-  if (usuarioLogado.value.type === 'teacher') {
-    updateTeacherCaderno(usuarioLogado.value.id, texto.value).then(response => {
-      console.log('Caderno do professor atualizado:', response);
-      session.updateCaderno(texto.value);  // Atualiza o caderno na store local
-    }).catch(error => {
-      console.error('Erro ao atualizar caderno do professor:', error);
-    });
-  } else if (usuarioLogado.value.type === 'director') {
+  if (usuarioLogado.value.type === 'director') {
     updateCaderno(usuarioLogado.value.id, texto.value).then(response => {
       console.log('Caderno do diretor atualizado:', response);
-      session.updateCaderno(texto.value);  // Atualiza o caderno na store local
+      session.updateCaderno(texto.value); 
     }).catch(error => {
       console.error('Erro ao atualizar caderno do diretor:', error);
     });
@@ -65,9 +70,8 @@ function fechar() {
   setTimeout(() => emit('fechar'), 500);
 }
 
-// Função para limpar o texto
 function limparTexto() {
-  texto.value = ''; // Limpa o conteúdo da variável de texto
+  texto.value = ''; 
 }
 </script>
 
