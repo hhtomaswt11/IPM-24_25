@@ -57,7 +57,7 @@
   "students": [
     {
       "id": "1",
-      "name": "Mafalda",
+      "name": "Mafalda Ribeiro",
       "num": "a100",
       "email": "a32324@alunos.uminho.pt",
       "password": "123",
@@ -79,10 +79,15 @@
     },
     {
       "id": "2",
-      "name": "Carlos",
+      "name": "Carlos Sá",
       "num": "a101",
       "email": "33232@alunos.uminho.pt",
       "password": "123",
+      "morada": "Rua C, 4700-011 - Guimarães, Portugal",
+      "sexo": "Masculino",
+      "telefone": "(+351) 915652987",
+      "departamento": "Escola de Engenharia",
+      "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
         6,
         7,
