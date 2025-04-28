@@ -74,7 +74,10 @@
 import { ref, onMounted } from 'vue';
 import { User } from 'lucide-vue-next';
 import Botao from '@/components/Botao.vue';
+import { useSessionStorage } from '@/stores/session'; // IMPORTANTE para aceder à sessão
 import axios from 'axios';  // Importando o Axios
+
+const session = useSessionStorage()
 
 const diretor = ref({
   name: '',
@@ -99,25 +102,53 @@ const novoTelefone = ref('');
 const novoDepartamento = ref('');
 const novosCargos = ref([]);
 
-// Buscar dados do diretor
+// Buscar dados do utilizador
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/directors');
-    const data = response.data;
+    if (!session.id) {
+      console.error('Nenhum ID de sessão encontrado.');
+      return;
+    }
 
-    diretor.value = data[0];
+    // Primeiro tenta buscar nos directors
+    let response = await axios.get(`http://localhost:3000/directors?id=${session.id}`);
+    let data = response.data;
+
+    if (data.length > 0) {
+      diretor.value = data[0];
+    } else {
+      // Se não encontrou nos directors, procura nos students
+      response = await axios.get(`http://localhost:3000/students?id=${session.id}`);
+      data = response.data;
+
+      if (data.length > 0) {
+        // Adaptar campos dos students ao modelo que esperas no template
+        diretor.value = {
+          name: data[0].name,
+          email: data[0].email,
+          nascimento: '', // não tens data de nascimento nos students
+          morada: '',
+          sexo: '',
+          telefone: '',
+          departamento: '',
+          cargos: ['Aluno'] // Define como "Aluno"
+        };
+      } else {
+        console.error('Utilizador não encontrado.');
+      }
+    }
 
     // Inicializar campos editáveis
-    novoNome.value = data[0].name;
-    novoEmail.value = data[0].email;
-    novoNascimento.value = data[0].nascimento;
-    novaMorada.value = data[0].morada;
-    novoSexo.value = data[0].sexo;
-    novoTelefone.value = data[0].telefone;
-    novoDepartamento.value = data[0].departamento;
-    novosCargos.value = [...data[0].cargos];
+    novoNome.value = diretor.value.name;
+    novoEmail.value = diretor.value.email;
+    novoNascimento.value = diretor.value.nascimento;
+    novaMorada.value = diretor.value.morada;
+    novoSexo.value = diretor.value.sexo;
+    novoTelefone.value = diretor.value.telefone;
+    novoDepartamento.value = diretor.value.departamento;
+    novosCargos.value = [...diretor.value.cargos];
   } catch (error) {
-    console.error('Erro ao buscar dados do diretor:', error);
+    console.error('Erro ao buscar dados do utilizador:', error);
   }
 });
 
@@ -140,7 +171,17 @@ async function guardarAlteracoes() {
   };
 
   try {
-    await axios.patch('http://localhost:3000/directors/1', atualizados);
+    if (diretor.value.cargos.includes('Aluno')) {
+      // Atualizar no students
+      await axios.patch(`http://localhost:3000/students/${session.id}`, {
+        name: novoNome.value,
+        email: novoEmail.value
+        // Students podem ter menos campos
+      });
+    } else {
+      // Atualizar no directors
+      await axios.patch(`http://localhost:3000/directors/${session.id}`, atualizados);
+    }
 
     // Atualizar localmente
     diretor.value = { ...diretor.value, ...atualizados };
@@ -150,6 +191,7 @@ async function guardarAlteracoes() {
   }
 }
 </script>
+
 
 
   
