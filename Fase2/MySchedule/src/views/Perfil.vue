@@ -74,10 +74,10 @@
 import { ref, onMounted } from 'vue';
 import { User } from 'lucide-vue-next';
 import Botao from '@/components/Botao.vue';
-import { useSessionStorage } from '@/stores/session'; // IMPORTANTE para aceder à sessão
-import axios from 'axios';  // Importando o Axios
+import { useSessionStorage } from '@/stores/session';
+import axios from 'axios';
 
-const session = useSessionStorage()
+const session = useSessionStorage();
 
 const diretor = ref({
   name: '',
@@ -122,16 +122,16 @@ onMounted(async () => {
       data = response.data;
 
       if (data.length > 0) {
-        // Adaptar campos dos students ao modelo que esperas no template
+        const aluno = data[0];
         diretor.value = {
-          name: data[0].name,
-          email: data[0].email,
-          nascimento: '', // não tens data de nascimento nos students
-          morada: '',
-          sexo: '',
-          telefone: '',
-          departamento: '',
-          cargos: ['Aluno'] // Define como "Aluno"
+          name: aluno.name,
+          email: aluno.email,
+          nascimento: aluno.nascimento,
+          morada: aluno.morada,
+          sexo: aluno.sexo,
+          telefone: aluno.telefone,
+          departamento: aluno.departamento,
+          cargos: [aluno.cargo] // Atenção: no aluno é `cargo` (string), não `cargos` (array)
         };
       } else {
         console.error('Utilizador não encontrado.');
@@ -171,12 +171,17 @@ async function guardarAlteracoes() {
   };
 
   try {
-    if (diretor.value.cargos.includes('Aluno')) {
+    if (diretor.value.cargos.length === 1 && diretor.value.cargos[0].startsWith('Aluno')) {
       // Atualizar no students
       await axios.patch(`http://localhost:3000/students/${session.id}`, {
         name: novoNome.value,
-        email: novoEmail.value
-        // Students podem ter menos campos
+        email: novoEmail.value,
+        nascimento: novoNascimento.value,
+        morada: novaMorada.value,
+        sexo: novoSexo.value,
+        telefone: novoTelefone.value,
+        departamento: novoDepartamento.value,
+        cargo: novosCargos.value[0] // Students têm cargo como string
       });
     } else {
       // Atualizar no directors
