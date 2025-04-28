@@ -7,6 +7,7 @@
   <script setup>
 import { ref, computed, onMounted } from 'vue';
 import TabelaHorario from './TabelaHorario.vue'
+import { useSessionStorage } from '@/stores/session';
   
 const props = defineProps({
   studentId: {
@@ -21,7 +22,9 @@ const horas = []
 for (let i = 9; i <= 18; i++) {
   horas.push((i < 10 ? "0" : "") + i + ":00")
 }
-  
+
+const session = useSessionStorage();
+
 const courses = ref([]);
 const shifts = ref([]);
 const classrooms = ref([]);

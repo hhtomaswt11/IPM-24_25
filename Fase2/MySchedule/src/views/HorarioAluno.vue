@@ -21,12 +21,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+ 
 import HorarioPessoalAluno from '@/components/HorarioPessoalAluno.vue';
 import HorarioCursoAluno from '@/components/HorarioCursoAluno.vue';
+import { useSessionStorage } from '@/stores/session';
+
+const session = useSessionStorage();
+const studentId = computed(() => Number(session.id));
 
 const vistaAtual = ref('pessoal');
-const studentId = 1;
 </script>
 
 <style scoped>

@@ -73,8 +73,7 @@
         2,
         3,
         4,
-        5,
-        10
+        5
       ]
     },
     {
@@ -89,10 +88,12 @@
       "departamento": "Escola de Engenharia",
       "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
-        6,
-        7,
-        8,
-        9
+        3,
+        11,
+        12,
+        13,
+        14,
+        15
       ]
     },
     {
@@ -103,369 +104,12 @@
       "password": "123",
       "enrolled": [
         11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": "4",
-      "name": "Ricardo",
-      "num": "a104",
-      "email": "r32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": "5",
-      "name": "Sofia",
-      "num": "a105",
-      "email": "s32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
+        15,
         21,
         22,
         23,
         24,
         25
-      ]
-    },
-    {
-      "id": "6",
-      "name": "Tiago",
-      "num": "a106",
-      "email": "t32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": "7",
-      "name": "Inês",
-      "num": "a107",
-      "email": "i32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": "8",
-      "name": "Gonçalo",
-      "num": "a108",
-      "email": "g32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": "9",
-      "name": "Mariana",
-      "num": "a109",
-      "email": "m32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": "10",
-      "name": "Diogo",
-      "num": "a110",
-      "email": "d32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": "11",
-      "name": "Beatriz",
-      "num": "a111",
-      "email": "b32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": "12",
-      "name": "Fábio",
-      "email": "f32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": "13",
-      "name": "Ana",
-      "email": "a32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": "14",
-      "name": "Bruno",
-      "email": "b32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": "15",
-      "name": "Catarina",
-      "email": "c32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": "16",
-      "name": "Daniel",
-      "email": "d32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": "17",
-      "name": "Eva",
-      "email": "e32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": "18",
-      "name": "Filipe",
-      "email": "f32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": "19",
-      "name": "Gabriela",
-      "email": "g32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": "20",
-      "name": "Hugo",
-      "email": "h32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": "21",
-      "name": "Isabel",
-      "email": "i32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": "22",
-      "name": "Jorge",
-      "email": "j32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": "23",
-      "name": "Leonor",
-      "email": "l32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": "24",
-      "name": "Miguel",
-      "email": "m32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": "25",
-      "name": "Nuno",
-      "email": "n32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": "26",
-      "name": "Olívia",
-      "email": "o32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": "27",
-      "name": "Pedro",
-      "email": "p32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": "28",
-      "name": "Rita",
-      "email": "r32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": "29",
-      "name": "Sara",
-      "email": "s32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": "30",
-      "name": "Tiago",
-      "email": "t32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
       ]
     }
   ],
@@ -781,7 +425,7 @@
       "totalStudentsRegistered": 30
     },
     {
-      "id": "6",
+      "id": "200",
       "courseId": 2,
       "classroomId": 2,
       "day": "Monday",
@@ -949,7 +593,7 @@
       "totalStudentsRegistered": 10
     },
     {
-      "id": "18",
+      "id": "201",
       "courseId": 5,
       "classroomId": 1,
       "day": "Friday",
@@ -2150,743 +1794,173 @@
     },
     {
       "id": "3",
-      "shiftId": 3,
+      "shiftId": 5,
       "studentId": 1
     },
     {
       "id": "4",
-      "shiftId": 4,
+      "shiftId": 200,
       "studentId": 1
     },
     {
       "id": "5",
-      "shiftId": 5,
+      "shiftId": 8,
       "studentId": 1
     },
     {
       "id": "6",
-      "shiftId": 6,
-      "studentId": 2
+      "shiftId": 9,
+      "studentId": 1
     },
     {
       "id": "7",
-      "shiftId": 7,
-      "studentId": 2
+      "shiftId": 12,
+      "studentId": 1
     },
     {
       "id": "8",
-      "shiftId": 8,
-      "studentId": 2
+      "shiftId": 13,
+      "studentId": 1
     },
     {
       "id": "9",
-      "shiftId": 9,
-      "studentId": 2
+      "shiftId": 16,
+      "studentId": 1
     },
     {
       "id": "10",
+      "shiftId": 17,
+      "studentId": 1
+    },
+    {
+      "id": "11",
+      "shiftId": 8,
+      "studentId": 2
+    },
+    {
+      "id": "12",
       "shiftId": 10,
       "studentId": 2
     },
     {
-      "id": "11",
-      "shiftId": 11,
-      "studentId": 3
-    },
-    {
-      "id": "12",
-      "shiftId": 12,
-      "studentId": 3
-    },
-    {
       "id": "13",
-      "shiftId": 13,
-      "studentId": 3
+      "shiftId": 45,
+      "studentId": 2
     },
     {
       "id": "14",
-      "shiftId": 14,
-      "studentId": 3
+      "shiftId": 46,
+      "studentId": 2
     },
     {
       "id": "15",
-      "shiftId": 15,
-      "studentId": 3
+      "shiftId": 49,
+      "studentId": 2
     },
     {
       "id": "16",
-      "shiftId": 16,
-      "studentId": 4
+      "shiftId": 51,
+      "studentId": 2
     },
     {
       "id": "17",
-      "shiftId": 17,
-      "studentId": 4
+      "shiftId": 53,
+      "studentId": 2
     },
     {
       "id": "18",
-      "shiftId": 18,
-      "studentId": 4
+      "shiftId": 54,
+      "studentId": 2
     },
     {
       "id": "19",
-      "shiftId": 19,
-      "studentId": 4
+      "shiftId": 56,
+      "studentId": 2
     },
     {
       "id": "20",
-      "shiftId": 20,
-      "studentId": 4
+      "shiftId": 58,
+      "studentId": 2
     },
     {
       "id": "21",
-      "shiftId": 21,
-      "studentId": 5
+      "shiftId": 59,
+      "studentId": 2
     },
     {
       "id": "22",
-      "shiftId": 22,
-      "studentId": 5
+      "shiftId": 62,
+      "studentId": 2
     },
     {
       "id": "23",
-      "shiftId": 23,
-      "studentId": 5
+      "shiftId": 45,
+      "studentId": 3
     },
     {
       "id": "24",
-      "shiftId": 24,
-      "studentId": 5
+      "shiftId": 46,
+      "studentId": 3
     },
     {
       "id": "25",
-      "shiftId": 25,
-      "studentId": 5
+      "shiftId": 59,
+      "studentId": 3
     },
     {
       "id": "26",
-      "shiftId": 26,
-      "studentId": 6
+      "shiftId": 61,
+      "studentId": 3
     },
     {
       "id": "27",
-      "shiftId": 27,
-      "studentId": 6
+      "shiftId": 83,
+      "studentId": 3
     },
     {
       "id": "28",
-      "shiftId": 28,
-      "studentId": 6
+      "shiftId": 85,
+      "studentId": 3
     },
     {
       "id": "29",
-      "shiftId": 29,
-      "studentId": 6
+      "shiftId": 87,
+      "studentId": 3
     },
     {
       "id": "30",
-      "shiftId": 30,
-      "studentId": 6
+      "shiftId": 90,
+      "studentId": 3
     },
     {
       "id": "31",
-      "shiftId": 31,
-      "studentId": 7
+      "shiftId": 91,
+      "studentId": 3
+    },
+    {
+      "id": "31",
+      "shiftId": 93,
+      "studentId": 3
     },
     {
       "id": "32",
-      "shiftId": 32,
-      "studentId": 7
+      "shiftId": 95,
+      "studentId": 3
     },
     {
       "id": "33",
-      "shiftId": 33,
-      "studentId": 7
+      "shiftId": 96,
+      "studentId": 3
     },
     {
       "id": "34",
-      "shiftId": 34,
-      "studentId": 7
+      "shiftId": 99,
+      "studentId": 3
     },
     {
       "id": "35",
-      "shiftId": 35,
-      "studentId": 7
-    },
-    {
-      "id": "36",
-      "shiftId": 36,
-      "studentId": 8
-    },
-    {
-      "id": "37",
-      "shiftId": 37,
-      "studentId": 8
-    },
-    {
-      "id": "38",
-      "shiftId": 38,
-      "studentId": 8
-    },
-    {
-      "id": "39",
-      "shiftId": 39,
-      "studentId": 8
-    },
-    {
-      "id": "40",
-      "shiftId": 40,
-      "studentId": 8
-    },
-    {
-      "id": "41",
-      "shiftId": 41,
-      "studentId": 9
-    },
-    {
-      "id": "42",
-      "shiftId": 42,
-      "studentId": 9
-    },
-    {
-      "id": "43",
-      "shiftId": 43,
-      "studentId": 9
-    },
-    {
-      "id": "44",
-      "shiftId": 44,
-      "studentId": 9
-    },
-    {
-      "id": "45",
-      "shiftId": 45,
-      "studentId": 9
-    },
-    {
-      "id": "46",
-      "shiftId": 46,
-      "studentId": 10
-    },
-    {
-      "id": "47",
-      "shiftId": 47,
-      "studentId": 10
-    },
-    {
-      "id": "48",
-      "shiftId": 48,
-      "studentId": 10
-    },
-    {
-      "id": "49",
-      "shiftId": 49,
-      "studentId": 10
-    },
-    {
-      "id": "50",
-      "shiftId": 50,
-      "studentId": 10
-    },
-    {
-      "id": "51",
-      "shiftId": 51,
-      "studentId": 11
-    },
-    {
-      "id": "52",
-      "shiftId": 52,
-      "studentId": 11
-    },
-    {
-      "id": "53",
-      "shiftId": 53,
-      "studentId": 11
-    },
-    {
-      "id": "54",
-      "shiftId": 54,
-      "studentId": 11
-    },
-    {
-      "id": "55",
-      "shiftId": 55,
-      "studentId": 11
-    },
-    {
-      "id": "56",
-      "shiftId": 56,
-      "studentId": 12
-    },
-    {
-      "id": "57",
-      "shiftId": 57,
-      "studentId": 12
-    },
-    {
-      "id": "58",
-      "shiftId": 58,
-      "studentId": 12
-    },
-    {
-      "id": "59",
-      "shiftId": 59,
-      "studentId": 12
-    },
-    {
-      "id": "60",
-      "shiftId": 60,
-      "studentId": 12
-    },
-    {
-      "id": "61",
-      "shiftId": 1,
-      "studentId": 13
-    },
-    {
-      "id": "62",
-      "shiftId": 2,
-      "studentId": 13
-    },
-    {
-      "id": "63",
-      "shiftId": 3,
-      "studentId": 13
-    },
-    {
-      "id": "64",
-      "shiftId": 4,
-      "studentId": 13
-    },
-    {
-      "id": "65",
-      "shiftId": 5,
-      "studentId": 13
-    },
-    {
-      "id": "66",
-      "shiftId": 6,
-      "studentId": 14
-    },
-    {
-      "id": "67",
-      "shiftId": 7,
-      "studentId": 14
-    },
-    {
-      "id": "68",
-      "shiftId": 8,
-      "studentId": 14
-    },
-    {
-      "id": "69",
-      "shiftId": 9,
-      "studentId": 14
-    },
-    {
-      "id": "70",
-      "shiftId": 10,
-      "studentId": 14
-    },
-    {
-      "id": "71",
-      "shiftId": 11,
-      "studentId": 15
-    },
-    {
-      "id": "72",
-      "shiftId": 12,
-      "studentId": 15
-    },
-    {
-      "id": "73",
-      "shiftId": 13,
-      "studentId": 15
-    },
-    {
-      "id": "74",
-      "shiftId": 14,
-      "studentId": 15
-    },
-    {
-      "id": "75",
-      "shiftId": 15,
-      "studentId": 15
-    },
-    {
-      "id": "76",
-      "shiftId": 16,
-      "studentId": 16
-    },
-    {
-      "id": "77",
-      "shiftId": 17,
-      "studentId": 16
-    },
-    {
-      "id": "78",
-      "shiftId": 18,
-      "studentId": 16
-    },
-    {
-      "id": "79",
-      "shiftId": 19,
-      "studentId": 16
-    },
-    {
-      "id": "80",
-      "shiftId": 20,
-      "studentId": 16
-    },
-    {
-      "id": "81",
-      "shiftId": 21,
-      "studentId": 17
-    },
-    {
-      "id": "82",
-      "shiftId": 22,
-      "studentId": 17
-    },
-    {
-      "id": "83",
-      "shiftId": 23,
-      "studentId": 17
-    },
-    {
-      "id": "84",
-      "shiftId": 24,
-      "studentId": 17
-    },
-    {
-      "id": "85",
-      "shiftId": 25,
-      "studentId": 17
-    },
-    {
-      "id": "86",
-      "shiftId": 26,
-      "studentId": 18
-    },
-    {
-      "id": "87",
-      "shiftId": 27,
-      "studentId": 18
-    },
-    {
-      "id": "88",
-      "shiftId": 28,
-      "studentId": 18
-    },
-    {
-      "id": "89",
-      "shiftId": 29,
-      "studentId": 18
-    },
-    {
-      "id": "90",
-      "shiftId": 30,
-      "studentId": 18
-    },
-    {
-      "id": "91",
-      "shiftId": 31,
-      "studentId": 19
-    },
-    {
-      "id": "92",
-      "shiftId": 32,
-      "studentId": 19
-    },
-    {
-      "id": "93",
-      "shiftId": 33,
-      "studentId": 19
-    },
-    {
-      "id": "94",
-      "shiftId": 34,
-      "studentId": 19
-    },
-    {
-      "id": "95",
-      "shiftId": 35,
-      "studentId": 19
-    },
-    {
-      "id": "96",
-      "shiftId": 36,
-      "studentId": 20
-    },
-    {
-      "id": "97",
-      "shiftId": 37,
-      "studentId": 20
-    },
-    {
-      "id": "98",
-      "shiftId": 38,
-      "studentId": 20
-    },
-    {
-      "id": "99",
-      "shiftId": 39,
-      "studentId": 20
-    },
-    {
-      "id": "100",
-      "shiftId": 40,
-      "studentId": 20
-    },
-    {
-      "id": "101",
-      "shiftId": 41,
-      "studentId": 21
-    },
-    {
-      "id": "102",
-      "shiftId": 42,
-      "studentId": 21
-    },
-    {
-      "id": "103",
-      "shiftId": 43,
-      "studentId": 21
-    },
-    {
-      "id": "104",
-      "shiftId": 44,
-      "studentId": 21
-    },
-    {
-      "id": "105",
-      "shiftId": 45,
-      "studentId": 21
-    },
-    {
-      "id": "106",
-      "shiftId": 46,
-      "studentId": 22
-    },
-    {
-      "id": "107",
-      "shiftId": 47,
-      "studentId": 22
-    },
-    {
-      "id": "108",
-      "shiftId": 48,
-      "studentId": 22
-    },
-    {
-      "id": "109",
-      "shiftId": 49,
-      "studentId": 22
-    },
-    {
-      "id": "110",
-      "shiftId": 50,
-      "studentId": 22
-    },
-    {
-      "id": "111",
-      "shiftId": 51,
-      "studentId": 23
-    },
-    {
-      "id": "112",
-      "shiftId": 52,
-      "studentId": 23
-    },
-    {
-      "id": "113",
-      "shiftId": 53,
-      "studentId": 23
-    },
-    {
-      "id": "114",
-      "shiftId": 54,
-      "studentId": 23
-    },
-    {
-      "id": "115",
-      "shiftId": 55,
-      "studentId": 23
-    },
-    {
-      "id": "116",
-      "shiftId": 56,
-      "studentId": 24
-    },
-    {
-      "id": "117",
-      "shiftId": 57,
-      "studentId": 24
-    },
-    {
-      "id": "118",
-      "shiftId": 58,
-      "studentId": 24
-    },
-    {
-      "id": "119",
-      "shiftId": 59,
-      "studentId": 24
-    },
-    {
-      "id": "120",
-      "shiftId": 60,
-      "studentId": 24
-    },
-    {
-      "id": "121",
-      "shiftId": 1,
-      "studentId": 25
-    },
-    {
-      "id": "122",
-      "shiftId": 2,
-      "studentId": 25
-    },
-    {
-      "id": "123",
-      "shiftId": 3,
-      "studentId": 25
-    },
-    {
-      "id": "124",
-      "shiftId": 4,
-      "studentId": 25
-    },
-    {
-      "id": "125",
-      "shiftId": 5,
-      "studentId": 25
-    },
-    {
-      "id": "126",
-      "shiftId": 6,
-      "studentId": 26
-    },
-    {
-      "id": "127",
-      "shiftId": 7,
-      "studentId": 26
-    },
-    {
-      "id": "128",
-      "shiftId": 8,
-      "studentId": 26
-    },
-    {
-      "id": "129",
-      "shiftId": 9,
-      "studentId": 26
-    },
-    {
-      "id": "130",
-      "shiftId": 10,
-      "studentId": 26
-    },
-    {
-      "id": "131",
-      "shiftId": 11,
-      "studentId": 27
-    },
-    {
-      "id": "132",
-      "shiftId": 12,
-      "studentId": 27
-    },
-    {
-      "id": "133",
-      "shiftId": 13,
-      "studentId": 27
-    },
-    {
-      "id": "134",
-      "shiftId": 14,
-      "studentId": 27
-    },
-    {
-      "id": "135",
-      "shiftId": 15,
-      "studentId": 27
-    },
-    {
-      "id": "136",
-      "shiftId": 16,
-      "studentId": 28
-    },
-    {
-      "id": "137",
-      "shiftId": 17,
-      "studentId": 28
-    },
-    {
-      "id": "138",
-      "shiftId": 18,
-      "studentId": 28
-    },
-    {
-      "id": "139",
-      "shiftId": 19,
-      "studentId": 28
-    },
-    {
-      "id": "140",
-      "shiftId": 20,
-      "studentId": 28
-    },
-    {
-      "id": "141",
-      "shiftId": 21,
-      "studentId": 29
-    },
-    {
-      "id": "142",
-      "shiftId": 22,
-      "studentId": 29
-    },
-    {
-      "id": "143",
-      "shiftId": 23,
-      "studentId": 29
-    },
-    {
-      "id": "144",
-      "shiftId": 24,
-      "studentId": 29
-    },
-    {
-      "id": "145",
-      "shiftId": 25,
-      "studentId": 29
-    },
-    {
-      "id": "146",
-      "shiftId": 26,
-      "studentId": 30
-    },
-    {
-      "id": "147",
-      "shiftId": 27,
-      "studentId": 30
-    },
-    {
-      "id": "148",
-      "shiftId": 28,
-      "studentId": 30
-    },
-    {
-      "id": "149",
-      "shiftId": 29,
-      "studentId": 30
-    },
-    {
-      "id": "150",
-      "shiftId": 30,
-      "studentId": 30
+      "shiftId": 101,
+      "studentId": 3
     }
   ],
   "conflicts": [
@@ -2894,8 +1968,8 @@
       "id": "1",
       "studentId": 1,
       "shiftID": [
-        1,
-        11
+        200,
+        13
       ]
     },
     {
