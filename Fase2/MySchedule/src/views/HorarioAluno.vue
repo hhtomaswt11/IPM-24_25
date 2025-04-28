@@ -15,8 +15,8 @@
       </button>
     </div>
 
-    <HorarioPessoalAluno v-if="vistaAtual === 'pessoal'" />
-    <HorarioCursoAluno v-else />
+    <HorarioPessoalAluno v-if="vistaAtual === 'pessoal'" :studentId="studentId"  />
+    <HorarioCursoAluno v-else :studentId="studentId" />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ import HorarioPessoalAluno from '@/components/HorarioPessoalAluno.vue';
 import HorarioCursoAluno from '@/components/HorarioCursoAluno.vue';
 
 const vistaAtual = ref('pessoal');
+const studentId = 1;
 </script>
 
 <style scoped>

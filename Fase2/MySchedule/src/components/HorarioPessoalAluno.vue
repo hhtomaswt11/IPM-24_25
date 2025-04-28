@@ -5,36 +5,63 @@
 </template> 
   
   <script setup>
-  import { computed } from 'vue'
-  import TabelaHorario from '@/components/TabelaHorario.vue'
+import { ref, computed, onMounted } from 'vue';
+import TabelaHorario from './TabelaHorario.vue'
   
-  const alunoId = 1
-  
-  import { allocations, shifts, courses, classrooms } from '@/database/trabalhodb.json'
-  
-  const dias = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-  
-  const horas = []
-  for (let i = 9; i <= 18; i++) {
-    horas.push((i < 10 ? "0" : "") + i + ":00")
+const props = defineProps({
+  studentId: {
+    type: Number,
+    required: true
   }
+});
+
+const dias = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
   
-  const turnoAluno = computed(() => {
-    const turnoIds = allocations.filter(a => a.studentId === alunoId).map(a => a.shiftId)
-    return shifts.filter(s => turnoIds.includes(s.id))
-  })
+const horas = []
+for (let i = 9; i <= 18; i++) {
+  horas.push((i < 10 ? "0" : "") + i + ":00")
+}
   
-  const horarioPessoal = computed(() => ({
+const courses = ref([]);
+const shifts = ref([]);
+const classrooms = ref([]);
+const allocations = ref([]);
+
+// Fetch dados
+onMounted(async () => {
+  const [resCourses, resShifts, resClassrooms, resAllocations] = await Promise.all([
+    fetch('http://localhost:3000/courses'),
+    fetch('http://localhost:3000/shifts'),
+    fetch('http://localhost:3000/classrooms'),
+    fetch('http://localhost:3000/allocations')
+  ]);
+
+  courses.value = await resCourses.json();
+  shifts.value = await resShifts.json();
+  classrooms.value = await resClassrooms.json();
+  allocations.value = await resAllocations.json();
+});
+
+// Processar horário pessoal
+const horarioPessoal = computed(() => {
+  if (!props.studentId) return null;
+
+  const studentAllocations = allocations.value.filter(a => a.studentId === props.studentId);
+  const shiftIds = studentAllocations.map(a => a.shiftId);
+  const studentShifts = shifts.value.filter(s => shiftIds.includes(Number(s.id)));
+
+  return {
     dias,
     horas,
-    shifts: turnoAluno.value,
-    courses,
-    classrooms
-  }))
-  </script> 
+    shifts: studentShifts,
+    courses: courses.value,
+    classrooms: classrooms.value
+  };
+});
+</script> 
   
-  <style scoped>
+<style scoped>
   .pagina {
     padding: 1rem;
   }
-  </style>  
+</style>  
