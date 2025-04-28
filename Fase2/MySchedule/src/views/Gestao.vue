@@ -84,8 +84,21 @@ onMounted(async () => {
           const turno = shift.name;
           const uc = courses.find(c => c.id == courseId)?.name || 'Desconhecido';
           const turnos = shifts
-            .filter(s => s.courseId == courseId)
+          .filter(s => {
+            const capacidadeTexto = gestaoStore.getCapacidadeById(s.id);
+            const [ocupadosStr, capacidadeStr] = capacidadeTexto.split('/');
+            const ocupados = parseInt(ocupadosStr);
+            const capacidade = parseInt(capacidadeStr);
+
+            return (
+              s.courseId == courseId &&          // Mesmo curso
+              s.type === shift.type &&            // Mesmo tipo ("PL", "T", etc)
+              s.id != shiftID &&                  // Não incluir turno atual
+              (!isNaN(ocupados) && !isNaN(capacidade) && ocupados < capacidade)  // Capacidade não cheia
+              );
+            })
             .map(s => ({ id: s.id, name: s.name }));
+
 
           conflitosCompletos.push(reactive({
             tipo: 'Conflito',
