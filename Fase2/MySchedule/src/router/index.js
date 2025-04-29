@@ -50,18 +50,19 @@ const router = createRouter({
     //   name: 'DetalheUC',
     //   component: DetalheUC,
     // },
-
-    {
-      path: '/unidades/:userType',
-      name: 'UnidadesPorTipo',
-      component: Unidades,
-    },
     {
       path: '/unidades/:userType/:nome',
       name: 'DetalheUC',
       component: DetalheUC,
     },
     
+
+    {
+      path: '/unidades/:userType',
+      name: 'UnidadesPorTipo',
+      component: Unidades,
+    },
+
     {
       path: '/perfil',
       name: 'Perfil',
