@@ -180,8 +180,11 @@ function responderMensagem(destinatario) {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin-left: 60px;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container */
+  box-sizing: border-box;
 }
+
 .top-bar {
   display: flex;
   width: 100%;
@@ -190,11 +193,15 @@ function responderMensagem(destinatario) {
   align-items: center;
   margin-bottom: 20px;
 }
+
 .messages-boxes {
   display: flex;
-  gap: 150px;
+  justify-content: center;
+  gap: 150px; /* Maintaining the same gap */
   margin-top: 50px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
+
 .message-box {
   width: 488px;
   height: 535px;
@@ -202,7 +209,30 @@ function responderMensagem(destinatario) {
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   position: relative;
+  flex-shrink: 0; /* Prevent boxes from shrinking */
 }
+
+/* Media query for medium screens */
+@media (max-width: 1200px) {
+  .messages-boxes {
+    padding: 0 20px;
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .messages-boxes {
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .message-box {
+    margin-bottom: 30px;
+  }
+}
+
+/* Rest of your existing styles remain unchanged */
 .message-box .header {
   width: 146px;
   height: 32px;
@@ -218,11 +248,13 @@ function responderMensagem(destinatario) {
   left: 0;
   border-radius: 10px 10px 0 0;
 }
+
 .message-list {
   padding: 15px;
   max-height: 400px;
   overflow-y: auto;
 }
+
 .message-item {
   margin-top: 20px;
   display: flex;
@@ -235,16 +267,20 @@ function responderMensagem(destinatario) {
   min-height: 60px;
   font-size: 13px;
 }
+
 .message-item.lida {
   background-color: #faf6ea;
 }
+
 .message-item:not(:first-child) {
   margin-top: 4px;
 }
+
 .message-content {
   max-width: 85%;
   color: #000;
 }
+
 .message-actions {
   display: flex;
   flex-direction: column;
@@ -253,26 +289,32 @@ function responderMensagem(destinatario) {
   justify-content: center;
   height: 100%;
 }
+
 .icon-button {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
 }
+
 .icon-button.trash:hover {
   color: #ba7070;
   transition: color 0.3s ease;
 }
+
 .message-content strong {
   font-size: 13px;
   font-weight: bold;
 }
+
 .received .header {
   background-color: #ba7070;
 }
+
 .sent .header {
   background-color: #ba7070;
 }
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -286,11 +328,13 @@ function responderMensagem(destinatario) {
   padding-top: 90px;
   justify-content: flex-start;
 }
+
 .nav-links {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 .nav-link {
   padding: 1.5rem;
   text-decoration: none;
@@ -300,14 +344,17 @@ function responderMensagem(destinatario) {
   border-bottom: 1px solid #444;
   transition: background-color 0.3s, color 0.3s;
 }
+
 .nav-link:hover {
   background-color: #ffffff;
   color: #373737;
 }
+
 .nav-link.router-link-exact-active {
   background-color: #ffffff;
   color: #373737;
 }
+
 .message-content p:last-child {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -315,6 +362,7 @@ function responderMensagem(destinatario) {
   display: block;
   max-width: 100%;
 }
+
 .notificacao {
   position: fixed;
   top: 30px;
@@ -328,6 +376,7 @@ function responderMensagem(destinatario) {
   z-index: 9999;
   animation: fadein 0.4s ease;
 }
+
 @keyframes fadein {
   from {
     opacity: 0;
