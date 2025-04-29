@@ -82,6 +82,7 @@
       "num": "a101",
       "email": "33232@alunos.uminho.pt",
       "password": "123",
+      "nascimento": "2004-10-30",
       "morada": "Rua C, 4700-011 - Guimarães, Portugal",
       "sexo": "Masculino",
       "telefone": "(+351) 915652987",
@@ -97,11 +98,17 @@
       ]
     },
     {
-      "id": 3,
-      "name": "Joana",
+      "id": "3",
+      "name": "Joana Rocha",
       "num": "a103",
       "email": "j32324@alunos.uminho.pt",
       "password": "123",
+      "nascimento": "2004-10-30",
+      "morada": "Rua C, 4700-011 - Guimarães, Portugal",
+      "sexo": "Feminino",
+      "telefone": "(+351) 915652987",
+      "departamento": "Escola de Engenharia",
+      "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
         11,
         15,
@@ -374,7 +381,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 45
     },
     {
       "id": "2",
@@ -410,6 +417,8 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 2,
+      "totalStudentsRegistered": 30
+      "teacherId": 2,
       "totalStudentsRegistered": 15
     },
     {
@@ -422,7 +431,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 4,
-      "totalStudentsRegistered": 30
+      "totalStudentsRegistered": 50
     },
     {
       "id": "200",
@@ -434,7 +443,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 5,
-      "totalStudentsRegistered": 20
+      "totalStudentsRegistered": 27
     },
     {
       "id": "6",
@@ -458,7 +467,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 3,
-      "totalStudentsRegistered": 20
+      "totalStudentsRegistered": 26
     },
     {
       "id": "8",
@@ -470,7 +479,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 4,
-      "totalStudentsRegistered": 20
+      "totalStudentsRegistered": 50
     },
     {
       "id": "9",
@@ -482,7 +491,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 20
+      "totalStudentsRegistered": 28
     },
     {
       "id": "10",
@@ -518,7 +527,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 46
     },
     {
       "id": "13",
@@ -542,7 +551,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 5,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 26
     },
     {
       "id": "15",
@@ -554,7 +563,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
       "id": "16",
@@ -566,7 +575,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "17",
@@ -578,7 +587,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 4,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "18",
@@ -602,7 +611,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 5,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "19",
@@ -614,7 +623,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "20",
@@ -638,7 +647,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "22",
@@ -662,7 +671,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 27
     },
     {
       "id": "24",
@@ -698,7 +707,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "27",
@@ -710,7 +719,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "28",
@@ -734,7 +743,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "30",
@@ -746,7 +755,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "31",
@@ -758,7 +767,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "32",
@@ -782,7 +791,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
       "id": "34",
@@ -794,7 +803,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "35",
@@ -806,7 +815,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "36",
@@ -818,7 +827,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "37",
@@ -830,7 +839,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 32
     },
     {
       "id": "38",
@@ -842,7 +851,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "45",
@@ -854,7 +863,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 47
     },
     {
       "id": "46",
@@ -866,7 +875,7 @@
       "type": "TP",
       "name": "TP2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "47",
@@ -902,7 +911,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "50",
@@ -914,7 +923,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "51",
@@ -938,7 +947,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "53",
@@ -950,7 +959,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "54",
@@ -974,7 +983,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "56",
@@ -998,7 +1007,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "58",
@@ -1022,7 +1031,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "60",
@@ -1046,7 +1055,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "62",
@@ -1070,7 +1079,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "64",
@@ -1082,7 +1091,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "65",
@@ -1106,7 +1115,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "67",
@@ -1118,7 +1127,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "68",
@@ -1142,7 +1151,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "70",
@@ -1166,7 +1175,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "72",
@@ -1190,7 +1199,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "74",
@@ -1214,7 +1223,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "76",
@@ -1226,7 +1235,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "77",
@@ -1238,7 +1247,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 50
     },
     {
       "id": "78",
@@ -1262,7 +1271,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "80",
@@ -1286,7 +1295,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 30
     },
     {
       "id": "82",
@@ -1298,7 +1307,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 40
     },
     {
       "id": "83",
@@ -1310,7 +1319,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "84",
@@ -1322,7 +1331,7 @@
       "type": "TP",
       "name": "TP1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "85",
@@ -1346,7 +1355,7 @@
       "type": "TP",
       "name": "TP3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 25
     },
     {
       "id": "87",
@@ -1358,7 +1367,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "88",
@@ -1382,7 +1391,7 @@
       "type": "TP",
       "name": "TP2",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "90",
@@ -1406,7 +1415,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "92",
@@ -1442,19 +1451,19 @@
       "type": "TP",
       "name": "TP3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "95",
       "courseId": 24,
       "classroomId": 1,
       "day": "Wednesday",
-      "from": 11,
-      "to": 13,
+      "from": 14,
+      "to": 16,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "96",
@@ -1466,7 +1475,7 @@
       "type": "TP",
       "name": "TP1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "97",
@@ -1490,19 +1499,19 @@
       "type": "TP",
       "name": "TP3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "99",
       "courseId": 25,
       "classroomId": 1,
       "day": "Friday",
-      "from": 11,
-      "to": 13,
+      "from": 9,
+      "to": 11,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "100",
@@ -1514,7 +1523,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "101",
@@ -1538,7 +1547,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "103",
@@ -1550,7 +1559,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "104",
@@ -1562,7 +1571,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "105",
@@ -1586,7 +1595,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "107",
@@ -1598,7 +1607,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "108",
@@ -1610,7 +1619,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "109",
@@ -1622,7 +1631,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "110",
@@ -1646,7 +1655,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "112",
@@ -1658,7 +1667,7 @@
       "type": "TP",
       "name": "TP1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "113",
@@ -1682,7 +1691,7 @@
       "type": "TP",
       "name": "TP3",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "115",
@@ -1694,7 +1703,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "116",
@@ -1706,7 +1715,7 @@
       "type": "TP",
       "name": "TP1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "117",
@@ -1718,7 +1727,7 @@
       "type": "TP",
       "name": "TP2",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "118",
@@ -1742,7 +1751,7 @@
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 45
     },
     {
       "id": "120",
@@ -1754,7 +1763,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 50
     },
     {
       "id": "121",
@@ -1766,7 +1775,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 15
+      "totalStudentsRegistered": 35
     },
     {
       "id": "122",
@@ -1971,29 +1980,17 @@
         200,
         13
       ]
-    },
+    },   
     {
       "id": "2",
-      "studentId": 2,
-      "shiftID": [
-        6,
-        16
-      ]
-    },
-    {
-      "id": "3",
       "studentId": 3,
       "shiftID": [
-        11,
-        21
-      ]
-    },
-    {
-      "id": "4",
-      "studentId": 4,
-      "shiftID": [
-        16,
-        26
+        46,
+        83,
+        87,
+        90,
+        96,
+        99
       ]
     }
   ],

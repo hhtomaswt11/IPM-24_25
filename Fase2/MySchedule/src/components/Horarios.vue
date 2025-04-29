@@ -82,7 +82,7 @@ const processedHorarios = computed(() => {
   <style scoped>
   .pagina-horarios {
   padding: 1rem;
-  max-width: 1200px;
+  max-width: 80%;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;

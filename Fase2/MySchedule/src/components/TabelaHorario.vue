@@ -85,7 +85,7 @@ function getAulas(hora, dia) {
       
       // Determinar capacidade com base em totalStudentsRegistered
       let capacidade = 'livre';
-      if (shift.totalStudentsRegistered > 30) {
+      if (shift.totalStudentsRegistered > 25) {
         capacidade = shift.totalStudentsRegistered >= classroom.capacity ? 'total' : 'parcial';
       }
       
@@ -174,6 +174,7 @@ td {
   justify-content: center;
   min-width: 0;
   overflow: hidden;
+  border: 1px solid #3E390A;
 }
 
 .aula-total {
