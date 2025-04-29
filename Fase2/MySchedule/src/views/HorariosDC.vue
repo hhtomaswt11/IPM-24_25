@@ -10,7 +10,9 @@ import Horarios from '@/components/Horarios.vue'
 
 <style scoped>
 .horarios-container {
-  height: 100vh;
-  overflow: auto;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; 
+  position: relative;
 }
 </style>

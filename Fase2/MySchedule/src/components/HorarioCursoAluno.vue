@@ -69,6 +69,8 @@ const horarioCurso = computed(() => ({
     padding: 1rem;
     max-width: 80%;
     margin: 0 auto;
+    overflow: hidden; 
+    position: relative;
   }
   </style>
   

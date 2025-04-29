@@ -46,7 +46,7 @@
                 placeholder="Insira a sua palavra-passe"
                 v-model="password"
               />
-              <div class="bottom-border-password"></div>
+              <div class="bottom-border-password"></div>  
             </div>
           </div>
 
@@ -70,7 +70,7 @@
 <script lang="ts">
 import * as api from '../api.ts'; // funções de login da API
 import { useSessionStorage } from '@/stores/session.ts'; // store de sessão para guardar o login
-import { useMensagensStore } from '@/stores/useMensagensStore'; // Importando a store de mensagens
+import { useMensagensStore } from '@/stores/useMensagensStore'; // store de mensagens
 
 export default {
   data() {
@@ -165,6 +165,7 @@ export default {
 html, body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden; 
 }
 
 /* Container principal */
@@ -172,6 +173,8 @@ html, body {
   display: flex;
   height: 100vh;
   width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 /* Parte esquerda com a imagem */
@@ -318,6 +321,7 @@ html, body {
 .input-field:focus {
   border-color: #6b7280;
   outline: none;
+  text-align: center;
 }
 
 .login-button {

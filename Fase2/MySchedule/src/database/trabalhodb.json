@@ -1,3 +1,5 @@
+
+
 {
   "directors": [
     {
@@ -111,7 +113,7 @@
       "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
         11,
-        15,
+        13,
         21,
         22,
         23,
@@ -1788,6 +1790,7 @@
       "totalStudentsRegistered": 15
     }
   ],
+
   "allocations": [
     {
       "id": "1",
@@ -1911,12 +1914,12 @@
     },
     {
       "id": "25",
-      "shiftId": 59,
+      "shiftId": 53,
       "studentId": 3
     },
     {
       "id": "26",
-      "shiftId": 61,
+      "shiftId": 54,
       "studentId": 3
     },
     {
@@ -1985,8 +1988,8 @@
       "shiftID": [
         46,
         83,
-        87,
         90,
+        93,
         96,
         99
       ]

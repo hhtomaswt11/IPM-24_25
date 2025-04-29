@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { RouterView, useRoute } from 'vue-router';
+import { RouterView, useRoute, useRouter } from 'vue-router';
 import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
+import TerminarSessao from '@/components/TerminarSessao.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
 import { useSessionStorage } from '@/stores/session.ts'; // IMPORTAR a session
 
@@ -11,12 +12,25 @@ const session = useSessionStorage(); // Aceder à sessão
 const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
 const mostrarCaderno = ref(false);
 const route = useRoute();
+const router = useRouter();
+const mostrarLogout = ref(false);
 
 // Dinâmico: tipo do utilizador
 const tipoUtilizador = computed(() => session.type); // student / teacher / director
 
 function toggleCaderno() {
   mostrarCaderno.value = !mostrarCaderno.value;
+}
+
+function abrirLogout() {
+  mostrarLogout.value = true;
+}
+
+function confirmarLogout() {
+  const session = useSessionStorage();
+  session.logout();
+  mostrarLogout.value = false;
+  router.push('/login');
 }
 
 let intervalo: number;
@@ -41,8 +55,14 @@ onUnmounted(() => {
     :mensagensNaoLidas="mensagensNaoLidas"
     :tipoUtilizador="tipoUtilizador" 
     @abrir-caderno="toggleCaderno"
+    @terminar-sessao="abrirLogout" 
    />
 
+   <TerminarSessao
+    :visible="mostrarLogout"
+    @confirmar="confirmarLogout"
+    @cancelar="mostrarLogout = false"
+  />
 
     <div class="main-wrapper">
       <main class="main-content">
