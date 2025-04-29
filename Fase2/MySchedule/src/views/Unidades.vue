@@ -12,9 +12,8 @@
       <div class="year-section">
         <div class="courses">
           <div v-for="course in year.courses" :key="course.id" class="course-card">
-            <!-- UC -->
-            <router-link :to="`/unidades/${course.name}`" class="course-name">
-              <h4>{{ course.name }}</h4>
+            <router-link :to="`/unidades/${session.type}/${course.name}`" class="course-name">
+            <h4>{{ course.name }}</h4>
             </router-link>
 
             <!-- Docente e Turnos -->

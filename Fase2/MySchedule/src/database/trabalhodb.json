@@ -1,7 +1,7 @@
 {
   "directors": [
     {
-      "id": "d1",
+      "id": 1,
       "name": "José Pedro Castro",
       "email": "jose.pedro.castro@di.uminho.pt",
       "password": "123",
@@ -19,35 +19,35 @@
   ],
   "teachers": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Pedro",
       "email": "pedro@di.uminho.pt",
       "password": "123",
       "caderno": ""
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Ana",
       "email": "ana@di.uminho.pt",
       "password": "123",
       "caderno": ""
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Luís",
       "email": "luis@di.uminho.pt",
       "password": "123",
       "caderno": ""
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Maria",
       "email": "maria@di.uminho.pt",
       "password": "123",
       "caderno": ""
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "João",
       "email": "joao@di.uminho.pt",
       "password": "123",
@@ -56,7 +56,7 @@
   ],
   "students": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Mafalda Ribeiro",
       "num": "a100",
       "email": "a32324@alunos.uminho.pt",
@@ -77,7 +77,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Carlos Sá",
       "num": "a101",
       "email": "33232@alunos.uminho.pt",
@@ -122,7 +122,7 @@
   ],
   "degrees": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Licenciatura em Engenharia Informática",
       "abbreviation": "LEI",
       "directorId": "d1"
@@ -130,7 +130,7 @@
   ],
   "courses": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Matemática",
       "abbreviation": "MAT",
       "year": 1,
@@ -138,7 +138,7 @@
       "degreeId": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Fundamentos de Programação",
       "abbreviation": "FP",
       "year": 1,
@@ -146,7 +146,7 @@
       "degreeId": 1
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Introdução à Computação",
       "abbreviation": "IC",
       "year": 1,
@@ -154,7 +154,7 @@
       "degreeId": 1
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Álgebra Linear",
       "abbreviation": "AL",
       "year": 1,
@@ -162,7 +162,7 @@
       "degreeId": 1
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Lógica para Computação",
       "abbreviation": "LC",
       "year": 1,
@@ -170,7 +170,7 @@
       "degreeId": 1
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Cálculo",
       "abbreviation": "CAL",
       "year": 1,
@@ -178,7 +178,7 @@
       "degreeId": 1
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Programação Orientada a Objetos",
       "abbreviation": "POO",
       "year": 1,
@@ -186,7 +186,7 @@
       "degreeId": 1
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Estruturas de Dados",
       "abbreviation": "ED",
       "year": 1,
@@ -194,7 +194,7 @@
       "degreeId": 1
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "Arquitetura de Computadores",
       "abbreviation": "AC",
       "year": 1,
@@ -202,7 +202,7 @@
       "degreeId": 1
     },
     {
-      "id": "10",
+      "id": 10,
       "name": "Sistemas Operativos",
       "abbreviation": "SO",
       "year": 1,
@@ -210,7 +210,7 @@
       "degreeId": 1
     },
     {
-      "id": "11",
+      "id": 11,
       "name": "Bases de Dados",
       "abbreviation": "BD",
       "year": 2,
@@ -218,7 +218,7 @@
       "degreeId": 1
     },
     {
-      "id": "12",
+      "id": 12,
       "name": "Redes de Computadores",
       "abbreviation": "RC",
       "year": 2,
@@ -226,7 +226,7 @@
       "degreeId": 1
     },
     {
-      "id": "13",
+      "id": 13,
       "name": "Engenharia de Software",
       "abbreviation": "ES",
       "year": 2,
@@ -234,7 +234,7 @@
       "degreeId": 1
     },
     {
-      "id": "14",
+      "id": 14,
       "name": "Inteligência Artificial",
       "abbreviation": "IA",
       "year": 2,
@@ -242,7 +242,7 @@
       "degreeId": 1
     },
     {
-      "id": "15",
+      "id": 15,
       "name": "Sistemas Distribuídos",
       "abbreviation": "SD",
       "year": 2,
@@ -250,7 +250,7 @@
       "degreeId": 1
     },
     {
-      "id": "16",
+      "id": 16,
       "name": "Compiladores",
       "abbreviation": "COMP",
       "year": 2,
@@ -258,7 +258,7 @@
       "degreeId": 1
     },
     {
-      "id": "17",
+      "id": 17,
       "name": "Segurança Informática",
       "abbreviation": "SI",
       "year": 2,
@@ -266,7 +266,7 @@
       "degreeId": 1
     },
     {
-      "id": "18",
+      "id": 18,
       "name": "Interação Humano-Computador",
       "abbreviation": "IHC",
       "year": 2,
@@ -274,7 +274,7 @@
       "degreeId": 1
     },
     {
-      "id": "19",
+      "id": 19,
       "name": "Grafos e Algoritmos",
       "abbreviation": "GA",
       "year": 2,
@@ -282,7 +282,7 @@
       "degreeId": 1
     },
     {
-      "id": "20",
+      "id": 20,
       "name": "Processamento de Linguagens",
       "abbreviation": "PL",
       "year": 2,
@@ -290,7 +290,7 @@
       "degreeId": 1
     },
     {
-      "id": "21",
+      "id": 21,
       "name": "Aprendizagem de Máquina",
       "abbreviation": "AM",
       "year": 3,
@@ -298,7 +298,7 @@
       "degreeId": 1
     },
     {
-      "id": "22",
+      "id": 22,
       "name": "Sistemas de Informação",
       "abbreviation": "SI",
       "year": 3,
@@ -306,7 +306,7 @@
       "degreeId": 1
     },
     {
-      "id": "23",
+      "id": 23,
       "name": "Computação Gráfica",
       "abbreviation": "CG",
       "year": 3,
@@ -314,7 +314,7 @@
       "degreeId": 1
     },
     {
-      "id": "24",
+      "id": 24,
       "name": "Redes de Nova Geração",
       "abbreviation": "RNG",
       "year": 3,
@@ -322,7 +322,7 @@
       "degreeId": 1
     },
     {
-      "id": "25",
+      "id": 25,
       "name": "Sistemas Embarcados",
       "abbreviation": "SE",
       "year": 3,
@@ -330,7 +330,7 @@
       "degreeId": 1
     },
     {
-      "id": "26",
+      "id": 26,
       "name": "Projeto de Engenharia Informática",
       "abbreviation": "PEI",
       "year": 3,
@@ -338,7 +338,7 @@
       "degreeId": 1
     },
     {
-      "id": "27",
+      "id": 27,
       "name": "Tópicos Avançados em Computação",
       "abbreviation": "TAC",
       "year": 3,
@@ -346,7 +346,7 @@
       "degreeId": 1
     },
     {
-      "id": "28",
+      "id": 28,
       "name": "Gestão de Projetos de Software",
       "abbreviation": "GPS",
       "year": 3,
@@ -354,7 +354,7 @@
       "degreeId": 1
     },
     {
-      "id": "29",
+      "id": 29,
       "name": "Computação Móvel",
       "abbreviation": "CM",
       "year": 3,
@@ -362,7 +362,7 @@
       "degreeId": 1
     },
     {
-      "id": "30",
+      "id": 30,
       "name": "Sistemas de Tempo Real",
       "abbreviation": "STR",
       "year": 3,
@@ -392,8 +392,8 @@
       "to": 16,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 1,
-      "totalStudentsRegistered": 22
+      "teacherId": 2,
+      "totalStudentsRegistered": 19
     },
     {
       "id": "3",
@@ -404,7 +404,7 @@
       "to": 16,
       "type": "PL",
       "name": "PL2",
-      "teacherId": 1,
+      "teacherId": 3,
       "totalStudentsRegistered": 15
     },
     {
@@ -416,8 +416,10 @@
       "to": 13,
       "type": "PL",
       "name": "PL3",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 30
+      "teacherId": 2,
+      "totalStudentsRegistered": 15
     },
     {
       "id": "5",
@@ -428,7 +430,7 @@
       "to": 11,
       "type": "T",
       "name": "T1",
-      "teacherId": 1,
+      "teacherId": 4,
       "totalStudentsRegistered": 50
     },
     {
@@ -440,7 +442,7 @@
       "to": 13,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 1,
+      "teacherId": 5,
       "totalStudentsRegistered": 27
     },
     {
@@ -452,7 +454,7 @@
       "to": 13,
       "type": "PL",
       "name": "PL2",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 20
     },
     {
@@ -464,7 +466,7 @@
       "to": 11,
       "type": "PL",
       "name": "PL3",
-      "teacherId": 1,
+      "teacherId": 3,
       "totalStudentsRegistered": 26
     },
     {
@@ -476,7 +478,7 @@
       "to": 18,
       "type": "T",
       "name": "T1",
-      "teacherId": 1,
+      "teacherId": 4,
       "totalStudentsRegistered": 50
     },
     {
@@ -512,7 +514,7 @@
       "to": 11,
       "type": "PL",
       "name": "PL3",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 20
     },
     {
@@ -524,7 +526,7 @@
       "to": 13,
       "type": "T",
       "name": "T1",
-      "teacherId": 1,
+      "teacherId": 3,
       "totalStudentsRegistered": 46
     },
     {
@@ -536,7 +538,7 @@
       "to": 13,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 1,
+      "teacherId": 4,
       "totalStudentsRegistered": 10
     },
     {
@@ -548,7 +550,7 @@
       "to": 13,
       "type": "PL",
       "name": "PL2",
-      "teacherId": 1,
+      "teacherId": 5,
       "totalStudentsRegistered": 26
     },
     {
@@ -572,7 +574,7 @@
       "to": 16,
       "type": "T",
       "name": "T1",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 50
     },
     {
@@ -584,7 +586,7 @@
       "to": 18,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 1,
+      "teacherId": 4,
       "totalStudentsRegistered": 50
     },
     {
@@ -596,7 +598,7 @@
       "to": 18,
       "type": "PL",
       "name": "PL2",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 10
     },
     {
@@ -608,7 +610,7 @@
       "to": 11,
       "type": "PL",
       "name": "PL3",
-      "teacherId": 1,
+      "teacherId": 5,
       "totalStudentsRegistered": 30
     },
     {
@@ -632,7 +634,7 @@
       "to": 16,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 1,
+      "teacherId": 5,
       "totalStudentsRegistered": 10
     },
     {
@@ -644,7 +646,7 @@
       "to": 13,
       "type": "PL",
       "name": "PL2",
-      "teacherId": 1,
+      "teacherId": 2,
       "totalStudentsRegistered": 50
     },
     {
