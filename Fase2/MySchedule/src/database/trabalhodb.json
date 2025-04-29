@@ -1,7 +1,7 @@
 {
   "directors": [
     {
-      "id": 1,
+      "id": "d1",
       "name": "José Pedro Castro",
       "email": "jose.pedro.castro@di.uminho.pt",
       "password": "123",
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Joana Rocha",
       "num": "a103",
       "email": "j32324@alunos.uminho.pt",
@@ -418,8 +418,6 @@
       "name": "PL3",
       "teacherId": 2,
       "totalStudentsRegistered": 30
-      "teacherId": 2,
-      "totalStudentsRegistered": 15
     },
     {
       "id": "5",
