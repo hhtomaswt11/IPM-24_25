@@ -12,8 +12,6 @@ import BarraPesquisa from '@/components/BarraPesquisa.vue'
 import DropDownAlternarSem from '@/components/DropDownAlternarSem.vue' 
 import DropDownAlternarAnos from '@/components/DropDownAlternarAnos.vue' 
 import NotFoundPage from '@/components/NotFoundPage.vue'
-import TerminarSessao from '@/components/TerminarSessao.vue'
-import Caderno from '@/components/Caderno.vue'
 
 
 
@@ -82,11 +80,6 @@ const router = createRouter({
       path: '/horario-aluno',
       name: 'HorarioAluno',
       component: HorarioAluno,
-    },
-    {
-      path: '/terminar',
-      name: 'TerminarSessao',
-      component: TerminarSessao,
     },
     {
       path: '/:notFoundPage(.*)',

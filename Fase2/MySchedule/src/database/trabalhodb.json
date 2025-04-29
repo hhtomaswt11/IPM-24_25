@@ -1,7 +1,9 @@
+
+
 {
   "directors": [
     {
-      "id": 1,
+      "id": "d1",
       "name": "José Pedro Castro",
       "email": "jose.pedro.castro@di.uminho.pt",
       "password": "123",
@@ -98,7 +100,7 @@
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Joana Rocha",
       "num": "a103",
       "email": "j32324@alunos.uminho.pt",
@@ -111,7 +113,7 @@
       "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
         11,
-        15,
+        13,
         21,
         22,
         23,
@@ -418,8 +420,6 @@
       "name": "PL3",
       "teacherId": 2,
       "totalStudentsRegistered": 30
-      "teacherId": 2,
-      "totalStudentsRegistered": 15
     },
     {
       "id": "5",
@@ -1790,6 +1790,7 @@
       "totalStudentsRegistered": 15
     }
   ],
+
   "allocations": [
     {
       "id": "1",
@@ -1913,12 +1914,12 @@
     },
     {
       "id": "25",
-      "shiftId": 59,
+      "shiftId": 53,
       "studentId": 3
     },
     {
       "id": "26",
-      "shiftId": 61,
+      "shiftId": 54,
       "studentId": 3
     },
     {
@@ -1987,8 +1988,8 @@
       "shiftID": [
         46,
         83,
-        87,
         90,
+        93,
         96,
         99
       ]

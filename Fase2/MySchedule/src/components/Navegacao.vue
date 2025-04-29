@@ -2,30 +2,35 @@
   <aside class="navegacao">
     <nav class="nav-links">
       <template v-if="tipoUtilizador === 'director'">
-        <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
-        <RouterLink to="/unidades/director" class="nav-link">Unidades Curriculares</RouterLink>
-        <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
-        <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
-        <RouterLink to="/mensagens" class="nav-link mensagens-link">
-          Mensagens
-          <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
-        </RouterLink>
-        <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
-        <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink>
+        <div class="links-principais">
+          <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
+          <RouterLink to="/unidades/director" class="nav-link">Unidades Curriculares</RouterLink>
+          <RouterLink to="/horarios-dc" class="nav-link">Horário</RouterLink>
+          <button class="nav-link" @click="$emit('abrir-caderno')">Caderno</button>
+          <RouterLink to="/mensagens" class="nav-link mensagens-link">
+            Mensagens
+            <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
+          </RouterLink>
+          <RouterLink to="/gestao" class="nav-link">Gestão</RouterLink>
+        </div>
+        <div class="footer-links">
+          <button class="nav-link terminar-sessao" @click="$emit('terminar-sessao')">Terminar Sessão</button>
+        </div>
       </template>
 
       <template v-else-if="tipoUtilizador === 'student'">
-        <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
-        <RouterLink to="/unidades/student" class="nav-link">Unidades Curriculares</RouterLink>
-        <RouterLink to="/horario-aluno" class="nav-link">Horário</RouterLink>
-        <RouterLink to="/mensagens" class="nav-link mensagens-link">
-          Mensagens
-          <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
-        </RouterLink>
-        
-        <!-- <RouterLink to="/terminar" class="nav-link">Terminar Sessão</RouterLink> -->
-        <RouterLink to="/terminar" class="nav-link terminar-sessao">Terminar Sessão</RouterLink>
-
+        <div class="links-principais">
+          <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
+          <RouterLink to="/unidades/student" class="nav-link">Unidades Curriculares</RouterLink>
+          <RouterLink to="/horario-aluno" class="nav-link">Horário</RouterLink>
+          <RouterLink to="/mensagens" class="nav-link mensagens-link">
+            Mensagens
+            <span v-if="mensagensNaoLidas > 0" class="badge">+{{ mensagensNaoLidas }}</span>
+          </RouterLink>
+        </div>
+        <div class="footer-links">
+          <button class="nav-link terminar-sessao" @click="$emit('terminar-sessao')">Terminar Sessão</button>
+        </div>
       </template>
     </nav>
 
@@ -35,20 +40,18 @@
   </aside>
 </template>
 
-  
-  <script setup>
-  defineProps({
-    tipoUtilizador: {
-      type: String,
-      required: true
-    },
-    mensagensNaoLidas: Number
-  })
-  defineEmits(['abrir-caderno']);
-  </script>
+<script setup>
+defineProps({
+  tipoUtilizador: {
+    type: String,
+    required: true
+  },
+  mensagensNaoLidas: Number
+})
+defineEmits(['abrir-caderno', 'terminar-sessao']);
+</script>
 
-  
-  <style scoped>
+<style scoped>
 .navegacao {
   width: 150px;
   background-color: #373737;
@@ -60,18 +63,32 @@
   left: 0;
   top: 0;
   bottom: 0;
-  justify-content: flex-start;
+  justify-content: space-between;
   z-index: 9999;
 }
 
-  
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .nav-link {
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 130px); /* Deixar espaço para o ícone no rodapé */
+  justify-content: space-between;
+}
+
+.links-principais {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.nav-link {
   padding: 1.5rem;
   text-decoration: none;
   color: white;
@@ -94,29 +111,24 @@
   color: #373737;
 }
 
-.nav-link.terminar-sessao {
-  margin-top: 270px; 
-}
-
-
 .nav-link.router-link-exact-active {
   background-color: #ffffff;
   color: #373737;
 }
 
-  .app-icon {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -20px;
-  }
+.app-icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20px;
+}
   
-  .footer-icon {
-    width: 150px;
-    height: auto;
-  }
+.footer-icon {
+  width: 150px;
+  height: auto;
+}
 
-  .mensagens-link {
+.mensagens-link {
   position: relative;
 }
 
@@ -131,8 +143,6 @@
   font-size: 12px;
   font-weight: bold;
 }
-
-
 
 @media (max-width: 768px) {
   .navegacao {
@@ -156,7 +166,4 @@
     font-size: 10px;
   }
 }
-
-
 </style>
-  
