@@ -3,10 +3,10 @@
     {
       "id": 1,
       "name": "José Pedro Castro",
-      "email": "jose@di.uminho.pt",
+      "email": "jose.pedro.castro@di.uminho.pt",
       "password": "123",
       "nascimento": "1980-01-12",
-      "morada": "Rua 10 de Junho, 4704-514 - BRAGA, Portugal",
+      "morada": "Rua  C, 4704-514 - Braga, Portugal",
       "sexo": "Masculino",
       "telefone": "(+351) 939999999",
       "departamento": "Escola de Engenharia",
@@ -57,10 +57,16 @@
   "students": [
     {
       "id": 1,
-      "name": "Mafalda",
-      "numero": "a100",
+      "name": "Mafalda Ribeiro",
+      "num": "a100",
       "email": "a32324@alunos.uminho.pt",
       "password": "123",
+      "nascimento": "2004-10-30",
+      "morada": "Rua C, 4700-011 - Guimarães, Portugal",
+      "sexo": "Feminino",
+      "telefone": "(+351) 912121120",
+      "departamento": "Escola de Engenharia",
+      "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "specialStatus": true,
       "enrolled": [
         1,
@@ -72,408 +78,38 @@
     },
     {
       "id": 2,
-      "name": "Carlos",
-      "numero": "a101",
+      "name": "Carlos Sá",
+      "num": "a101",
       "email": "33232@alunos.uminho.pt",
       "password": "123",
+      "morada": "Rua C, 4700-011 - Guimarães, Portugal",
+      "sexo": "Masculino",
+      "telefone": "(+351) 915652987",
+      "departamento": "Escola de Engenharia",
+      "cargo": "Aluno da Licenciatura em Engenharia Informática",
       "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
+        3,
+        11,
+        12,
+        13,
+        14,
+        15
       ]
     },
     {
       "id": 3,
       "name": "Joana",
-      "numero": "a102",
+      "num": "a103",
       "email": "j32324@alunos.uminho.pt",
       "password": "123",
       "enrolled": [
         11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Ricardo",
-      "numero": "a103",
-      "email": "r32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Sofia",
-      "numero": "a104",
-      "email": "s32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
+        15,
         21,
         22,
         23,
         24,
         25
-      ]
-    },
-    {
-      "id": 6,
-      "name": "Tiago",
-      "numero": "a105",
-      "email": "t32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": 7,
-      "name": "Inês",
-      "numero": "a106",
-      "email": "i32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": 8,
-      "name": "Gonçalo",
-      "numero": "a107",
-      "email": "g32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": 9,
-      "name": "Mariana",
-      "numero": "a108",
-      "email": "m32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": 10,
-      "name": "Diogo",
-      "numero": "a109",
-      "email": "d32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": 11,
-      "name": "Beatriz",
-      "numero": "a110",
-      "email": "b32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": 12,
-      "name": "Fábio",
-      "numero": "a111",
-      "email": "f32324@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": 13,
-      "name": "Ana",
-      "numero": "a112",
-      "email": "a32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": 14,
-      "name": "Bruno",
-      "numero": "a113",
-      "email": "b32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": 15,
-      "name": "Catarina",
-      "numero": "a114",
-      "email": "c32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": 16,
-      "name": "Daniel",
-      "numero": "a115",
-      "email": "d32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": 17,
-      "name": "Eva",
-      "numero": "a116",
-      "email": "e32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": 18,
-      "name": "Filipe",
-      "numero": "a117",
-      "email": "f32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": 19,
-      "name": "Gabriela",
-      "numero": "a118",
-      "email": "g32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": 20,
-      "name": "Hugo",
-      "numero": "a119",
-      "email": "h32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": 21,
-      "name": "Isabel",
-      "numero": "a120",
-      "email": "i32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": 22,
-      "name": "Jorge",
-      "numero": "a121",
-      "email": "j32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": 23,
-      "name": "Leonor",
-      "numero": "a122",
-      "email": "l32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": 24,
-      "name": "Miguel",
-      "numero": "a123",
-      "email": "m32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
-    },
-    {
-      "id": 25,
-      "name": "Nuno",
-      "numero": "a124",
-      "email": "n32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "id": 26,
-      "name": "Olívia",
-      "numero": "a125",
-      "email": "o32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "id": 27,
-      "name": "Pedro",
-      "numero": "a126",
-      "email": "p32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ]
-    },
-    {
-      "id": 28,
-      "name": "Rita",
-      "numero": "a127",
-      "email": "r32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ]
-    },
-    {
-      "id": 29,
-      "name": "Sara",
-      "numero": "a128",
-      "email": "s32325@alunos.uminho.pt",
-      "password": "123",
-      "enrolled": [
-        21,
-        22,
-        23,
-        24,
-        25
-      ]
-    },
-    {
-      "id": 30,
-      "name": "Tiago",
-      "email": "t32325@alunos.uminho.pt",
-      "numero": "a129",
-      "password": "123",
-      "enrolled": [
-        26,
-        27,
-        28,
-        29,
-        30
       ]
     }
   ],
@@ -482,7 +118,7 @@
       "id": 1,
       "name": "Licenciatura em Engenharia Informática",
       "abbreviation": "LEI",
-      "directorId": 1
+      "directorId": "d1"
     }
   ],
   "courses": [
@@ -729,1507 +365,1633 @@
   ],
   "shifts": [
     {
-      "id": 1,
+      "id": "1",
       "courseId": 1,
       "classroomId": 1,
       "day": "Monday",
-      "from": 10,
-      "to": 12,
+      "from": 9,
+      "to": 11,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 2,
+      "id": "2",
+      "courseId": 1,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 14,
+      "to": 16,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 2,
+      "totalStudentsRegistered": 19
+    },
+    {
+      "id": "3",
+      "courseId": 1,
+      "classroomId": 1,
+      "day": "Wednesday",
+      "from": 14,
+      "to": 16,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 3,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "4",
       "courseId": 1,
       "classroomId": 1,
       "day": "Tuesday",
-      "from": 14,
-      "to": 16,
+      "from": 11,
+      "to": 13,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "name": "PL3",
+      "teacherId": 2,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 3,
+      "id": "5",
+      "courseId": 2,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 4,
+      "totalStudentsRegistered": 30
+    },
+    {
+      "id": "200",
+      "courseId": 2,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 5,
+      "totalStudentsRegistered": 20
+    },
+    {
+      "id": "6",
+      "courseId": 2,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 2,
+      "totalStudentsRegistered": 20
+    },
+    {
+      "id": "7",
       "courseId": 2,
       "classroomId": 1,
-      "day": "Wednesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 4,
-      "courseId": 2,
-      "classroomId": 1,
       "day": "Thursday",
-      "from": 14,
-      "to": 16,
+      "from": 9,
+      "to": 11,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "name": "PL3",
+      "teacherId": 3,
+      "totalStudentsRegistered": 20
     },
     {
-      "id": 5,
+      "id": "8",
       "courseId": 3,
-      "classroomId": 1,
-      "day": "Friday",
-      "from": 10,
-      "to": 12,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 16,
+      "to": 18,
       "type": "T",
       "name": "T1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "teacherId": 4,
+      "totalStudentsRegistered": 20
     },
     {
-      "id": 6,
+      "id": "9",
       "courseId": 3,
-      "classroomId": 1,
-      "day": "Monday",
-      "from": 14,
-      "to": 16,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "teacherId": 1,
+      "totalStudentsRegistered": 20
     },
     {
-      "id": 7,
-      "courseId": 4,
-      "classroomId": 1,
+      "id": "10",
+      "courseId": 3,
+      "classroomId": 3,
       "day": "Tuesday",
-      "from": 10,
-      "to": 12,
+      "from": 14,
+      "to": 16,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 20
+    },
+    {
+      "id": "11",
+      "courseId": 3,
+      "classroomId": 3,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 2,
+      "totalStudentsRegistered": 20
+    },
+    {
+      "id": "12",
+      "courseId": 4,
+      "classroomId": 1,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
       "type": "T",
       "name": "T1",
+      "teacherId": 3,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "13",
+      "courseId": 4,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
       "teacherId": 4,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 8,
+      "id": "14",
       "courseId": 4,
       "classroomId": 1,
       "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 5,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "15",
+      "courseId": 4,
+      "classroomId": 1,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "16",
+      "courseId": 5,
+      "classroomId": 2,
+      "day": "Thursday",
       "from": 14,
       "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 2,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "17",
+      "courseId": 5,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
       "type": "PL",
       "name": "PL1",
       "teacherId": 4,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 9,
+      "id": "18",
       "courseId": 5,
-      "classroomId": 1,
-      "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 2,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 10,
+      "id": "201",
       "courseId": 5,
       "classroomId": 1,
       "day": "Friday",
-      "from": 14,
-      "to": 16,
+      "from": 9,
+      "to": 11,
       "type": "PL",
-      "name": "PL1",
+      "name": "PL3",
       "teacherId": 5,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 11,
+      "id": "19",
       "courseId": 6,
-      "classroomId": 1,
-      "day": "Monday",
-      "from": 10,
-      "to": 12,
+      "classroomId": 3,
+      "day": "Friday",
+      "from": 14,
+      "to": 16,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 12,
+      "id": "20",
       "courseId": 6,
-      "classroomId": 1,
+      "classroomId": 2,
       "day": "Tuesday",
       "from": 14,
       "to": 16,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 5,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "21",
+      "courseId": 6,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 2,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "22",
+      "courseId": 6,
+      "classroomId": 1,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "23",
+      "courseId": 7,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "24",
+      "courseId": 7,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 13,
+      "id": "25",
       "courseId": 7,
-      "classroomId": 1,
-      "day": "Wednesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 2,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 14,
+      "id": "26",
       "courseId": 7,
-      "classroomId": 1,
+      "classroomId": 3,
+      "day": "Tuesday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "27",
+      "courseId": 8,
+      "classroomId": 3,
+      "day": "Tuesday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "28",
+      "courseId": 8,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "29",
+      "courseId": 8,
+      "classroomId": 3,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "30",
+      "courseId": 8,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "31",
+      "courseId": 9,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "32",
+      "courseId": 9,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "33",
+      "courseId": 9,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "34",
+      "courseId": 9,
+      "classroomId": 2,
       "day": "Thursday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
+      "name": "PL3",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 15,
-      "courseId": 8,
-      "classroomId": 1,
-      "day": "Friday",
-      "from": 10,
-      "to": 12,
+      "id": "35",
+      "courseId": 10,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
       "type": "T",
       "name": "T1",
-      "teacherId": 3,
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 16,
-      "courseId": 8,
-      "classroomId": 1,
+      "id": "36",
+      "courseId": 10,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "37",
+      "courseId": 10,
+      "classroomId": 2,
       "day": "Monday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 3,
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 17,
-      "courseId": 9,
-      "classroomId": 1,
+      "id": "38",
+      "courseId": 10,
+      "classroomId": 2,
       "day": "Tuesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 4,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 18,
-      "courseId": 9,
-      "classroomId": 1,
-      "day": "Wednesday",
-      "from": 14,
-      "to": 16,
+      "from": 11,
+      "to": 13,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 4,
+      "name": "PL3",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 19,
-      "courseId": 10,
-      "classroomId": 1,
-      "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 20,
-      "courseId": 10,
-      "classroomId": 1,
-      "day": "Friday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 21,
+      "id": "45",
       "courseId": 11,
       "classroomId": 1,
       "day": "Monday",
-      "from": 10,
-      "to": 12,
+      "from": 14,
+      "to": 16,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 22,
+      "id": "46",
       "courseId": 11,
       "classroomId": 1,
-      "day": "Tuesday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
+      "day": "Monday",
+      "from": 9,
+      "to": 11,
+      "type": "TP",
+      "name": "TP2",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 23,
+      "id": "47",
+      "courseId": 11,
+      "classroomId": 1,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "48",
+      "courseId": 11,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "49",
+      "courseId": 12,
+      "classroomId": 1,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "50",
       "courseId": 12,
       "classroomId": 1,
       "day": "Wednesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 2,
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 24,
+      "id": "51",
       "courseId": 12,
       "classroomId": 1,
-      "day": "Thursday",
-      "from": 14,
-      "to": 16,
+      "day": "Friday",
+      "from": 9,
+      "to": 11,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
+      "name": "PL3",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 25,
+      "id": "52",
+      "courseId": 12,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "53",
       "courseId": 13,
-      "classroomId": 1,
+      "classroomId": 2,
       "day": "Friday",
-      "from": 10,
-      "to": 12,
+      "from": 11,
+      "to": 13,
       "type": "T",
       "name": "T1",
-      "teacherId": 3,
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 26,
+      "id": "54",
       "courseId": 13,
-      "classroomId": 1,
+      "classroomId": 2,
       "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "55",
+      "courseId": 13,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "56",
+      "courseId": 14,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "57",
+      "courseId": 14,
+      "classroomId": 1,
+      "day": "Friday",
       "from": 14,
       "to": 16,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 3,
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 27,
+      "id": "58",
       "courseId": 14,
       "classroomId": 1,
       "day": "Tuesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 4,
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 28,
-      "courseId": 14,
+      "id": "59",
+      "courseId": 15,
       "classroomId": 1,
       "day": "Wednesday",
       "from": 14,
       "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 4,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 29,
+      "id": "60",
+      "courseId": 15,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "61",
+      "courseId": 15,
+      "classroomId": 3,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "62",
       "courseId": 15,
       "classroomId": 1,
       "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 30,
-      "courseId": 15,
-      "classroomId": 1,
-      "day": "Friday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 31,
-      "courseId": 16,
-      "classroomId": 1,
-      "day": "Monday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
+      "name": "PL3",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 32,
+      "id": "63",
       "courseId": 16,
       "classroomId": 1,
       "day": "Tuesday",
       "from": 14,
       "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "64",
+      "courseId": 16,
+      "classroomId": 1,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "65",
+      "courseId": 16,
+      "classroomId": 1,
+      "day": "Tuesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "66",
+      "courseId": 16,
+      "classroomId": 1,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 33,
+      "id": "67",
+      "courseId": 17,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "68",
+      "courseId": 17,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "69",
       "courseId": 17,
       "classroomId": 1,
       "day": "Wednesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 2,
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 34,
+      "id": "70",
       "courseId": 17,
       "classroomId": 1,
-      "day": "Thursday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 35,
-      "courseId": 18,
-      "classroomId": 1,
-      "day": "Friday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 36,
-      "courseId": 18,
-      "classroomId": 1,
       "day": "Monday",
-      "from": 14,
-      "to": 16,
+      "from": 9,
+      "to": 11,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 3,
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 37,
-      "courseId": 19,
-      "classroomId": 1,
-      "day": "Tuesday",
-      "from": 10,
-      "to": 12,
+      "id": "71",
+      "courseId": 18,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 12,
+      "to": 14,
       "type": "T",
       "name": "T1",
-      "teacherId": 4,
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 38,
-      "courseId": 19,
+      "id": "72",
+      "courseId": 18,
+      "classroomId": 3,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "73",
+      "courseId": 18,
       "classroomId": 1,
       "day": "Wednesday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 4,
+      "name": "PL3",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 39,
-      "courseId": 20,
+      "id": "74",
+      "courseId": 18,
       "classroomId": 1,
-      "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 40,
-      "courseId": 20,
+      "id": "75",
+      "courseId": 19,
       "classroomId": 1,
       "day": "Friday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "76",
+      "courseId": 19,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 13,
+      "to": 15,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "77",
+      "courseId": 19,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 15,
+      "to": 17,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "78",
+      "courseId": 19,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "79",
+      "courseId": 20,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "80",
+      "courseId": 20,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "81",
+      "courseId": 20,
+      "classroomId": 2,
+      "day": "Wednesday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 5,
+      "name": "PL2",
+      "teacherId": 1,
       "totalStudentsRegistered": 10
     },
     {
-      "id": 41,
+      "id": "82",
+      "courseId": 20,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 9,
+      "to": 11,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 10
+    },
+    {
+      "id": "83",
       "courseId": 21,
       "classroomId": 1,
       "day": "Monday",
-      "from": 10,
-      "to": 12,
+      "from": 9,
+      "to": 11,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 42,
+      "id": "84",
+      "courseId": 21,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "85",
+      "courseId": 21,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "86",
       "courseId": 21,
       "classroomId": 1,
-      "day": "Tuesday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
+      "day": "Thursday",
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP3",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 43,
+      "id": "87",
       "courseId": 22,
-      "classroomId": 1,
-      "day": "Wednesday",
-      "from": 10,
-      "to": 12,
+      "classroomId": 2,
+      "day": "Tuesday",
+      "from": 11,
+      "to": 13,
       "type": "T",
       "name": "T1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 44,
+      "id": "88",
+      "courseId": 22,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "89",
       "courseId": 22,
       "classroomId": 1,
       "day": "Thursday",
       "from": 14,
       "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 45,
-      "courseId": 23,
-      "classroomId": 1,
+      "id": "90",
+      "courseId": 22,
+      "classroomId": 2,
       "day": "Friday",
-      "from": 10,
-      "to": 12,
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "91",
+      "courseId": 23,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 9,
+      "to": 11,
       "type": "T",
       "name": "T1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 46,
+      "id": "92",
       "courseId": 23,
       "classroomId": 1,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "93",
+      "courseId": 23,
+      "classroomId": 3,
+      "day": "Friday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "94",
+      "courseId": 23,
+      "classroomId": 3,
       "day": "Monday",
       "from": 14,
       "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 47,
+      "id": "95",
+      "courseId": 24,
+      "classroomId": 1,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "96",
+      "courseId": 24,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "97",
+      "courseId": 24,
+      "classroomId": 3,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "98",
       "courseId": 24,
       "classroomId": 1,
       "day": "Tuesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 4,
-      "totalStudentsRegistered": 10
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 48,
-      "courseId": 24,
-      "classroomId": 1,
-      "day": "Wednesday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 4,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 49,
-      "courseId": 25,
-      "classroomId": 1,
-      "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 50,
+      "id": "99",
       "courseId": 25,
       "classroomId": 1,
       "day": "Friday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 51,
-      "courseId": 26,
-      "classroomId": 1,
-      "day": "Monday",
-      "from": 10,
-      "to": 12,
+      "from": 11,
+      "to": 13,
       "type": "T",
       "name": "T1",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 52,
-      "courseId": 26,
+      "id": "100",
+      "courseId": 25,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "101",
+      "courseId": 25,
       "classroomId": 1,
       "day": "Tuesday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
+      "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 53,
-      "courseId": 27,
-      "classroomId": 1,
-      "day": "Wednesday",
-      "from": 10,
-      "to": 12,
+      "id": "102",
+      "courseId": 25,
+      "classroomId": 2,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "103",
+      "courseId": 26,
+      "classroomId": 3,
+      "day": "Monday",
+      "from": 11,
+      "to": 13,
       "type": "T",
       "name": "T1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 54,
+      "id": "104",
+      "courseId": 26,
+      "classroomId": 1,
+      "day": "Tuesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "105",
+      "courseId": 26,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 14,
+      "to": 16,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "106",
+      "courseId": 26,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 16,
+      "to": 18,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "107",
       "courseId": 27,
       "classroomId": 1,
+      "day": "Tuesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "108",
+      "courseId": 27,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "109",
+      "courseId": 27,
+      "classroomId": 3,
       "day": "Thursday",
       "from": 14,
       "to": 16,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 2,
-      "totalStudentsRegistered": 10
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 55,
+      "id": "110",
+      "courseId": 27,
+      "classroomId": 1,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "111",
+      "courseId": 28,
+      "classroomId": 2,
+      "day": "Wednesday",
+      "from": 9,
+      "to": 11,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "112",
+      "courseId": 28,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "113",
       "courseId": 28,
       "classroomId": 1,
       "day": "Friday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "from": 9,
+      "to": 11,
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 56,
+      "id": "114",
       "courseId": 28,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 16,
+      "to": 18,
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "115",
+      "courseId": 29,
+      "classroomId": 3,
+      "day": "Thursday",
+      "from": 11,
+      "to": 13,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "116",
+      "courseId": 29,
+      "classroomId": 2,
+      "day": "Friday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "117",
+      "courseId": 29,
+      "classroomId": 2,
+      "day": "Monday",
+      "from": 14,
+      "to": 16,
+      "type": "TP",
+      "name": "TP2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "118",
+      "courseId": 29,
+      "classroomId": 3,
+      "day": "Wednesday",
+      "from": 11,
+      "to": 13,
+      "type": "TP",
+      "name": "TP3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "119",
+      "courseId": 30,
       "classroomId": 1,
+      "day": "Friday",
+      "from": 14,
+      "to": 16,
+      "type": "T",
+      "name": "T1",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
+    },
+    {
+      "id": "120",
+      "courseId": 30,
+      "classroomId": 3,
       "day": "Monday",
       "from": 14,
       "to": 16,
       "type": "PL",
       "name": "PL1",
-      "teacherId": 3,
-      "totalStudentsRegistered": 10
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 57,
-      "courseId": 29,
-      "classroomId": 1,
+      "id": "121",
+      "courseId": 30,
+      "classroomId": 3,
       "day": "Tuesday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 4,
-      "totalStudentsRegistered": 10
+      "from": 11,
+      "to": 13,
+      "type": "PL",
+      "name": "PL2",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     },
     {
-      "id": 58,
-      "courseId": 29,
+      "id": "122",
+      "courseId": 30,
       "classroomId": 1,
       "day": "Wednesday",
-      "from": 14,
-      "to": 16,
+      "from": 16,
+      "to": 18,
       "type": "PL",
-      "name": "PL1",
-      "teacherId": 4,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 59,
-      "courseId": 30,
-      "classroomId": 1,
-      "day": "Thursday",
-      "from": 10,
-      "to": 12,
-      "type": "T",
-      "name": "T1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
-    },
-    {
-      "id": 60,
-      "courseId": 30,
-      "classroomId": 1,
-      "day": "Friday",
-      "from": 14,
-      "to": 16,
-      "type": "PL",
-      "name": "PL1",
-      "teacherId": 5,
-      "totalStudentsRegistered": 10
+      "name": "PL3",
+      "teacherId": 1,
+      "totalStudentsRegistered": 15
     }
   ],
   "allocations": [
     {
-      "id": 1,
+      "id": "1",
       "shiftId": 1,
       "studentId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "shiftId": 2,
       "studentId": 1
     },
     {
-      "id": 3,
-      "shiftId": 3,
-      "studentId": 1
-    },
-    {
-      "id": 4,
-      "shiftId": 4,
-      "studentId": 1
-    },
-    {
-      "id": 5,
+      "id": "3",
       "shiftId": 5,
       "studentId": 1
     },
     {
-      "id": 6,
-      "shiftId": 6,
-      "studentId": 2
+      "id": "4",
+      "shiftId": 200,
+      "studentId": 1
     },
     {
-      "id": 7,
-      "shiftId": 7,
-      "studentId": 2
+      "id": "5",
+      "shiftId": 8,
+      "studentId": 1
     },
     {
-      "id": 8,
+      "id": "6",
+      "shiftId": 9,
+      "studentId": 1
+    },
+    {
+      "id": "7",
+      "shiftId": 12,
+      "studentId": 1
+    },
+    {
+      "id": "8",
+      "shiftId": 13,
+      "studentId": 1
+    },
+    {
+      "id": "9",
+      "shiftId": 16,
+      "studentId": 1
+    },
+    {
+      "id": "10",
+      "shiftId": 17,
+      "studentId": 1
+    },
+    {
+      "id": "11",
       "shiftId": 8,
       "studentId": 2
     },
     {
-      "id": 9,
-      "shiftId": 9,
-      "studentId": 2
-    },
-    {
-      "id": 10,
+      "id": "12",
       "shiftId": 10,
       "studentId": 2
     },
     {
-      "id": 11,
-      "shiftId": 11,
-      "studentId": 3
-    },
-    {
-      "id": 12,
-      "shiftId": 12,
-      "studentId": 3
-    },
-    {
-      "id": 13,
-      "shiftId": 13,
-      "studentId": 3
-    },
-    {
-      "id": 14,
-      "shiftId": 14,
-      "studentId": 3
-    },
-    {
-      "id": 15,
-      "shiftId": 15,
-      "studentId": 3
-    },
-    {
-      "id": 16,
-      "shiftId": 16,
-      "studentId": 4
-    },
-    {
-      "id": 17,
-      "shiftId": 17,
-      "studentId": 4
-    },
-    {
-      "id": 18,
-      "shiftId": 18,
-      "studentId": 4
-    },
-    {
-      "id": 19,
-      "shiftId": 19,
-      "studentId": 4
-    },
-    {
-      "id": 20,
-      "shiftId": 20,
-      "studentId": 4
-    },
-    {
-      "id": 21,
-      "shiftId": 21,
-      "studentId": 5
-    },
-    {
-      "id": 22,
-      "shiftId": 22,
-      "studentId": 5
-    },
-    {
-      "id": 23,
-      "shiftId": 23,
-      "studentId": 5
-    },
-    {
-      "id": 24,
-      "shiftId": 24,
-      "studentId": 5
-    },
-    {
-      "id": 25,
-      "shiftId": 25,
-      "studentId": 5
-    },
-    {
-      "id": 26,
-      "shiftId": 26,
-      "studentId": 6
-    },
-    {
-      "id": 27,
-      "shiftId": 27,
-      "studentId": 6
-    },
-    {
-      "id": 28,
-      "shiftId": 28,
-      "studentId": 6
-    },
-    {
-      "id": 29,
-      "shiftId": 29,
-      "studentId": 6
-    },
-    {
-      "id": 30,
-      "shiftId": 30,
-      "studentId": 6
-    },
-    {
-      "id": 31,
-      "shiftId": 31,
-      "studentId": 7
-    },
-    {
-      "id": 32,
-      "shiftId": 32,
-      "studentId": 7
-    },
-    {
-      "id": 33,
-      "shiftId": 33,
-      "studentId": 7
-    },
-    {
-      "id": 34,
-      "shiftId": 34,
-      "studentId": 7
-    },
-    {
-      "id": 35,
-      "shiftId": 35,
-      "studentId": 7
-    },
-    {
-      "id": 36,
-      "shiftId": 36,
-      "studentId": 8
-    },
-    {
-      "id": 37,
-      "shiftId": 37,
-      "studentId": 8
-    },
-    {
-      "id": 38,
-      "shiftId": 38,
-      "studentId": 8
-    },
-    {
-      "id": 39,
-      "shiftId": 39,
-      "studentId": 8
-    },
-    {
-      "id": 40,
-      "shiftId": 40,
-      "studentId": 8
-    },
-    {
-      "id": 41,
-      "shiftId": 41,
-      "studentId": 9
-    },
-    {
-      "id": 42,
-      "shiftId": 42,
-      "studentId": 9
-    },
-    {
-      "id": 43,
-      "shiftId": 43,
-      "studentId": 9
-    },
-    {
-      "id": 44,
-      "shiftId": 44,
-      "studentId": 9
-    },
-    {
-      "id": 45,
+      "id": "13",
       "shiftId": 45,
-      "studentId": 9
+      "studentId": 2
     },
     {
-      "id": 46,
+      "id": "14",
       "shiftId": 46,
-      "studentId": 10
+      "studentId": 2
     },
     {
-      "id": 47,
-      "shiftId": 47,
-      "studentId": 10
-    },
-    {
-      "id": 48,
-      "shiftId": 48,
-      "studentId": 10
-    },
-    {
-      "id": 49,
+      "id": "15",
       "shiftId": 49,
-      "studentId": 10
+      "studentId": 2
     },
     {
-      "id": 50,
-      "shiftId": 50,
-      "studentId": 10
-    },
-    {
-      "id": 51,
+      "id": "16",
       "shiftId": 51,
-      "studentId": 11
+      "studentId": 2
     },
     {
-      "id": 52,
-      "shiftId": 52,
-      "studentId": 11
-    },
-    {
-      "id": 53,
+      "id": "17",
       "shiftId": 53,
-      "studentId": 11
+      "studentId": 2
     },
     {
-      "id": 54,
+      "id": "18",
       "shiftId": 54,
-      "studentId": 11
+      "studentId": 2
     },
     {
-      "id": 55,
-      "shiftId": 55,
-      "studentId": 11
-    },
-    {
-      "id": 56,
+      "id": "19",
       "shiftId": 56,
-      "studentId": 12
+      "studentId": 2
     },
     {
-      "id": 57,
-      "shiftId": 57,
-      "studentId": 12
-    },
-    {
-      "id": 58,
+      "id": "20",
       "shiftId": 58,
-      "studentId": 12
+      "studentId": 2
     },
     {
-      "id": 59,
+      "id": "21",
       "shiftId": 59,
-      "studentId": 12
+      "studentId": 2
     },
     {
-      "id": 60,
-      "shiftId": 60,
-      "studentId": 12
+      "id": "22",
+      "shiftId": 62,
+      "studentId": 2
     },
     {
-      "id": 61,
-      "shiftId": 1,
-      "studentId": 13
-    },
-    {
-      "id": 62,
-      "shiftId": 2,
-      "studentId": 13
-    },
-    {
-      "id": 63,
-      "shiftId": 3,
-      "studentId": 13
-    },
-    {
-      "id": 64,
-      "shiftId": 4,
-      "studentId": 13
-    },
-    {
-      "id": 65,
-      "shiftId": 5,
-      "studentId": 13
-    },
-    {
-      "id": 66,
-      "shiftId": 6,
-      "studentId": 14
-    },
-    {
-      "id": 67,
-      "shiftId": 7,
-      "studentId": 14
-    },
-    {
-      "id": 68,
-      "shiftId": 8,
-      "studentId": 14
-    },
-    {
-      "id": 69,
-      "shiftId": 9,
-      "studentId": 14
-    },
-    {
-      "id": 70,
-      "shiftId": 10,
-      "studentId": 14
-    },
-    {
-      "id": 71,
-      "shiftId": 11,
-      "studentId": 15
-    },
-    {
-      "id": 72,
-      "shiftId": 12,
-      "studentId": 15
-    },
-    {
-      "id": 73,
-      "shiftId": 13,
-      "studentId": 15
-    },
-    {
-      "id": 74,
-      "shiftId": 14,
-      "studentId": 15
-    },
-    {
-      "id": 75,
-      "shiftId": 15,
-      "studentId": 15
-    },
-    {
-      "id": 76,
-      "shiftId": 16,
-      "studentId": 16
-    },
-    {
-      "id": 77,
-      "shiftId": 17,
-      "studentId": 16
-    },
-    {
-      "id": 78,
-      "shiftId": 18,
-      "studentId": 16
-    },
-    {
-      "id": 79,
-      "shiftId": 19,
-      "studentId": 16
-    },
-    {
-      "id": 80,
-      "shiftId": 20,
-      "studentId": 16
-    },
-    {
-      "id": 81,
-      "shiftId": 21,
-      "studentId": 17
-    },
-    {
-      "id": 82,
-      "shiftId": 22,
-      "studentId": 17
-    },
-    {
-      "id": 83,
-      "shiftId": 23,
-      "studentId": 17
-    },
-    {
-      "id": 84,
-      "shiftId": 24,
-      "studentId": 17
-    },
-    {
-      "id": 85,
-      "shiftId": 25,
-      "studentId": 17
-    },
-    {
-      "id": 86,
-      "shiftId": 26,
-      "studentId": 18
-    },
-    {
-      "id": 87,
-      "shiftId": 27,
-      "studentId": 18
-    },
-    {
-      "id": 88,
-      "shiftId": 28,
-      "studentId": 18
-    },
-    {
-      "id": 89,
-      "shiftId": 29,
-      "studentId": 18
-    },
-    {
-      "id": 90,
-      "shiftId": 30,
-      "studentId": 18
-    },
-    {
-      "id": 91,
-      "shiftId": 31,
-      "studentId": 19
-    },
-    {
-      "id": 92,
-      "shiftId": 32,
-      "studentId": 19
-    },
-    {
-      "id": 93,
-      "shiftId": 33,
-      "studentId": 19
-    },
-    {
-      "id": 94,
-      "shiftId": 34,
-      "studentId": 19
-    },
-    {
-      "id": 95,
-      "shiftId": 35,
-      "studentId": 19
-    },
-    {
-      "id": 96,
-      "shiftId": 36,
-      "studentId": 20
-    },
-    {
-      "id": 97,
-      "shiftId": 37,
-      "studentId": 20
-    },
-    {
-      "id": 98,
-      "shiftId": 38,
-      "studentId": 20
-    },
-    {
-      "id": 99,
-      "shiftId": 39,
-      "studentId": 20
-    },
-    {
-      "id": 100,
-      "shiftId": 40,
-      "studentId": 20
-    },
-    {
-      "id": 101,
-      "shiftId": 41,
-      "studentId": 21
-    },
-    {
-      "id": 102,
-      "shiftId": 42,
-      "studentId": 21
-    },
-    {
-      "id": 103,
-      "shiftId": 43,
-      "studentId": 21
-    },
-    {
-      "id": 104,
-      "shiftId": 44,
-      "studentId": 21
-    },
-    {
-      "id": 105,
+      "id": "23",
       "shiftId": 45,
-      "studentId": 21
+      "studentId": 3
     },
     {
-      "id": 106,
+      "id": "24",
       "shiftId": 46,
-      "studentId": 22
+      "studentId": 3
     },
     {
-      "id": 107,
-      "shiftId": 47,
-      "studentId": 22
-    },
-    {
-      "id": 108,
-      "shiftId": 48,
-      "studentId": 22
-    },
-    {
-      "id": 109,
-      "shiftId": 49,
-      "studentId": 22
-    },
-    {
-      "id": 110,
-      "shiftId": 50,
-      "studentId": 22
-    },
-    {
-      "id": 111,
-      "shiftId": 51,
-      "studentId": 23
-    },
-    {
-      "id": 112,
-      "shiftId": 52,
-      "studentId": 23
-    },
-    {
-      "id": 113,
-      "shiftId": 53,
-      "studentId": 23
-    },
-    {
-      "id": 114,
-      "shiftId": 54,
-      "studentId": 23
-    },
-    {
-      "id": 115,
-      "shiftId": 55,
-      "studentId": 23
-    },
-    {
-      "id": 116,
-      "shiftId": 56,
-      "studentId": 24
-    },
-    {
-      "id": 117,
-      "shiftId": 57,
-      "studentId": 24
-    },
-    {
-      "id": 118,
-      "shiftId": 58,
-      "studentId": 24
-    },
-    {
-      "id": 119,
+      "id": "25",
       "shiftId": 59,
-      "studentId": 24
+      "studentId": 3
     },
     {
-      "id": 120,
-      "shiftId": 60,
-      "studentId": 24
+      "id": "26",
+      "shiftId": 61,
+      "studentId": 3
     },
     {
-      "id": 121,
-      "shiftId": 1,
-      "studentId": 25
+      "id": "27",
+      "shiftId": 83,
+      "studentId": 3
     },
     {
-      "id": 122,
-      "shiftId": 2,
-      "studentId": 25
+      "id": "28",
+      "shiftId": 85,
+      "studentId": 3
     },
     {
-      "id": 123,
-      "shiftId": 3,
-      "studentId": 25
+      "id": "29",
+      "shiftId": 87,
+      "studentId": 3
     },
     {
-      "id": 124,
-      "shiftId": 4,
-      "studentId": 25
+      "id": "30",
+      "shiftId": 90,
+      "studentId": 3
     },
     {
-      "id": 125,
-      "shiftId": 5,
-      "studentId": 25
+      "id": "31",
+      "shiftId": 91,
+      "studentId": 3
     },
     {
-      "id": 126,
-      "shiftId": 6,
-      "studentId": 26
+      "id": "31",
+      "shiftId": 93,
+      "studentId": 3
     },
     {
-      "id": 127,
-      "shiftId": 7,
-      "studentId": 26
+      "id": "32",
+      "shiftId": 95,
+      "studentId": 3
     },
     {
-      "id": 128,
-      "shiftId": 8,
-      "studentId": 26
+      "id": "33",
+      "shiftId": 96,
+      "studentId": 3
     },
     {
-      "id": 129,
-      "shiftId": 9,
-      "studentId": 26
+      "id": "34",
+      "shiftId": 99,
+      "studentId": 3
     },
     {
-      "id": 130,
-      "shiftId": 10,
-      "studentId": 26
-    },
-    {
-      "id": 131,
-      "shiftId": 11,
-      "studentId": 27
-    },
-    {
-      "id": 132,
-      "shiftId": 12,
-      "studentId": 27
-    },
-    {
-      "id": 133,
-      "shiftId": 13,
-      "studentId": 27
-    },
-    {
-      "id": 134,
-      "shiftId": 14,
-      "studentId": 27
-    },
-    {
-      "id": 135,
-      "shiftId": 15,
-      "studentId": 27
-    },
-    {
-      "id": 136,
-      "shiftId": 16,
-      "studentId": 28
-    },
-    {
-      "id": 137,
-      "shiftId": 17,
-      "studentId": 28
-    },
-    {
-      "id": 138,
-      "shiftId": 18,
-      "studentId": 28
-    },
-    {
-      "id": 139,
-      "shiftId": 19,
-      "studentId": 28
-    },
-    {
-      "id": 140,
-      "shiftId": 20,
-      "studentId": 28
-    },
-    {
-      "id": 141,
-      "shiftId": 21,
-      "studentId": 29
-    },
-    {
-      "id": 142,
-      "shiftId": 22,
-      "studentId": 29
-    },
-    {
-      "id": 143,
-      "shiftId": 23,
-      "studentId": 29
-    },
-    {
-      "id": 144,
-      "shiftId": 24,
-      "studentId": 29
-    },
-    {
-      "id": 145,
-      "shiftId": 25,
-      "studentId": 29
-    },
-    {
-      "id": 146,
-      "shiftId": 26,
-      "studentId": 30
-    },
-    {
-      "id": 147,
-      "shiftId": 27,
-      "studentId": 30
-    },
-    {
-      "id": 148,
-      "shiftId": 28,
-      "studentId": 30
-    },
-    {
-      "id": 149,
-      "shiftId": 29,
-      "studentId": 30
-    },
-    {
-      "id": 150,
-      "shiftId": 30,
-      "studentId": 30
+      "id": "35",
+      "shiftId": 101,
+      "studentId": 3
     }
   ],
   "conflicts": [
     {
-      "id": 1,
+      "id": "1",
       "studentId": 1,
-      "courseIDs": [
-        1,
-        11
+      "shiftID": [
+        200,
+        13
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "studentId": 2,
-      "courseIDs": [
+      "shiftID": [
         6,
         16
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "studentId": 3,
-      "courseIDs": [
+      "shiftID": [
         11,
         21
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "studentId": 4,
-      "courseIDs": [
+      "shiftID": [
         16,
         26
       ]
@@ -2237,22 +1999,34 @@
   ],
   "buildings": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Edificio 1",
       "abbreviation": "E1"
     }
   ],
   "classrooms": [
     {
-      "id": 1,
+      "id": "1",
       "name": "1.01",
+      "capacity": 50,
+      "buildingId": 1
+    },
+    {
+      "id": "2",
+      "name": "1.02",
+      "capacity": 50,
+      "buildingId": 1
+    },
+    {
+      "id": "3",
+      "name": "1.03",
       "capacity": 50,
       "buildingId": 1
     }
   ],
   "classroomRequests": [
     {
-      "id": 1,
+      "id": "1",
       "classroomId": 1,
       "teacherId": 1,
       "response": "ok",
@@ -2261,7 +2035,7 @@
   ],
   "shiftRequests": [
     {
-      "id": 1,
+      "id": "1",
       "shiftId": 1,
       "studentId": 1,
       "response": "ok",
@@ -2271,32 +2045,36 @@
   ],
   "mensagens": [
     {
-      "id": 1,
+      "id": "1",
       "enviada": false,
+      "idPessoa": "d1",
       "de": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
       "lida": false
     },
     {
-      "id": 2,
+      "id": "2",
       "enviada": false,
+      "idPessoa": "d1",
       "de": "Maria Lopes",
       "assunto": "Dúvida sobre o projeto final",
       "conteudo": "Olá, gostaria de esclarecer uma dúvida sobre a entrega do projeto final.",
       "lida": true
     },
     {
-      "id": 3,
+      "id": "3",
       "enviada": true,
+      "idPessoa": "d1",
       "para": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
       "lida": true
     },
     {
-      "id": 4,
+      "id": "4",
       "enviada": true,
+      "idPessoa": "d1",
       "para": "Maria Lopes",
       "assunto": "Dúvida sobre o projeto final",
       "conteudo": "Olá, as tuas dúvidas são muito pertinentes.",
