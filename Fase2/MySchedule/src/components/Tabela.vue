@@ -47,7 +47,7 @@
               <!-- Capacidade dinâmica a partir da store -->
               <template v-else-if="campo === 'capacidade'">
                 <span>
-                  {{ gestaoStore.getCapacidadeById(Number(item.escolha)) }}
+                  {{ item.capacidade || gestaoStore.getCapacidadeById(Number(item.escolha)) || '---' }}
                 </span>
               </template>
 

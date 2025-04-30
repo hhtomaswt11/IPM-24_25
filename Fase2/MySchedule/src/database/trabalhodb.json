@@ -2031,10 +2031,10 @@
   "shiftRequests": [
     {
       "id": "1",
-      "shiftId": 1,
+      "shiftId": 4,
       "studentId": 1,
       "response": "ok",
-      "alternativeShiftId": null,
+      "alternativeShiftId": 3,
       "responseSeenByStudent": false
     }
   ],
