@@ -81,31 +81,26 @@ const processedHorarios = computed(() => {
   
   <style scoped>
   .pagina-horarios {
-  padding: 1rem;
   max-width: 80%;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
 }
 
-
   .legenda {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
   }
   
   .legenda-item {
     display: flex;
-    align-items: center;
     gap: 0.5rem;
+    min-width: 180px;
   }
 
   .legenda-item span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     color: #3E3E3E
   }
   

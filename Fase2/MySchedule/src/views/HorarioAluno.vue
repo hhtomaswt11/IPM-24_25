@@ -38,6 +38,7 @@ const vistaAtual = ref('pessoal');
 <style scoped>
 .horario-page-container {
   width: 100%;
+  height: 80vh; 
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
