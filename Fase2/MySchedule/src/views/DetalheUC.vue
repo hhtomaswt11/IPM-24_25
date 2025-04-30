@@ -30,7 +30,7 @@ if (!uc) {
 
 const ucShifts = db.shifts.filter(s => s.courseId.toString() === uc.id)
 const theoreticalShift = ucShifts.find(s => s.type === 'T')
-const teacher = theoreticalShift ? db.teachers.find(t => t.id === theoreticalShift.teacherId) : null
+const teacher = theoreticalShift ? db.teachers.find(t => Number(t.id) === theoreticalShift.teacherId) : null
 const teacherName = teacher ? teacher.name : 'Desconhecido'
 
 function irParaGestaoUC() {

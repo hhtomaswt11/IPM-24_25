@@ -1,5 +1,15 @@
 <template>
     <div class="pagina">
+      <div class="legenda">
+      <div class="legenda-item">
+        <div class="cor-example capacidade-total"></div>
+        <span>Capacidade Total</span>
+      </div>
+      <div class="legenda-item">
+        <div class="cor-example capacidade-parcial"></div>
+        <span>Capacidade Parcial</span>
+      </div>
+    </div> 
       <TabelaHorario :horario="horarioCurso" tipo="curso"/>
     </div>
   </template>
@@ -67,6 +77,41 @@ const horarioCurso = computed(() => ({
   <style scoped>
   .pagina {
     width: 100%;
+  }
+
+  .legenda {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column; 
+    position: fixed;
+    top: 35px;  
+    left: 1375px;
+  }
+  
+  .legenda-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .legenda-item span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3E3E3E
+  }
+  
+  .cor-example {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+  
+  .capacidade-total {
+    background-color: #fca5a5;
+  }
+  
+  .capacidade-parcial {
+    background-color: #fde68a;
   }
   </style>
   
