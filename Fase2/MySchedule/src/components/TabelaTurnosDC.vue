@@ -40,18 +40,18 @@
   })
   
   function getClassroomName(classroomId) {
-    const room = db.classrooms.find(r => r.id === classroomId)
-    const building = room ? db.buildings.find(b => b.id === room.buildingId) : null
+    const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
+    const building = room ? db.buildings.find(b => b.id.toString() === room.buildingId.toString()) : null
     return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
   }
   
   function getClassroomCapacity(classroomId) {
-    const room = db.classrooms.find(r => r.id === classroomId)
+    const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
     return room ? room.capacity : 0
   }
   
   function calculateOccupancyRate(shift) {
-    const room = db.classrooms.find(r => r.id === shift.classroomId)
+    const room = db.classrooms.find(r => r.id.toString() === shift.classroomId.toString())
     if (!room || room.capacity === 0) return 0
     return Math.round((shift.totalStudentsRegistered / room.capacity) * 100)
   }

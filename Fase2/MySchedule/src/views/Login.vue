@@ -136,6 +136,10 @@ export default {
       session.name = user.name;
       session.type = type;
 
+      sessionStorage.setItem('userId', user.id);
+      sessionStorage.setItem('tipoUtilizador', type);
+
+
       this.error = '';
 
       if (type === 'student' || type === 'teacher' || type === 'director') {

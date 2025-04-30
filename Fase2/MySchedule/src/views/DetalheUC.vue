@@ -5,9 +5,11 @@
       <span>Docente: {{ teacherName }}</span>
     </div>
 
-    <TabelaTurnosAl :shifts="ucShifts" />
+    <TabelaTurnosAl v-if="tipoUtilizador === 'student'" :shifts="ucShifts" :ucId="uc.id" />
+    <TabelaTurnosDC v-else :shifts="ucShifts" />
 
-    <div class="uc-footer">
+
+    <div class="uc-footer" v-if="tipoUtilizador === 'director'">
       <button class="gestao-btn" @click="irParaGestaoUC">Gestão da UC</button>
     </div>
   </div>
@@ -15,11 +17,15 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 import db from '@/database/trabalhodb.json'
 import TabelaTurnosAl from '@/components/TabelaTurnosAl.vue'
+import TabelaTurnosDC from '@/components/TabelaTurnosDC.vue'
 
 const route = useRoute()
 const router = useRouter()
+
+const tipoUtilizador = route.params.userType // 'student' ou 'director'
 
 const nome = route.params.nome.toLowerCase()
 const uc = db.courses.find(c => c.name.toLowerCase().includes(nome))
