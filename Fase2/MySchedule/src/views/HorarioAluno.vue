@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="horario-page-container">
     <div class="botoes-container">
       <button
         :class="{ ativo: vistaAtual === 'pessoal' }"
@@ -15,8 +15,10 @@
       </button>
     </div>
 
-    <HorarioPessoalAluno v-if="vistaAtual === 'pessoal'" :studentId="studentId"  />
-    <HorarioCursoAluno v-else :studentId="studentId" />
+    <div class="horario-content">
+      <HorarioPessoalAluno v-if="vistaAtual === 'pessoal'" :studentId="studentId" />
+      <HorarioCursoAluno v-else :studentId="studentId" />
+    </div>
   </div>
 </template>
 
@@ -34,6 +36,17 @@ const vistaAtual = ref('pessoal');
 </script>
 
 <style scoped>
+.horario-page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.horario-content {
+  width: 100%;
+}
+
 .botoes-container {
   display: flex;
   justify-content: center;

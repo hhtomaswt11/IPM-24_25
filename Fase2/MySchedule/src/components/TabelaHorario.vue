@@ -117,9 +117,10 @@ function getRowspan(horaIndex, diaIndex) {
 
 <style scoped>
 .tabela-wrapper {
-  overflow-x: auto;
+  width: 100%;
   max-width: 100%;
-  margin-bottom: 60px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .tabela-horario {

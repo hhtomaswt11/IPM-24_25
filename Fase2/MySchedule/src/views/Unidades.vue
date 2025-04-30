@@ -98,7 +98,7 @@ export default {
 
           if (userType === "student") {
             // Se for aluno, só mostrar cursos que ele está inscrito
-            return matchesYear && matchesSearch && enrolledCourseIds.includes(course.id);
+            return matchesYear && matchesSearch && enrolledCourseIds.includes(Number(course.id));
           } else {
             // Se for diretor, mostrar tudo
             return matchesYear && matchesSearch;
@@ -117,10 +117,10 @@ export default {
       this.selectedSemester = semester;
     },
     getTeacherName(courseId) {
-      const courseShifts = this.shifts.filter((shift) => shift.courseId === courseId);
+      const courseShifts = this.shifts.filter((shift) => shift.courseId === Number(courseId));
       if (courseShifts.length > 0) {
         const teacherId = courseShifts[0].teacherId;
-        const teacher = this.teachers.find((teacher) => teacher.id === teacherId);
+        const teacher = this.teachers.find((teacher) => Number(teacher.id) === teacherId);
         return teacher ? teacher.name : "Professor desconhecido";
       }
       return "Sem docente atribuído";
