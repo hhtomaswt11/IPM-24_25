@@ -10,7 +10,6 @@
           <th>Nº alunos</th>
           <th>Hora</th>
           <th>Dia</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -30,15 +29,6 @@
           <td>{{ shift.totalStudentsRegistered }}</td>
           <td>{{ formatTime(shift.from) }} - {{ formatTime(shift.to) }}</td>
           <td>{{ translateDay(shift.day) }}</td>
-          <td>
-            <button
-              v-if="!alunoInscrito(shift.id)"
-              class="swap-btn"
-              @click="pedirTroca(shift.id)"
-            >
-              ⇄
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -132,32 +122,32 @@ function pedirTroca(novoTurnoId) {
 <style scoped>
 .uc-table-container {
   overflow-x: auto;
+  padding: 1rem;
 }
 
 .uc-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 6px 8px;
 }
 
 .uc-table th,
 .uc-table td {
   padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  background-color: white;
 }
 
 .uc-table th {
-  background-color: #555;
-  color: #fff;
-  font-weight: 600;
+  background-color: #867D7D;
+  color: rgb(10, 10, 10);
+  text-align: center;
+  font-weight: bold;
 }
 
-.uc-table tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-.highlight {
-  background-color: #fef08a !important;
+.highlight td {
+  background-color: #F7E58F;
   font-weight: bold;
 }
 
@@ -177,16 +167,19 @@ function pedirTroca(novoTurnoId) {
 }
 
 .swap-btn {
-  background-color: #e0b4b4;
+  background-color: #cda2a2;
   color: #fff;
   border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
+  padding: 13px 2px;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.2s;               
+  width: 100%;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 .swap-btn:hover {
-  background-color: #cc9b9b;
+  background-color: #BA7070;
 }
 </style>
