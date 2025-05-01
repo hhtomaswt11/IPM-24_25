@@ -2070,15 +2070,6 @@
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
       "lida": true
-    },
-    {
-      "id": "4",
-      "enviada": true,
-      "idPessoa": "d1",
-      "para": "Maria Lopes",
-      "assunto": "Dúvida sobre o projeto final",
-      "conteudo": "Olá, as tuas dúvidas são muito pertinentes.",
-      "lida": true
     }
   ]
 }

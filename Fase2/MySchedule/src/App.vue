@@ -9,7 +9,9 @@ import { useSessionStorage } from '@/stores/session.ts'; // IMPORTAR a session
 
 const store = useMensagensStore();
 const session = useSessionStorage(); // Aceder à sessão
-const mensagensNaoLidas = computed(() => store.mensagensNaoLidas);
+const mensagensNaoLidas = computed(() => {
+  return session.id ? store.mensagensNaoLidasPorUtilizador(session.id).value : 0;
+});
 const mostrarCaderno = ref(false);
 const route = useRoute();
 const router = useRouter();

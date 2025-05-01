@@ -106,8 +106,11 @@ import EnviarMensagem from '@/components/EnviarMensagem.vue';
 import Mensagem from '@/components/Mensagem.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
 import axios from 'axios'; // Importa o Axios
+import { useSessionStorage } from '@/stores/session';
+
 
 const store = useMensagensStore();
+const session = useSessionStorage();
 
 const showOverlay = ref(false);
 const showNotificacao = ref(false);
@@ -135,15 +138,20 @@ function normalizar(texto) {
 
 const mensagensRecebidasFiltradas = computed(() =>
   mensagens.value.filter(
-    m => !m.enviada && (termoPesquisa.value === '' || normalizar(m.de).includes(normalizar(termoPesquisa.value)))
+    m =>
+      !m.enviada && m.idPessoa === session.id && // só mostra mensagens recebidas pelo utilizador com sessão
+      (termoPesquisa.value === '' || normalizar(m.de).includes(normalizar(termoPesquisa.value)))
   )
 );
 
 const mensagensEnviadasFiltradas = computed(() =>
   mensagens.value.filter(
-    m => m.enviada && (termoPesquisa.value === '' || normalizar(m.para).includes(normalizar(termoPesquisa.value)))
+    m =>
+      m.enviada && m.idPessoa === session.id && // só mostra mensagens enviadas pelo utilizador com sessão
+      (termoPesquisa.value === '' || normalizar(m.para).includes(normalizar(termoPesquisa.value)))
   )
 );
+
 
 function abrirOverlay() {
   showOverlay.value = true;
