@@ -23,6 +23,7 @@ import { useGestaoStore } from '@/stores/capacidade';
 import { getTurnosDisponiveis } from '@/utils/getTurnosDisponiveis';
 import { prepararShiftRequests } from '@/utils/prepararShiftRequests';  
 import {prepararTrocasDeSala} from '@/utils/prepararTrocasdeSalas'
+import {tratarConflitos} from '@/utils/tratarConflitos'
 import axios from 'axios';
 
 const gestaoStore = useGestaoStore();
@@ -48,7 +49,8 @@ function notifyAllocationUpdated() {
 
 onMounted(async () => {
   try {
-    const [conflictsRes, shiftsRes, coursesRes, studentsRes, classroomsRes, shiftRequestsRes, classroomRequestsRes, teachersRes] = await Promise.all([
+    const [conflictsRes, shiftsRes, coursesRes, studentsRes, classroomsRes, 
+           shiftRequestsRes, classroomRequestsRes, teachersRes] = await Promise.all([
       axios.get('http://localhost:3000/conflicts'),
       axios.get('http://localhost:3000/shifts'),
       axios.get('http://localhost:3000/courses'),
@@ -76,52 +78,8 @@ onMounted(async () => {
     });
     gestaoStore.setCapacidades(capacidadePorTurno);
     
-    const conflitosCompletos = [];
-    for (const conflito of conflitos) {
-      const studentId = conflito.studentId;
-      const shiftIDs = conflito.shiftID;
-      const conflitoId = conflito.id;
-      
-      for (const shiftID of shiftIDs) {
-        const shift = shifts.find(s => s.id == shiftID);
-        if (shift) {
-          const courseId = shift.courseId;
-          const turno = shift.name;
-          const uc = courses.find(c => c.id == courseId)?.name || 'Desconhecido';
-          const turnosDisponiveis = await getTurnosDisponiveis(studentId, courseId, shift.type, shiftID);
-          const turnos = turnosDisponiveis
-            .filter(s => {
-              const capacidadeTexto = gestaoStore.getCapacidadeById(s.id);
-              const [ocupadosStr, capacidadeStr] = capacidadeTexto?.split('/') || [];
-              const ocupados = parseInt(ocupadosStr);
-              const capacidade = parseInt(capacidadeStr);
-              return (
-                s.courseId == courseId &&
-                s.type === shift.type &&
-                s.id != shiftID &&
-                (!isNaN(ocupados) && !isNaN(capacidade) && ocupados < capacidade)
-              );
-            })
-            .map(s => ({ id: s.id, name: s.name }));
-          
-          conflitosCompletos.push(reactive({
-            tipo: 'Conflito',
-            numero: getStudentNumber(studentId),
-            estatuto: getStudentStatus(studentId),
-            uc: uc,
-            turnoAtual: turno,
-            alteracao: turnos,
-            escolha: '', // Inicializado como string vazio
-            decisao: 'Atualizar',
-            studentId: studentId, // Adicionado para facilitar atualizações
-            turnoAtualId: shiftID, // Adicionado para facilitar atualizações
-            conflitoId: conflitoId, // Adicionado para relacionar com o conflito original
-            todosShifts: shiftIDs // Adicionados todos os shifts do conflito
-          }));
-        }
-      }
-    }
 
+    const conflitosCompletos = await tratarConflitos({ conflitos, shifts, courses, estudantes, gestaoStore });
     const pedidosTroca = prepararShiftRequests({ shiftRequests,shifts, courses,estudantes });
 
     const pedidosSala = prepararTrocasDeSala({ classroomRequests, shifts, classrooms, teachers, courses});
