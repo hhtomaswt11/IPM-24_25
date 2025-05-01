@@ -20,6 +20,7 @@
 import Tabela from '@/components/Tabela.vue';
 import { ref, onMounted, reactive } from 'vue';
 import { useGestaoStore } from '@/stores/capacidade'; // importa a store
+import { getTurnosDisponiveis } from '@/utils/getTurnosDisponiveis';
 import axios from 'axios'; // Importa o Axios
 
 const gestaoStore = useGestaoStore(); // instancia a store
@@ -55,7 +56,7 @@ onMounted(async () => {
 
     const conflitos = conflictsRes.data;
     const shifts = shiftsRes.data;
-    const courses = coursesRes.data;
+    const courses = coursesRes.data;  
     estudantes = studentsRes.data;
     const classrooms = classroomsRes.data;
 
@@ -83,7 +84,9 @@ onMounted(async () => {
           const courseId = shift.courseId;
           const turno = shift.name;
           const uc = courses.find(c => c.id == courseId)?.name || 'Desconhecido';
-          const turnos = shifts
+          const turnosDisponiveis = await getTurnosDisponiveis(studentId, courseId, shift.type, shiftID);
+
+          const turnos = turnosDisponiveis
           .filter(s => {
             const capacidadeTexto = gestaoStore.getCapacidadeById(s.id);
             const [ocupadosStr, capacidadeStr] = capacidadeTexto.split('/');
