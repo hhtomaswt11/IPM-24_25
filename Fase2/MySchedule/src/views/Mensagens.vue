@@ -70,13 +70,23 @@
       </div>
     </div>
 
-    <!-- Overlays -->
-    <EnviarMensagem 
-      v-if="showOverlay"
-      v-model="showOverlay" 
-      :paraInicial="destinatarioResposta"
-      @notificar="mostrarNotificacaoTemporaria"
-    />
+<!-- Overlay para Diretor -->
+<EnviarMensagem 
+  v-if="showOverlay && session.type === 'director'"
+  v-model="showOverlay" 
+  :paraInicial="destinatarioResposta"
+  @send="enviarMensagem"
+  @notificar="mostrarNotificacaoTemporaria"
+/>
+
+<!-- Overlay para Aluno -->
+<EnviarMensagemAluno 
+  v-if="showOverlay && session.type === 'student'"
+  v-model="showOverlay" 
+  :paraInicial="destinatarioResposta"
+  @send="enviarMensagem"
+  @notificar="mostrarNotificacaoTemporaria"
+/>
     <Mensagem
       v-if="mostrarMensagem"
       v-model="mostrarMensagem"
@@ -102,7 +112,8 @@ import { ref, computed, onMounted } from 'vue';
 import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
 import Botao from '@/components/Botao.vue';
-import EnviarMensagem from '@/components/EnviarMensagem.vue';
+import EnviarMensagem from '@/components/EnviarMensagemDiretor.vue';
+import EnviarMensagemAluno from '@/components/EnviarMensagemAluno.vue';
 import Mensagem from '@/components/Mensagem.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
 import axios from 'axios'; // Importa o Axios
