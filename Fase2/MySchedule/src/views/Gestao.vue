@@ -21,6 +21,8 @@ import Tabela from '@/components/Tabela.vue';
 import { ref, onMounted, reactive } from 'vue';
 import { useGestaoStore } from '@/stores/capacidade';
 import { getTurnosDisponiveis } from '@/utils/getTurnosDisponiveis';
+import { prepararShiftRequests } from '@/utils/prepararShiftRequests';  
+import {prepararTrocasDeSala} from '@/utils/prepararTrocasdeSalas'
 import axios from 'axios';
 
 const gestaoStore = useGestaoStore();
@@ -46,18 +48,24 @@ function notifyAllocationUpdated() {
 
 onMounted(async () => {
   try {
-    const [conflictsRes, shiftsRes, coursesRes, studentsRes, classroomsRes] = await Promise.all([
+    const [conflictsRes, shiftsRes, coursesRes, studentsRes, classroomsRes, shiftRequestsRes, classroomRequestsRes, teachersRes] = await Promise.all([
       axios.get('http://localhost:3000/conflicts'),
       axios.get('http://localhost:3000/shifts'),
       axios.get('http://localhost:3000/courses'),
       axios.get('http://localhost:3000/students'),
-      axios.get('http://localhost:3000/classrooms')
+      axios.get('http://localhost:3000/classrooms'),
+      axios.get('http://localhost:3000/shiftRequests'),
+      axios.get('http://localhost:3000/classroomRequests'),
+      axios.get('http://localhost:3000/teachers')
     ]);
     const conflitos = conflictsRes.data;
     const shifts = shiftsRes.data;
     const courses = coursesRes.data;
     estudantes = studentsRes.data;
     const classrooms = classroomsRes.data;
+    const shiftRequests = shiftRequestsRes.data;
+    const classroomRequests = classroomRequestsRes.data;
+    const teachers = teachersRes.data;
     
     const capacidadePorTurno = {};
     shifts.forEach(shift => {
@@ -113,7 +121,13 @@ onMounted(async () => {
         }
       }
     }
-    dados.value = conflitosCompletos;
+
+    const pedidosTroca = prepararShiftRequests({ shiftRequests,shifts, courses,estudantes });
+
+    const pedidosSala = prepararTrocasDeSala({ classroomRequests, shifts, classrooms, teachers, courses});
+
+
+    dados.value = [...conflitosCompletos, ...pedidosTroca, ...pedidosSala];
   } catch (error) {
     console.error('Erro ao carregar dados:', error);
   }
@@ -121,134 +135,134 @@ onMounted(async () => {
 
 async function acaoAtualizar(item) {
   try {
-    console.log('Atualizando:', item);
-    
-    // Verificar se um turno foi selecionado
+    if (item.tipo === 'Troca de Sala') {
+      // 1. Eliminar o pedido de troca de sala
+      await axios.delete(`http://localhost:3000/classroomRequests/${item.classroomRequestId}`);
+      console.log(`Pedido de troca de sala removido: ${item.classroomRequestId}`);
+
+      // 2. Atualizar o shift correspondente com a nova sala
+      await axios.patch(`http://localhost:3000/shifts/${item.shiftId}`, {
+        classroomId: item.novaSalaId
+      });
+      console.log(`Shift ${item.shiftId} atualizado para nova sala: ${item.novaSalaId}`);
+
+      // 3. Remover o item da tabela (frontend)
+      dados.value = dados.value.filter(d => d !== item);
+      return;
+    }
+
+    // ⚙️ Lógica normal para Conflitos e Trocas de Turno:
     if (!item.escolha) {
       alert('Por favor, selecione um turno para alteração.');
       return;
     }
-    
+
     const studentId = item.studentId;
-    if (!studentId) {
-      console.error('ID do estudante não encontrado.');
-      return;
-    }
-    
     const turnoAtualId = item.turnoAtualId;
-    if (!turnoAtualId) {
-      console.error('ID do turno atual não encontrado.');
-      return;
-    }
-    
-    // Obter o ID do novo turno selecionado no dropdown
     const novoShiftId = item.escolha;
-    
-    // Buscar alocações
+
     const alocacoesRes = await axios.get('http://localhost:3000/allocations');
     const alocacoes = alocacoesRes.data;
-    
-    // Encontrar a alocação existente para este aluno e turno
-    const alocacao = alocacoes.find(a => 
-      a.studentId == studentId && a.shiftId == turnoAtualId
-    );
-    
+
+    const alocacao = alocacoes.find(a => a.studentId == studentId && a.shiftId == turnoAtualId);
     if (!alocacao) {
-      console.error('Alocação não encontrada para:', { studentId, turnoAtualId });
+      console.error('Alocação não encontrada');
       return;
     }
-    
-    // Atualizar a alocação com o novo ID de turno
+
     await axios.patch(`http://localhost:3000/allocations/${alocacao.id}`, {
       shiftId: Number(novoShiftId)
     });
-    console.log('Alocação atualizada com sucesso:', {
-      alocacaoId: alocacao.id,
-      de: turnoAtualId,
-      para: novoShiftId
-    });
-    
-    // Atualizar os dados de turno no banco de dados
-    try {
-      // Obter o turno atual
-      const turnoAtualRes = await axios.get(`http://localhost:3000/shifts/${turnoAtualId}`);
-      const turnoAtual = turnoAtualRes.data;
-      
-      // Obter o novo turno
-      const novoTurnoRes = await axios.get(`http://localhost:3000/shifts/${novoShiftId}`);
-      const novoTurno = novoTurnoRes.data;
-      
-      // Decrementar o número de alunos no turno antigo
-      if (turnoAtual && turnoAtual.totalStudentsRegistered > 0) {
-        await axios.patch(`http://localhost:3000/shifts/${turnoAtualId}`, {
-          totalStudentsRegistered: turnoAtual.totalStudentsRegistered - 1
-        });
-      }
-      
-      // Incrementar o número de alunos no novo turno
-      if (novoTurno) {
-        await axios.patch(`http://localhost:3000/shifts/${novoShiftId}`, {
-          totalStudentsRegistered: (novoTurno.totalStudentsRegistered || 0) + 1
-        });
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar dados de turno:', error);
-    }
-    
-    // Notificar que as alocações foram atualizadas
-    notifyAllocationUpdated();
-    
-    // Buscar conflitos
-    const conflitosRes = await axios.get('http://localhost:3000/conflicts');
-    const conflitos = conflitosRes.data;
-    
-    // Encontrar o conflito que contém este turno
-    const conflito = conflitos.find(c =>
-      c.studentId == studentId &&
-      Array.isArray(c.shiftID) &&
-      c.shiftID.includes(Number(turnoAtualId))
-    );
-    
-    if (conflito) {
-      // Guardar o ID do conflito e todos os turnos associados a ele
-      const conflitoId = conflito.id;
-      const todosShiftsDoConflito = conflito.shiftID;
-      
-      // Remover o conflito do banco de dados
-      await axios.delete(`http://localhost:3000/conflicts/${conflitoId}`);
-      console.log('Conflito removido com sucesso:', conflitoId);
-      
-      // Remover TODOS os itens relacionados ao mesmo conflito do frontend
-      dados.value = dados.value.filter(d => {
-        // Se for um item de outro estudante, mantém
-        if (d.studentId != studentId) return true;
-        
-        // Se o turno atual deste item estiver no array de turnos do conflito, remove
-        return !todosShiftsDoConflito.includes(Number(d.turnoAtualId));
+
+    // Atualizar contadores dos shifts
+    const turnoAtual = (await axios.get(`http://localhost:3000/shifts/${turnoAtualId}`)).data;
+    const novoTurno = (await axios.get(`http://localhost:3000/shifts/${novoShiftId}`)).data;
+
+    if (turnoAtual.totalStudentsRegistered > 0) {
+      await axios.patch(`http://localhost:3000/shifts/${turnoAtualId}`, {
+        totalStudentsRegistered: turnoAtual.totalStudentsRegistered - 1
       });
-      
-      console.log('Todos os itens relacionados ao conflito foram removidos do frontend.');
+    }
+
+    await axios.patch(`http://localhost:3000/shifts/${novoShiftId}`, {
+      totalStudentsRegistered: (novoTurno.totalStudentsRegistered || 0) + 1
+    });
+
+    // Notificar e remover item do frontend
+    notifyAllocationUpdated();
+
+    const conflitos = (await axios.get('http://localhost:3000/conflicts')).data;
+    const conflito = conflitos.find(c =>
+      c.studentId == studentId && Array.isArray(c.shiftID) && c.shiftID.includes(Number(turnoAtualId))
+    );
+
+    if (conflito) {
+      await axios.delete(`http://localhost:3000/conflicts/${conflito.id}`);
+      dados.value = dados.value.filter(d =>
+        d.studentId != studentId || !conflito.shiftID.includes(Number(d.turnoAtualId))
+      );
     } else {
-      console.warn('Conflito não encontrado para remoção.');
-      // Remover apenas o item atual
       dados.value = dados.value.filter(d => d !== item);
     }
-    
+
   } catch (error) {
-    console.error('Erro ao atualizar alocação/conflito:', error);
-    alert(`Erro ao atualizar: ${error.message}`);
+    console.error('Erro ao atualizar:', error);
+    alert(`Erro: ${error.message}`);
   }
 }
 
+
 // Implementar função para aceitar (se necessário)
 async function acaoAceitar(item) {
-  // Implemente conforme necessário
+  try {
+    const { studentId, turnoAtualId, escolha, shiftRequestId } = item;
+    const novoShiftId = item.alternativeShiftId;
+
+    // Buscar todas as alocações
+    const resAlocacoes = await axios.get('http://localhost:3000/allocations');
+    const alocacoes = resAlocacoes.data;
+
+    // Procurar a alocação existente
+    const alocacao = alocacoes.find(a =>
+      a.studentId == studentId && a.shiftId == turnoAtualId
+    );
+
+    if (alocacao) {
+      // Atualizar shiftId da alocação
+      await axios.patch(`http://localhost:3000/allocations/${alocacao.id}`, {
+        shiftId: novoShiftId
+      });
+      console.log(`✔ Alocação atualizada para turno ${novoShiftId}`);
+    } else {
+      console.warn('⚠ Alocação não encontrada para troca de turno.');
+    }
+
+    // Remover o pedido de troca da base de dados
+    await axios.delete(`http://localhost:3000/shiftRequests/${shiftRequestId}`);
+    console.log(`✔ Pedido de troca ${shiftRequestId} removido`);
+
+    // Remover do frontend
+    dados.value = dados.value.filter(d => d !== item);
+  } catch (error) {
+    console.error('Erro ao aceitar pedido de troca:', error);
+  }
 }
 
-// Implementar função para rejeitar (se necessário)
 async function acaoRejeitar(item) {
-  // Implemente conforme necessário
+  try {
+    const { shiftRequestId } = item;
+
+    // Remover o pedido de troca da base de dados
+    await axios.delete(`http://localhost:3000/shiftRequests/${shiftRequestId}`);
+    console.log(`✖ Pedido de troca ${shiftRequestId} rejeitado e removido`);
+
+    // Remover do frontend
+    dados.value = dados.value.filter(d => d !== item);
+  } catch (error) {
+    console.error('Erro ao rejeitar pedido de troca:', error);
+  }
 }
+
 </script>
 
 
