@@ -5,6 +5,8 @@ export const useMensagensStore = defineStore('mensagens', () => {
   const mensagens = ref([]);
   let isLoading = ref(false);  // Adicionando a flag de carregamento
 
+  
+
   // Função para carregar as mensagens
   async function carregarMensagens() {
     if (isLoading.value) return; // Impede que múltiplas requisições sejam feitas ao mesmo tempo

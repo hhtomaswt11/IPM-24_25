@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" @after-leave="emit('fechado')">
-    <div v-if="modelValue" class="overlay" @click="handleBackgroundClick">
+    <div v-if="modelValue" class="overlay" @click.self="handleBackgroundClick">
       <div class="overlay-content">
         <!-- Ícones canto superior direito -->
         <div class="top-icons">
@@ -24,7 +24,18 @@
             <!-- Campo Assunto -->
             <div class="campo">
               <div class="label-caixa">Assunto</div>
-              <div class="linha-span">{{ assunto }}</div>
+              <div class="linha-span">
+                <span
+                  v-if="assunto.includes('Troca de Turno')"
+                  @click="navegarParaGestaoUC"
+                  style="cursor: pointer; text-decoration: underline; color: #BA7070"
+                >
+                  {{ assunto }}
+                </span>
+                <span v-else>
+                  {{ assunto }}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -39,7 +50,8 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
 import { Reply, Trash2 } from 'lucide-vue-next';
 
 const props = defineProps({
@@ -52,6 +64,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue', 'apagar', 'responder', 'fechado']);
+const router = useRouter();
 
 function handleBackgroundClick(event) {
   if (event.target.classList.contains('overlay')) {
@@ -67,6 +80,30 @@ function apagarMensagem() {
 function emitResponder() {
   emit('update:modelValue', false);
   emit('responder', props.de); 
+}
+
+function extrairNomeUC(assunto) {
+  // Remove prefixo e sufixo se possível
+  const semPrefixo = assunto.replace('Troca de Turno - ', '');
+  const partes = semPrefixo.split(/T\d|PL\d/);
+  return partes[0]?.trim() || null;
+}
+
+
+function navegarParaGestaoUC() {
+  const nomeUC = extrairNomeUC(props.assunto);
+  console.log("nome: ", nomeUC)
+  if (!nomeUC) return;
+
+  const destino = `/gestao-uc/${encodeURIComponent(nomeUC)}`;
+  console.log('Tentando navegar para:', destino);
+
+  emit('update:modelValue', false); // fecha o modal
+
+  setTimeout(() => {
+    console.log('Redirecionando para:', `/gestao-uc/${encodeURIComponent(nomeUC)}`);
+    router.push(`/gestao-uc/${encodeURIComponent(nomeUC)}`);
+  }, 100); // pequena pausa para garantir que o modal foi fechado
 }
 </script>
 
