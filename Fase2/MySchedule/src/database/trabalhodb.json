@@ -549,7 +549,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 4,
-      "totalStudentsRegistered": 9
+      "totalStudentsRegistered": 8
     },
     {
       "id": "14",
@@ -561,7 +561,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 5,
-      "totalStudentsRegistered": 27
+      "totalStudentsRegistered": 28
     },
     {
       "id": "15",
@@ -1838,7 +1838,7 @@
     },
     {
       "id": "8",
-      "shiftId": "14",
+      "shiftId": 14,
       "studentId": 1
     },
     {

@@ -160,7 +160,7 @@ async function acaoAtualizar(item) {
     
     // Atualizar a alocação com o novo ID de turno
     await axios.patch(`http://localhost:3000/allocations/${alocacao.id}`, {
-      shiftId: novoShiftId
+      shiftId: Number(novoShiftId)
     });
     console.log('Alocação atualizada com sucesso:', {
       alocacaoId: alocacao.id,
