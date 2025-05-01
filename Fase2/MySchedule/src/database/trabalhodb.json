@@ -384,6 +384,18 @@
       "totalStudentsRegistered": 45
     },
     {
+      "id": "201",
+      "courseId": 4,
+      "classroomId": 1,
+      "day": "Monday",
+      "from": 14,
+      "to": 16,
+      "type": "PL",
+      "name": "PL4",
+      "teacherId": 1,
+      "totalStudentsRegistered": 45
+    },
+    {
       "id": "2",
       "courseId": 1,
       "classroomId": 1,
