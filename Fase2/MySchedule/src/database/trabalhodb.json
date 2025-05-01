@@ -1832,7 +1832,7 @@
     },
     {
       "id": "6",
-      "shiftId": 11,
+      "shiftId": 9,
       "studentId": 1
     },
     {
@@ -1842,7 +1842,7 @@
     },
     {
       "id": "8",
-      "shiftId": 14,
+      "shiftId": 13,
       "studentId": 1
     },
     {
@@ -1987,6 +1987,14 @@
     }
   ],
   "conflicts": [
+    {
+      "id": "1",
+      "studentId": 1,
+      "shiftID": [
+        200,
+        13
+      ]
+    },
     {
       "id": "2",
       "studentId": 3,

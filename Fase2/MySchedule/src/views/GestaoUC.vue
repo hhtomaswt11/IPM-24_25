@@ -17,6 +17,7 @@
 import { useRoute } from 'vue-router'
 import Tabela from '@/components/Tabela.vue'
 import { useGestaoStore } from '@/stores/capacidade'; 
+import { aceitarTrocaTurno, rejeitarTrocaTurno, atualizarAlocacao } from '@/utils/gestaoAcoes';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
@@ -83,10 +84,8 @@ onMounted(async () => {
     const shift = shifts.find(s => s.id == req.shiftId)
     const student = estudantes.find(s => s.id == req.studentId)
     const course = shift ? courses.find(c => c.id == shift.courseId) : null
-    const altShift = req.alternativeShiftId
-    const shiftRequestId = req.id
-      ? shifts.find(s => s.id == req.alternativeShiftId)
-      : null
+    const altShift = shifts.find(s => s.id == req.alternativeShiftId);
+    const shiftRequestId = req.id;
     const sala = shift ? classrooms.find(r => r.id == shift.classroomId) : null
 
     return shift && student && course ? {
@@ -94,9 +93,9 @@ onMounted(async () => {
       numero: student.num,
       estatuto: student.specialStatus ? 'Sim' : 'Não',
       turnoAtual: shift.name,
-      alteracao: altShift?.name || '---',
+      alteracao: altShift.name,
       capacidade: `${shift.totalStudentsRegistered}/${sala?.capacity || '?'}`,
-      decisao: '✔ ✖',
+      decisao: 'Atualizar',
       uc: course.id.toString(),
       studentId: student.id,
       turnoAtualId: shift.id,
@@ -155,115 +154,13 @@ onMounted(async () => {
 })
 
 async function acaoAtualizar(item) {
-  try {
-    if (item.tipo === 'Troca de Sala') {
-      // 1. Eliminar o pedido de troca de sala
-      await axios.delete(`http://localhost:3000/classroomRequests/${item.classroomRequestId}`);
-      console.log(`Pedido de troca de sala removido: ${item.classroomRequestId}`);
-
-      // 2. Atualizar o shift correspondente com a nova sala
-      await axios.patch(`http://localhost:3000/shifts/${item.shiftId}`, {
-        classroomId: item.novaSalaId
-      });
-      console.log(`Shift ${item.shiftId} atualizado para nova sala: ${item.novaSalaId}`);
-
-      // 3. Remover o item da tabela (frontend)
-      dadosFiltrados.value = dadosFiltrados.value.filter(d => d !== item);
-      return;
-    }
-
-    //Lógica normal para Conflitos e Trocas de Turno:
-    if (!item.escolha) {
-      alert('Por favor, selecione um turno para alteração.');
-      return;
-    }
-
-    const studentId = item.studentId;
-    const turnoAtualId = item.turnoAtualId;
-    const novoShiftId = item.escolha;
-
-    const alocacoesRes = await axios.get('http://localhost:3000/allocations');
-    const alocacoes = alocacoesRes.data;
-
-    const alocacao = alocacoes.find(a => a.studentId == studentId && a.shiftId == turnoAtualId);
-    if (!alocacao) {
-      console.error('Alocação não encontrada');
-      return;
-    }
-
-    await axios.patch(`http://localhost:3000/allocations/${alocacao.id}`, {
-      shiftId: Number(novoShiftId)
-    });
-
-    // Atualizar contadores dos shifts
-    const turnoAtual = (await axios.get(`http://localhost:3000/shifts/${turnoAtualId}`)).data;
-    const novoTurno = (await axios.get(`http://localhost:3000/shifts/${novoShiftId}`)).data;
-
-    if (turnoAtual.totalStudentsRegistered > 0) {
-      await axios.patch(`http://localhost:3000/shifts/${turnoAtualId}`, {
-        totalStudentsRegistered: turnoAtual.totalStudentsRegistered - 1
-      });
-    }
-
-    await axios.patch(`http://localhost:3000/shifts/${novoShiftId}`, {
-      totalStudentsRegistered: (novoTurno.totalStudentsRegistered || 0) + 1
-    });
-
-    // Notificar e remover item do frontend
-    notifyAllocationUpdated();
-
-    const conflitos = (await axios.get('http://localhost:3000/conflicts')).data;
-    const conflito = conflitos.find(c =>
-      c.studentId == studentId && Array.isArray(c.shiftID) && c.shiftID.includes(Number(turnoAtualId))
-    );
-
-    if (conflito) {
-      await axios.delete(`http://localhost:3000/conflicts/${conflito.id}`);
-      dadosFiltrados.value = dadosFiltrados.value.filter(d =>
-        d.studentId != studentId || !conflito.shiftID.includes(Number(d.turnoAtualId))
-      );
-    } else {
-      dadosFiltrados.value = dadosFiltrados.value.filter(d => d !== item);
-    }
-
-  } catch (error) {
-    console.error('Erro ao atualizar:', error);
-    alert(`Erro: ${error.message}`);
-  }
+  await atualizarAlocacao(item, dados, notifyAllocationUpdated);
 }
 
 
-// Implementar função para aceitar (se necessário)
 async function acaoAceitar(item) {
   try {
-    const { studentId, turnoAtualId, escolha, shiftRequestId } = item;
-    const novoShiftId = item.alternativeShiftId;
-
-    // Buscar todas as alocações
-    const resAlocacoes = await axios.get('http://localhost:3000/allocations');
-    const alocacoes = resAlocacoes.data;
-
-    // Procurar a alocação existente
-    const alocacao = alocacoes.find(a =>
-      a.studentId == studentId && a.shiftId == turnoAtualId
-    );
-
-    if (alocacao) {
-      // Atualizar shiftId da alocação
-      await axios.patch(`http://localhost:3000/allocations/${alocacao.id}`, {
-        shiftId: novoShiftId
-      });
-      console.log(`✔ Alocação atualizada para turno ${novoShiftId}`);
-    } else {
-      console.warn('⚠ Alocação não encontrada para troca de turno.');
-    }
-
-    // Remover o pedido de troca da base de dadosFiltrados
-    await axios.delete(`http://localhost:3000/shiftRequests/${shiftRequestId}`);
-    console.log(`✔ Pedido de troca ${shiftRequestId} removido`);
-
-    // Remover do frontend
-    dadosFiltrados.value = dadosFiltrados.value.filter(d => d !== item);
+    await aceitarTrocaTurno(item, dadosFiltrados);
   } catch (error) {
     console.error('Erro ao aceitar pedido de troca:', error);
   }
@@ -271,14 +168,7 @@ async function acaoAceitar(item) {
 
 async function acaoRejeitar(item) {
   try {
-    const { shiftRequestId } = item;
-
-    // Remover o pedido de troca da base de dadosFiltrados
-    await axios.delete(`http://localhost:3000/shiftRequests/${shiftRequestId}`);
-    console.log(`✖ Pedido de troca ${shiftRequestId} rejeitado e removido`);
-
-    // Remover do frontend
-    dadosFiltrados.value = dadosFiltrados.value.filter(d => d !== item);
+    await rejeitarTrocaTurno(item, dadosFiltrados);
   } catch (error) {
     console.error('Erro ao rejeitar pedido de troca:', error);
   }
