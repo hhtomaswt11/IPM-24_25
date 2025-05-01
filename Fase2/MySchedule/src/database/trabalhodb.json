@@ -21,6 +21,7 @@
     {
       "id": "1",
       "name": "Pedro",
+      "numero": "p1",
       "email": "pedro@di.uminho.pt",
       "password": "123",
       "caderno": ""
@@ -28,6 +29,7 @@
     {
       "id": "2",
       "name": "Ana",
+      "numero": "p2",
       "email": "ana@di.uminho.pt",
       "password": "123",
       "caderno": ""
@@ -35,6 +37,7 @@
     {
       "id": "3",
       "name": "Luís",
+      "numero": "p3",
       "email": "luis@di.uminho.pt",
       "password": "123",
       "caderno": ""
@@ -42,6 +45,7 @@
     {
       "id": "4",
       "name": "Maria",
+      "numero": "p4",
       "email": "maria@di.uminho.pt",
       "password": "123",
       "caderno": ""
@@ -2027,19 +2031,16 @@
     {
       "id": "1",
       "classroomId": 1,
-      "teacherId": 1,
-      "response": "ok",
-      "responseSeenByTeacher": false
+      "shiftId": 9,
+      "teacherId": 1
     }
   ],
   "shiftRequests": [
     {
       "id": "1",
-      "shiftId": 4,
+      "shiftId": 9,
       "studentId": 1,
-      "response": "ok",
-      "alternativeShiftId": 3,
-      "responseSeenByStudent": false
+      "alternativeShiftId": 11
     }
   ],
   "mensagens": [
@@ -2068,15 +2069,6 @@
       "para": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
-      "lida": true
-    },
-    {
-      "id": "4",
-      "enviada": true,
-      "idPessoa": "d1",
-      "para": "Maria Lopes",
-      "assunto": "Dúvida sobre o projeto final",
-      "conteudo": "Olá, as tuas dúvidas são muito pertinentes.",
       "lida": true
     }
   ]

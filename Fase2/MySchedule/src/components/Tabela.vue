@@ -19,20 +19,21 @@
               :key="i"
               :class="campo === 'uc' ? 'uc-cell' : ''"
             >
-              <!-- Decisão -->
-              <template v-if="campo === 'decisao'">
-                <span
-                  v-if="item[campo] === 'Atualizar'"
-                  class="acao atualizar"
-                  @click="$emit('atualizar', item)"
-                >
-                  Atualizar
-                </span>
-                <span v-else class="acoes">
-                  <span class="acao aceitar" @click="$emit('aceitar', index)">✔</span>
-                  <span class="acao rejeitar" @click="$emit('rejeitar', index)">✖</span>
-                </span>
-              </template>
+          <!-- Decisão -->
+          <template v-if="campo === 'decisao'">
+            <template v-if="item.tipo === 'Troca de Turno'">
+              <span class="acoes">
+                <span class="acao aceitar" @click="$emit('aceitar', item)">✔</span>
+                <span class="acao rejeitar" @click="$emit('rejeitar', item)">✖</span>
+              </span>
+            </template>
+            <template v-else>
+              <span class="acao atualizar" @click="$emit('atualizar', item)">
+                Atualizar
+              </span>
+            </template>
+          </template>
+
 
               <!-- Alteração (com dropdown) -->
               <template v-else-if="campo === 'alteracao' && Array.isArray(item[campo])">

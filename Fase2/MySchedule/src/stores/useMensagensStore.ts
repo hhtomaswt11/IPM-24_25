@@ -21,6 +21,25 @@ export const useMensagensStore = defineStore('mensagens', () => {
     }
   }
 
+  // Função para eliminar uma mensagem pelo ID
+async function eliminarMensagem(id: number) {
+  try {
+    const response = await fetch(`http://localhost:3000/mensagens/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (response.ok) {
+      await carregarMensagens(); // Atualiza a lista após apagar
+    } else {
+      console.error('Erro ao eliminar mensagem:', response.status);
+    }
+  } catch (error) {
+    console.error('Erro ao eliminar mensagem:', error);
+  }
+}
+
+
+
   // Função para marcar uma mensagem como lida
   async function marcarComoLida(id:number) {
     try {
@@ -47,16 +66,18 @@ export const useMensagensStore = defineStore('mensagens', () => {
   };
 
   // Computed para contar mensagens não lidas
-  const mensagensNaoLidas = computed(() =>
-    mensagens.value.filter(m => !m.enviada && !m.lida).length
+  const mensagensNaoLidasPorUtilizador = (idPessoa) => computed(() =>
+    mensagens.value.filter(m => !m.enviada && !m.lida && m.idPessoa === idPessoa).length
   );
+  
 
   iniciarAtualizacaoAutomatica();
 
   return {
     mensagens,
-    mensagensNaoLidas,
+    mensagensNaoLidasPorUtilizador,
     carregarMensagens,
-    marcarComoLida
+    marcarComoLida,
+    eliminarMensagem
   };
 });
