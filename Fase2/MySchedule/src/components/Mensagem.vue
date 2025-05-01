@@ -28,7 +28,7 @@
                 <span
                   v-if="assunto.includes('Troca de Turno')"
                   @click="navegarParaGestaoUC"
-                  style="cursor: pointer; text-decoration: underline; color: #BA7070"
+                  class="link-navegavel"
                 >
                   {{ assunto }}
                 </span>
@@ -213,6 +213,17 @@ function navegarParaGestaoUC() {
     font-family: 'Meera Inimai', sans-serif;
   }
   
+  .link-navegavel {
+  cursor: pointer;
+  color: inherit; /* mantém a cor normal do texto */
+  transition: color 0.2s ease;
+}
+
+.link-navegavel:hover {
+  color: #BA7070; /* cor ao passar o rato */
+}
+
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.3s ease;
