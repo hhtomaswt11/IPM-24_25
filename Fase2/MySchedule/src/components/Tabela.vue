@@ -24,7 +24,7 @@
                 <span
                   v-if="item[campo] === 'Atualizar'"
                   class="acao atualizar"
-                  @click="$emit('atualizar', index)"
+                  @click="$emit('atualizar', item)"
                 >
                   Atualizar
                 </span>
@@ -76,25 +76,28 @@ const props = defineProps({
   dados: Array
 });
 
+const emit = defineEmits(['atualizar', 'aceitar', 'rejeitar']);
 
 watch(
   () => props.dados,
   (novosDados) => {
-    novosDados.forEach((item, index) => {
-      watch(
-        () => item.escolha,
-        (novaEscolha) => {
-          console.log(`👉 Linha ${index} - Escolha: ${novaEscolha}`);
-          console.log(`📦 Capacidade: ${gestaoStore.getCapacidadeById(Number(novaEscolha))}`);
-        },
-        { immediate: true }
-      );
-    });
+    if (novosDados) {
+      novosDados.forEach((item, index) => {
+        watch(
+          () => item.escolha,
+          (novaEscolha) => {
+            if (novaEscolha) {
+              console.log(`👉 Linha ${index} - Escolha: ${novaEscolha}`);
+              console.log(`📦 Capacidade: ${gestaoStore.getCapacidadeById(Number(novaEscolha))}`);
+            }
+          },
+          { immediate: true }
+        );
+      });
+    }
   },
   { immediate: true, deep: true }
 );
-
-defineEmits(['atualizar', 'aceitar', 'rejeitar']);
 </script>
 
 <style scoped>

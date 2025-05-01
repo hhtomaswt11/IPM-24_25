@@ -549,7 +549,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 4,
-      "totalStudentsRegistered": 10
+      "totalStudentsRegistered": 9
     },
     {
       "id": "14",
@@ -561,7 +561,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 5,
-      "totalStudentsRegistered": 26
+      "totalStudentsRegistered": 27
     },
     {
       "id": "15",
@@ -1838,7 +1838,7 @@
     },
     {
       "id": "8",
-      "shiftId": 13,
+      "shiftId": "14",
       "studentId": 1
     },
     {
@@ -1983,14 +1983,6 @@
     }
   ],
   "conflicts": [
-    {
-      "id": "1",
-      "studentId": 1,
-      "shiftID": [
-        200,
-        13
-      ]
-    },
     {
       "id": "2",
       "studentId": 3,
