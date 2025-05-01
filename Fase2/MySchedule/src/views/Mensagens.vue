@@ -133,8 +133,7 @@ const termoPesquisa = ref('');
 // Carregar mensagens diretamente do json-server com Axios
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/mensagens');
-    store.setMensagens(response.data); // Assuming setMensagens is a method to store data in Pinia store
+    await store.carregarMensagens();
   } catch (error) {
     console.error('Erro ao carregar as mensagens:', error);
   }

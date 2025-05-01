@@ -44,9 +44,13 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import axios from 'axios';
 import { defineEmits, defineProps } from 'vue';
 import { SendHorizontal } from 'lucide-vue-next';
 import Botao from '@/components/Botao.vue';
+import { useSessionStorage } from '@/stores/session';
+
+const session = useSessionStorage();
 
 const props = defineProps({
   modelValue: Boolean,
@@ -63,23 +67,71 @@ watch(() => props.paraInicial, (novoValor) => {
   para.value = novoValor || '';
 });
 
-
 function handleBackgroundClick(event) {
   if (event.target.classList.contains('overlay')) {
     emit('update:modelValue', false);
   }
 }
 
-function emitSend() {
-  if (para.value.trim() !== '') {
-    emit('send');
-    emit('update:modelValue', false);
-    emit('notificar');
-  } else {
+async function emitSend() {
+  if (para.value.trim() === '') {
     alert('Preencha o campo "Para" antes de enviar.');
+    return;
+  }
+
+  if (assunto.value.trim() === '') {
+    alert('Preencha o campo "Assunto" antes de enviar.');
+    return;
+  }
+
+  try {
+    // Buscar o nome da pessoa que está na sessão (diretor)
+    const res = await axios.get(`http://localhost:3000/directors/${session.id}`);
+    const nomeDiretor = res.data.name;
+
+    // Conteúdo da mensagem (o assunto será o corpo da mensagem neste caso)
+    const conteudo = mensagem.value.trim();
+
+    // Criar mensagens
+    const mensagemEnviada = {
+      enviada: true,
+      idPessoa: session.id,
+      para: para.value,
+      assunto: assunto.value,
+      conteudo,
+      lida: true
+    };
+
+    const mensagemRecebida = {
+      enviada: false,
+      idPessoa: para.value,
+      de: nomeDiretor,
+      assunto: assunto.value,
+      conteudo,
+      lida: false
+    };
+
+    // Enviar as mensagens
+    const [resEnv, resRec] = await Promise.all([
+      axios.post('http://localhost:3000/mensagens', mensagemEnviada),
+      axios.post('http://localhost:3000/mensagens', mensagemRecebida)
+    ]);
+
+    console.log('Mensagem enviada criada:', resEnv.data);
+    console.log('Mensagem recebida criada:', resRec.data);
+
+    alert('Mensagem enviada com sucesso!');
+
+    emit('send');
+    emit('notificar');
+    emit('update:modelValue', false);
+  } catch (error) {
+    console.error('Erro ao enviar a mensagem:', error);
+    alert('Erro ao enviar a mensagem. Tente novamente.');
   }
 }
 </script>
+
 
   
   <style scoped>
