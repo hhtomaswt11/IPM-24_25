@@ -151,7 +151,7 @@ async function acaoAtualizar(item) {
       return;
     }
 
-    // ⚙️ Lógica normal para Conflitos e Trocas de Turno:
+    //Lógica normal para Conflitos e Trocas de Turno:
     if (!item.escolha) {
       alert('Por favor, selecione um turno para alteração.');
       return;

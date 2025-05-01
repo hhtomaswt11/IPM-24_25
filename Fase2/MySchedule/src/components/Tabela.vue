@@ -88,8 +88,8 @@ watch(
           () => item.escolha,
           (novaEscolha) => {
             if (novaEscolha) {
-              console.log(`👉 Linha ${index} - Escolha: ${novaEscolha}`);
-              console.log(`📦 Capacidade: ${gestaoStore.getCapacidadeById(Number(novaEscolha))}`);
+              console.log(`Linha ${index} - Escolha: ${novaEscolha}`);
+              console.log(`Capacidade: ${gestaoStore.getCapacidadeById(Number(novaEscolha))}`);
             }
           },
           { immediate: true }
