@@ -2078,6 +2078,15 @@
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
       "lida": true
+    },
+    {
+      "id": "d818",
+      "enviada": true,
+      "idPessoa": "1",
+      "para": "d1",
+      "assunto": "Troca de Turno - Fundamentos de Programação - Turno PL2",
+      "conteudo": "",
+      "lida": true
     }
   ]
 }
