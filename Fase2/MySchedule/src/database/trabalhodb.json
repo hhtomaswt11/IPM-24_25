@@ -122,6 +122,26 @@
         24,
         25
       ]
+    },
+    {
+      "id": "4",
+      "name": "Gustavo Lopes",
+      "num": "a104",
+      "email": "gustavo@alunos.uminho.pt",
+      "password": "123",
+      "nascimento": "2004-10-30",
+      "morada": "Rua C, 4700-011 - Guimarães, Portugal",
+      "sexo": "Masculino",
+      "telefone": "(+351) 915652987",
+      "departamento": "Escola de Engenharia",
+      "cargo": "Aluno da Licenciatura em Engenharia Informática",
+      "enrolled": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ],
   "degrees": [
