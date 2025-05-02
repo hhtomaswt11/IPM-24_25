@@ -43,7 +43,7 @@
             <div class="label">Endereço postal</div>
             <div class="valor">
               <input v-if="editando" v-model="novaMorada" />
-              <span v-else>{{ diretor.morada }}</span>
+              <span v-else v-html="diretorWithFormat.moradaFormatada"></span>
             </div>
           </div>
           <div class="campo">
@@ -84,7 +84,7 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed} from 'vue';
 import { User } from 'lucide-vue-next';
 import Botao from '@/components/Botao.vue';
 import { useSessionStorage } from '@/stores/session';
@@ -104,6 +104,11 @@ const diretor = ref({
 });
 
 const editando = ref(false);
+
+const diretorWithFormat = computed(() => ({
+  ...diretor.value,
+  moradaFormatada: diretor.value.morada?.replace(',', ',<br>') || '',
+}));
 
 // Campos editáveis
 const novoNome = ref('');
@@ -293,7 +298,7 @@ async function guardarAlteracoes() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 66px;
+  gap: 40px;
 }
 
 /* Estilo dos campos */
