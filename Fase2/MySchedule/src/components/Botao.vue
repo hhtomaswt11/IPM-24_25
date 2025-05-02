@@ -32,7 +32,7 @@ function onClick() {
   color: #02020299;
   /* font-family: 'Meera Inimai', sans-serif; */
   /* font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif; */
-  
+
   font-family: 'Roboto', sans-serif;
 
 

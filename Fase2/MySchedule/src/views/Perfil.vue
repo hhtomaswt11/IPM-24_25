@@ -29,7 +29,7 @@
             <div class="valor">{{ diretor.name }}</div>
           </div>
           <div class="campo">
-            <div class="label">Endereço eletrônico</div>
+            <div class="label">Endereço eletrónico</div>
             <div class="valor">
               <input v-if="editando" v-model="novoEmail" />
               <span v-else>{{ diretor.email }}</span>
@@ -40,9 +40,8 @@
             <div class="valor">{{ diretor.nascimento }}</div>
           </div>
           <div class="campo">
-            <div class="label">Morada</div>
+            <div class="label">Endereço postal</div>
             <div class="valor">
-              <!-- Se estiver editando, exibe input para morada -->
               <input v-if="editando" v-model="novaMorada" />
               <span v-else>{{ diretor.morada }}</span>
             </div>
@@ -77,8 +76,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Círculo cinzento no canto inferior direito -->
+    <div class="circulo"></div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -290,14 +293,14 @@ async function guardarAlteracoes() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 66px;
 }
 
 /* Estilo dos campos */
 .campo .label {
   font-weight: bold;
   color: #222;
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 5px;
 }
 
@@ -305,4 +308,17 @@ async function guardarAlteracoes() {
   color: #444;
   font-size: 18px;
 }
+
+
+.circulo {
+  position: absolute;
+  bottom: -240px;
+  right: -200px;
+  width: 650px; /* Aumente o tamanho para 80px */
+  height: 600px; /* Aumente o tamanho para 80px */
+  background-color: #ebebeb; /* Cor cinza */
+  border-radius: 50%; /* Tornando o elemento um círculo */
+}
+
+
 </style>
