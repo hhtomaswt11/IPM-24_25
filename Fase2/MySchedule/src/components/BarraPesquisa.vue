@@ -6,7 +6,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       type="text"
-      :placeholder="placeholderText || 'Pesquise uma mensagem'"
+      :placeholder="placeholderText || 'Pesquise por um utilizador'"
     />
   </div>
 </template>
