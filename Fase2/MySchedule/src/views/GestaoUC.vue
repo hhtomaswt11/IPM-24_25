@@ -1,7 +1,18 @@
 <template>
   <div class="gestao-container">
     <div class="decoracao-fundo"></div>
+    <div v-if="isLoading"></div>
+
+<!-- SEM DADOS: mostra overlay -->
+    <div v-else-if="dadosFiltrados.length === 0" class="overlay">
+      <div class="overlay-content">
+        <p>De momento, esta Unidade Curricular não apresenta conflitos, trocas de turnos nem trocas de sala!</p>
+      </div>
+    </div>
+
+<!-- COM DADOS: mostra tabela -->
     <Tabela
+      v-else
       titulo="Conflitos, Trocas de Turnos e Salas"
       :colunas="colunas"
       :campos="campos"
@@ -10,10 +21,12 @@
       @aceitar="acaoAceitar"
       @rejeitar="acaoRejeitar"
     />
+
   </div>
 </template>
 
 <script setup>
+const isLoading = ref(true)
 import { useRoute } from 'vue-router'
 import Tabela from '@/components/Tabela.vue'
 import { useGestaoStore } from '@/stores/capacidade'; 
@@ -129,10 +142,11 @@ onMounted(async () => {
             !isNaN(ocupados) && !isNaN(capacidade) && ocupados < capacidade
           );
         }).map(s => ({ id: s.id, name: s.name }));
+
         conflitosCompletos.push({
           tipo: 'Conflito',
-          numero: getStudentNumber(studentId, estudantes),
-          estatuto: getStudentStatus(studentId, estudantes),
+          numero: getStudentNumber(studentId),
+          estatuto: getStudentStatus(studentId),
           turnoAtual: turno,
           alteracao: turnosDisponiveis,
           escolha: '',
@@ -147,16 +161,15 @@ onMounted(async () => {
       }
     }
   }
-  console.log(conflitosCompletos)
-  console.log(uc.id)
 
   dadosFiltrados.value = [...todasTrocas, ...conflitosCompletos].filter(d => d.uc === uc?.id?.toString());
+  isLoading.value = false
 })
+
 
 async function acaoAtualizar(item) {
   await atualizarAlocacao(item, dados, notifyAllocationUpdated);
 }
-
 
 async function acaoAceitar(item) {
   try {
@@ -173,7 +186,6 @@ async function acaoRejeitar(item) {
     console.error('Erro ao rejeitar pedido de troca:', error);
   }
 }
-
 </script>
 
 <style scoped>
@@ -185,14 +197,23 @@ async function acaoRejeitar(item) {
   box-sizing: border-box;
 }
 
-.decoracao-fundo {
-  background-color: #FDF7F7;
+.overlay {
   position: absolute;
-  top: 165px;
-  left: 0;
-  right: 0;
-  height: 370px;
-  z-index: 0;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #FDF7F7;
+  border: 2px solid #b0a7a7;
   border-radius: 8px;
+  padding: 30px 40px;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #444;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.overlay-content {
+  max-width: 700px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="uc-table-container">
+  <div class="uc-table-wrapper">
     <table class="uc-table">
       <thead>
         <tr>
@@ -32,6 +32,18 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Botões flutuantes à direita da tabela -->
+    <template v-for="(shift, index) in shifts" :key="'botao-' + shift.id">
+      <button
+        v-if="!alunoInscrito(shift.id.toString())"
+        class="swap-floating-btn"
+        :style="{ top: `${60 + index * 60}px` }"
+        @click="pedirTroca(shift.id)"
+      >
+        ⇄
+      </button>
+    </template>
   </div>
 </template>
 
@@ -120,9 +132,13 @@ function pedirTroca(novoTurnoId) {
 </script>
 
 <style scoped>
-.uc-table-container {
+.uc-table-wrapper {
+  position: relative;
+  padding: 2rem;
+  background-color: #fdf7f7; 
+  border-radius: 8px;
   overflow-x: auto;
-  padding: 1rem;
+  min-height: 100%; 
 }
 
 .uc-table {
@@ -166,20 +182,20 @@ function pedirTroca(novoTurnoId) {
   font-weight: bold;
 }
 
-.swap-btn {
+.swap-floating-btn {
+  position: absolute;
+  right: -40px;
   background-color: #cda2a2;
-  color: #fff;
+  color: white;
   border: none;
-  padding: 13px 2px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;               
-  width: 100%;
-  border-radius: 3px;
+  padding: 10px 12px;
+  border-radius: 4px;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.swap-btn:hover {
-  background-color: #BA7070;
+.swap-floating-btn:hover {
+  background-color: #ba7070;
 }
 </style>
