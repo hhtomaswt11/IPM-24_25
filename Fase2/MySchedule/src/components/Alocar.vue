@@ -4,7 +4,7 @@
       <div class="overlay-conteudo">
         <div class="lado-esquerdo">
           <div class="tabela-escala-wrapper">
-            <TabelaHorario :horario="horarioVazio" tipo="pessoal" />
+            <TabelaHorario :horario="horarioVazio" tipo="custom" />
           </div>
         </div>
         <div class="lado-direito">
@@ -41,9 +41,13 @@
               <div class="dropdown">
                 <select class="dropbox" v-model="selectedTheoretical[index]">
                   <option value="" disabled selected>Selecionar</option>
-                  <option value="T1">T1</option>
-                  <option value="T2">T2</option>
-                  <option value="T3">T3</option>
+                  <option 
+                    v-for="shift in getShiftsForCourse(course.id, 'T')" 
+                    :key="shift.id" 
+                    :value="shift.name"
+                  >
+                    {{ shift.name }}
+                  </option>
                 </select>
                 <ChevronDown class="select-icon" />
               </div>
@@ -52,9 +56,13 @@
               <div class="dropdown">
                 <select class="dropbox" v-model="selectedPractical[index]">
                   <option value="" disabled selected>Selecionar</option>
-                  <option value="P1">P1</option>
-                  <option value="P2">P2</option>
-                  <option value="P3">P3</option>
+                  <option 
+                    v-for="shift in getShiftsForCourse(course.id, 'PL')" 
+                    :key="shift.id" 
+                    :value="shift.name"
+                  >
+                    {{ shift.name }}
+                  </option>
                 </select>
                 <ChevronDown class="select-icon" />
               </div>
@@ -90,6 +98,18 @@ const props = defineProps({
 // Dados do estudante
 const studentData = ref(null)
 const enrolledCourses = ref([])
+const allShifts = ref([])
+const allClassrooms = ref([])
+
+
+// Traduzir dias de inglês para português 
+const dayTranslationsReverse = {
+  'Monday': 'Segunda',
+  'Tuesday': 'Terça',
+  'Wednesday': 'Quarta',
+  'Thursday': 'Quinta',
+  'Friday': 'Sexta'
+}
 
 // Criar tabela vazia com dias úteis e horas até às 18h
 const horarioVazio = reactive({
@@ -97,7 +117,6 @@ const horarioVazio = reactive({
   horas: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
   shifts: [],
   courses: [],
-  classrooms: []
 })
 
 const emit = defineEmits(['fechar'])
@@ -124,22 +143,110 @@ async function fetchStudentData() {
     if (student) {
       studentData.value = student
       
-      // Buscar todos os cursos
-      const coursesResponse = await axios.get('http://localhost:3000/courses')
+      const [coursesResponse, shiftsResponse, classroomsResponse] = await Promise.all([
+        axios.get('http://localhost:3000/courses'),
+        axios.get('http://localhost:3000/shifts'),
+        axios.get('http://localhost:3000/classrooms')
+      ])
       
       // Filtrar apenas os cursos em que o estudante está inscrito
       enrolledCourses.value = coursesResponse.data.filter(course => 
         student.enrolled.includes(parseInt(course.id))
       )
+      
+      allShifts.value = shiftsResponse.data
+      allClassrooms.value = classroomsResponse.data
     }
   } catch (error) {
     console.error('Erro ao buscar dados:', error)
   }
 }
 
+// Função para obter os turnos que pertencem a um curso e tipo específico
+function getShiftsForCourse(courseId, shiftType) {
+  return allShifts.value.filter(shift => 
+    parseInt(shift.courseId) === parseInt(courseId) && shift.type === shiftType
+  )
+}
+
+// Função para atualizar os turnos selecionados e atualizar a visualização da tabela
+function updateSelectedShifts() {
+  // Clear existing shifts and selectedShifts
+  horarioVazio.shifts = []
+  selectedShifts.value = []
+
+  // Loop through each enrolled course
+  enrolledCourses.value.forEach((course, index) => {
+    const courseId = parseInt(course.id)
+
+    // Handle theoretical shift
+    if (selectedTheoretical.value[index]) {
+      const theoreticalShift = allShifts.value.find(shift => 
+        parseInt(shift.courseId) === courseId &&
+        shift.type === 'T' &&
+        shift.name === selectedTheoretical.value[index]
+      )
+
+      if (theoreticalShift) {
+        selectedShifts.value.push(theoreticalShift)
+
+        const shiftDay = dayTranslationsReverse[theoreticalShift.day] || theoreticalShift.day
+
+        horarioVazio.shifts.push({
+          ...theoreticalShift,
+          day: shiftDay,
+          classroomId: theoreticalShift.classroomId,
+          totalStudentsRegistered: theoreticalShift.totalStudentsRegistered,
+          courseId
+        })
+      }
+    }
+
+    // Handle practical shift
+    if (selectedPractical.value[index]) {
+      const practicalShift = allShifts.value.find(shift => 
+        parseInt(shift.courseId) === courseId &&
+        shift.type === 'PL' &&
+        shift.name === selectedPractical.value[index]
+      )
+
+      if (practicalShift) {
+        selectedShifts.value.push(practicalShift)
+
+        const shiftDay = dayTranslationsReverse[practicalShift.day] || practicalShift.day
+
+        horarioVazio.shifts.push({
+          ...practicalShift,
+          day: shiftDay,
+          classroomId: practicalShift.classroomId,
+          totalStudentsRegistered: practicalShift.totalStudentsRegistered,
+          courseId
+        })
+      }
+    }
+  })
+
+  // Add courses to the schedule for labeling
+  horarioVazio.courses = enrolledCourses.value.map(course => ({
+    ...course,
+    id: parseInt(course.id)
+  }))
+
+  // Add classrooms to the schedule from the real data
+  horarioVazio.classrooms = allClassrooms.value.map(cl => ({
+    ...cl,
+    id: parseInt(cl.id)
+  }))
+
+  console.log('Selected Shifts:', selectedShifts.value)
+  console.log('Updated Schedule:', horarioVazio)
+}
+
+
 // Armazenar as seleções dos turnos
 const selectedTheoretical = ref([])
 const selectedPractical = ref([])
+const selectedShifts = ref([]) // Armazenar os objetos dos turnos selecionados
 
 // Inicializar arrays quando os cursos forem carregados
 watch(enrolledCourses, (newCourses) => {
@@ -147,12 +254,18 @@ watch(enrolledCourses, (newCourses) => {
   selectedPractical.value = new Array(newCourses.length).fill('')
 }, { immediate: true })
 
+// Atualizar a tabela quando os turnos selecionados mudarem
+watch([selectedTheoretical, selectedPractical], () => {
+  updateSelectedShifts()
+}, { deep: true })
+
 // Função para salvar as alocações
 async function salvarAlocacoes() {
   // Criar objeto com as alocações
   const alocacoes = enrolledCourses.value.map((course, index) => {
     return {
       curso: course.name,
+      cursoId: course.id,
       turnoTeorico: selectedTheoretical.value[index],
       turnoPratico: selectedPractical.value[index]
     }

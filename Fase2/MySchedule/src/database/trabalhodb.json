@@ -886,8 +886,8 @@
       "day": "Monday",
       "from": 9,
       "to": 11,
-      "type": "TP",
-      "name": "TP2",
+      "type": "PL",
+      "name": "PL2",
       "teacherId": 1,
       "totalStudentsRegistered": 50
     },
@@ -898,8 +898,8 @@
       "day": "Thursday",
       "from": 11,
       "to": 13,
-      "type": "TP",
-      "name": "TP1",
+      "type": "PL",
+      "name": "PL1",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },
@@ -910,8 +910,8 @@
       "day": "Wednesday",
       "from": 16,
       "to": 18,
-      "type": "TP",
-      "name": "TP3",
+      "type": "PL",
+      "name": "PL3",
       "teacherId": 1,
       "totalStudentsRegistered": 10
     },

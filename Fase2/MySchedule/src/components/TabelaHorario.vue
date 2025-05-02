@@ -18,7 +18,7 @@
                     'aula-parcial': aula.capacidade === 'parcial',
                     'aula-livre': !aula.capacidade || aula.capacidade === 'livre',
                     'aula-pessoal': props.tipo === 'pessoal'
-                  }"
+                  }"  
                 >
                   {{ aula.disciplina }}<br />
                   {{ aula.tp }}<br />
