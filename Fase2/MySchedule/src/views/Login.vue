@@ -142,7 +142,11 @@ export default {
 
       this.error = '';
 
-      if (type === 'student' || type === 'teacher' || type === 'director') {
+      if(type == 'teacher')   this.error = 'Endereço eletrónico ou palavra-passe inválidos';
+
+      this.error = '';
+
+      if (type === 'student' || type === 'director'){// } || type === 'director') {
         this.$router.push(`/unidades/${type}`);
       } else {
         this.$router.push('/login');
