@@ -2074,10 +2074,19 @@
       "id": "3",
       "enviada": true,
       "idPessoa": "d1",
-      "para": "João Pedro",
+      "para": "Mafalda Ribeiro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
       "lida": true
+    },
+    {
+      "id": "4",
+      "enviada": false,
+      "idPessoa": "1",
+      "de": "José Pedro Castro",
+      "assunto": "Troca de Turno - Programação Funcional T2→T1",
+      "conteudo": "Foi trocado.",
+      "lida": false
     }
   ]
 }
