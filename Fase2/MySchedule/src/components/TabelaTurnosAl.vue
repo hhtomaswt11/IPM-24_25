@@ -10,6 +10,7 @@
           <th>Nº alunos</th>
           <th>Hora</th>
           <th>Dia</th>
+          <th></th> <!-- nova coluna para os botões -->
         </tr>
       </thead>
       <tbody>
@@ -29,21 +30,18 @@
           <td>{{ shift.totalStudentsRegistered }}</td>
           <td>{{ formatTime(shift.from) }} - {{ formatTime(shift.to) }}</td>
           <td>{{ translateDay(shift.day) }}</td>
+          <td>
+            <button
+              v-if="!alunoInscrito(shift.id.toString())"
+              class="swap-btn"
+              @click="pedirTroca(shift.id)"
+            >
+              ⇄
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
-
-    <!-- Botões flutuantes à direita da tabela -->
-    <template v-for="(shift, index) in shifts" :key="'botao-' + shift.id">
-      <button
-        v-if="!alunoInscrito(shift.id.toString())"
-        class="swap-floating-btn"
-        :style="{ top: `${60 + index * 60}px` }"
-        @click="pedirTroca(shift.id)"
-      >
-        ⇄
-      </button>
-    </template>
   </div>
 </template>
 
@@ -107,28 +105,27 @@ function translateDay(day) {
   return dias[day] || day
 }
 
-function pedirTroca(novoTurnoId) {
+async function pedirTroca(novoTurnoId) {
   const turnoAtual = alunoShifts.find(id => {
     const t = db.shifts.find(s => s.id === id)
     return t?.courseId === ucId
   })
 
   const novoPedido = {
-    id: Date.now(), // ID fictício único
-    shiftId: turnoAtual,
+    shiftId: Number(turnoAtual),
     studentId: alunoId,
-    response: null,
-    alternativeShiftId: novoTurnoId,
-    responseSeenByStudent: false
+    alternativeShiftId: novoTurnoId
   }
 
-  // Guardar em localStorage (simular backend)
-  const existentes = JSON.parse(localStorage.getItem("shiftRequests") || "[]")
-  existentes.push(novoPedido)
-  localStorage.setItem("shiftRequests", JSON.stringify(existentes))
-
-  alert("Pedido de troca registado com sucesso!")
+  try {
+    await axios.post("http://localhost:3000/shiftRequests", novoPedido)
+    alert("Pedido de troca registado com sucesso!")
+  } catch (e) {
+    console.error("Erro ao criar pedido:", e)
+    alert("Erro ao registar o pedido.")
+  }
 }
+
 </script>
 
 <style scoped>
@@ -198,4 +195,22 @@ function pedirTroca(novoTurnoId) {
 .swap-floating-btn:hover {
   background-color: #ba7070;
 }
+
+.swap-btn {
+  background-color: #cda2a2;
+  color: #fff;
+  border: none;
+  padding: 13px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;               
+  width: 100%;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.swap-btn:hover {
+  background-color: #ba7070;
+}
+
 </style>

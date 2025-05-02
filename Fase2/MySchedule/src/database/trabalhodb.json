@@ -525,7 +525,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 1,
-      "totalStudentsRegistered": 28
+      "totalStudentsRegistered": 27
     },
     {
       "id": "10",
@@ -549,7 +549,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 2,
-      "totalStudentsRegistered": 20
+      "totalStudentsRegistered": 21
     },
     {
       "id": "12",
@@ -1851,11 +1851,6 @@
       "studentId": 1
     },
     {
-      "id": "6",
-      "shiftId": 9,
-      "studentId": 1
-    },
-    {
       "id": "7",
       "shiftId": 12,
       "studentId": 1
@@ -2004,6 +1999,11 @@
       "id": "35",
       "shiftId": 101,
       "studentId": 3
+    },
+    {
+      "id": "cbe0",
+      "studentId": "1",
+      "shiftId": "11"
     }
   ],
   "conflicts": [
@@ -2063,14 +2063,7 @@
       "teacherId": 1
     }
   ],
-  "shiftRequests": [
-    {
-      "id": "1",
-      "shiftId": 9,
-      "studentId": 1,
-      "alternativeShiftId": 11
-    }
-  ],
+  "shiftRequests": [],
   "mensagens": [
     {
       "id": "1",
