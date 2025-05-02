@@ -35,7 +35,7 @@ defineEmits(['update:modelValue']);
   flex-grow: 1;
   border: none;
   background: none;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: -2px;
 
   color: #020202;

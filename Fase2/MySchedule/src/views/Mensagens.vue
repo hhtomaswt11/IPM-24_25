@@ -1,7 +1,7 @@
 <template>
   <div class="messages-container">
     <div class="top-bar">
-      <Botao label="Nova Mensagem" @click="abrirOverlay" />
+      <BotaoMensagem label="Nova Mensagem" @click="abrirOverlay" />
       <SearchBar v-model="termoPesquisa" />
     </div>
 
@@ -111,7 +111,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { Trash2, MailWarning } from 'lucide-vue-next';
 import SearchBar from '@/components/BarraPesquisa.vue';
-import Botao from '@/components/Botao.vue';
+import BotaoMensagem from '@/components/BotaoMensagem.vue';
 import EnviarMensagem from '@/components/EnviarMensagemDiretor.vue';
 import EnviarMensagemAluno from '@/components/EnviarMensagemAluno.vue';
 import Mensagem from '@/components/Mensagem.vue';
@@ -394,6 +394,8 @@ function responderMensagem(destinatario) {
   z-index: 9999;
   animation: fadein 0.4s ease;
 }
+
+
 
 @keyframes fadein {
   from {
