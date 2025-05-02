@@ -13,8 +13,6 @@
         <!-- Botão de Limpar -->
         <button @click="limparTexto" class="limpar-button">
           Limpar
-          <i class="fas fa-trash-alt" style ="color: #8B0000"></i>
-
         </button>
       </div>
     </transition>
@@ -30,7 +28,7 @@ import { updateCaderno } from '@/api.ts'; // <-- Agora importado corretamente
 const session = useSessionStorage();
 const usuarioLogado = ref(session); 
 
-const texto = ref(''); // Inicialmente vazio
+const texto = ref(''); // Inicialmente vazio  
 const mostrar = ref(false);
 
 const podeAcessar = computed(() => {
@@ -135,20 +133,18 @@ function limparTexto() {
 }
 
 .limpar-button {
-
-
-  width: 20%; 
-  margin: 0 auto; 
-  padding: 6.5px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  width: 40%;
+  margin: 20px auto 0 auto;
+  padding: 10px;
   background-color: white;
   color: black;
   border: none;
-
-
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center; 
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .limpar-button:hover {
