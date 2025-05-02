@@ -4,9 +4,19 @@
       <div class="perfil-info">
         <User class="user-icon" />
         <span class="nome-utilizador">{{ diretor.name }}</span>
+        <div class="botao-editar">
+          <Botao
+            v-if="!editando"
+            label="Editar"
+            @click="ativarEdicao"
+          />
+          <Botao
+            v-else
+            label="Guardar"
+            @click="guardarAlteracoes"
+          />
+        </div>
       </div>
-      <Botao v-if="!editando" label="Editar" @click="ativarEdicao" />
-      <Botao v-else label="Guardar" @click="guardarAlteracoes" />
     </div>
 
     <!-- Conteúdo do perfil -->
@@ -32,9 +42,9 @@
           <div class="campo">
             <div class="label">Morada</div>
             <div class="valor">
-              {{ diretor.morada.split(',')[0] }},
-              <br />
-              {{ diretor.morada.split(',').slice(1).join(',') }}
+              <!-- Se estiver editando, exibe input para morada -->
+              <input v-if="editando" v-model="novaMorada" />
+              <span v-else>{{ diretor.morada }}</span>
             </div>
           </div>
           <div class="campo">
@@ -163,7 +173,7 @@ async function guardarAlteracoes() {
     name: novoNome.value,
     email: novoEmail.value,
     nascimento: novoNascimento.value,
-    morada: novaMorada.value,
+    morada: novaMorada.value,  // Agora também salva a morada
     sexo: novoSexo.value,
     telefone: novoTelefone.value,
     departamento: novoDepartamento.value,
@@ -177,7 +187,7 @@ async function guardarAlteracoes() {
         name: novoNome.value,
         email: novoEmail.value,
         nascimento: novoNascimento.value,
-        morada: novaMorada.value,
+        morada: novaMorada.value,  // Enviar morada para students
         sexo: novoSexo.value,
         telefone: novoTelefone.value,
         departamento: novoDepartamento.value,
@@ -197,80 +207,102 @@ async function guardarAlteracoes() {
 }
 </script>
 
+<style scoped>
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Top bar */
+.top-bar {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* Ícone + nome */
+.perfil-info {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Ícone User */
+.user-icon {
+  width: 60px;
+  height: 60px;
+  color: #02020299;
+}
+
+/* Nome do utilizador */
+.nome-utilizador {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Conteúdo do perfil */
+.perfil-conteudo {
+  margin-top: 30px;
+  padding: 20px 0;
+  margin-left: 50px; /* Aumenta espaço à esquerda */
+}
+
+/* Duas colunas */
+.perfil-colunas {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}
 
 
-  
-  <style scoped>
-  .perfil-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  /* Top bar */
-  .top-bar {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  
-  /* Ícone + nome */
-  .perfil-info {
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  /* Ícone User */
-  .user-icon {
-    width: 60px;
-    height: 60px;
-    color: #02020299;
-  }
-  
-  /* Nome do utilizador */
-  .nome-utilizador {
-    font-size: 28px;
-    font-weight: bold;
-    color: #222;
-  }
-  
-  /* Conteúdo do perfil */
-  .perfil-conteudo {
-    margin-top:30px;
-    padding: 20px 0;
-    margin-left: 50px; /* Aumenta espaço à esquerda */
-  }
-  
-  /* Duas colunas */
-  .perfil-colunas {
-    display: flex;
-    justify-content: space-between;
-    gap: 100px;
-  }
-  
-  /* Cada coluna */
-  .coluna {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  /* Estilo dos campos */
-  .campo .label {
-    font-weight: bold;
-    color: #222;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-  
-  .campo .valor {
-    color: #444;
-    font-size: 18px;
-  }
-  </style>
-  
+.botao-editar {
+  margin-left: 20px;
+}
+
+.perfil-info {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.botao-editar :deep(button) {
+  font-size: 18px;
+  padding: 6px 12px;
+  background-color: #373737;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.botao-editar :deep(button):hover {
+  background-color: #222; /* Tom um pouco mais claro no hover */
+}
+
+/* Cada coluna */
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Estilo dos campos */
+.campo .label {
+  font-weight: bold;
+  color: #222;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.campo .valor {
+  color: #444;
+  font-size: 18px;
+}
+</style>
