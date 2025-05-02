@@ -95,6 +95,14 @@ const props = defineProps({
   aluno: String
 })
 
+watch(() => props.visivel, (val) => {
+  if (val) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
+});
+
 // Dados do estudante
 const studentData = ref(null)
 const enrolledCourses = ref([])
@@ -364,6 +372,9 @@ async function salvarAlocacoes() {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body.modal-open {
   overflow: hidden;
 }
 
