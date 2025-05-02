@@ -100,6 +100,7 @@ const studentData = ref(null)
 const enrolledCourses = ref([])
 const allShifts = ref([])
 const allClassrooms = ref([])
+const allAllocations = ref([])
 
 
 // Traduzir dias de inglês para português 
@@ -133,34 +134,34 @@ watch(() => props.aluno, async (newVal) => {
 }, { immediate: true })
 
 // Função para buscar dados do estudante
-async function fetchStudentData() {
-  try {
-    // Buscar todos os estudantes
-    const studentsResponse = await axios.get('http://localhost:3000/students')
-    // Encontrar o estudante pelo número
-    const student = studentsResponse.data.find(s => s.num === props.aluno)
-    
-    if (student) {
-      studentData.value = student
+  async function fetchStudentData() {
+    try {
+      // Buscar todos os estudantes
+      const studentsResponse = await axios.get('http://localhost:3000/students')
+      // Encontrar o estudante pelo número
+      const student = studentsResponse.data.find(s => s.num === props.aluno)
       
-      const [coursesResponse, shiftsResponse, classroomsResponse] = await Promise.all([
-        axios.get('http://localhost:3000/courses'),
-        axios.get('http://localhost:3000/shifts'),
-        axios.get('http://localhost:3000/classrooms')
-      ])
-      
-      // Filtrar apenas os cursos em que o estudante está inscrito
-      enrolledCourses.value = coursesResponse.data.filter(course => 
-        student.enrolled.includes(parseInt(course.id))
-      )
-      
-      allShifts.value = shiftsResponse.data
-      allClassrooms.value = classroomsResponse.data
+      if (student) {
+        studentData.value = student
+        
+        const [coursesResponse, shiftsResponse, classroomsResponse] = await Promise.all([
+          axios.get('http://localhost:3000/courses'),
+          axios.get('http://localhost:3000/shifts'),
+          axios.get('http://localhost:3000/classrooms'),
+        ])
+        
+        // Filtrar apenas os cursos em que o estudante está inscrito
+        enrolledCourses.value = coursesResponse.data.filter(course => 
+          student.enrolled.includes(parseInt(course.id))
+        )
+        
+        allShifts.value = shiftsResponse.data
+        allClassrooms.value = classroomsResponse.data
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error)
     }
-  } catch (error) {
-    console.error('Erro ao buscar dados:', error)
   }
-}
 
 // Função para obter os turnos que pertencem a um curso e tipo específico
 function getShiftsForCourse(courseId, shiftType) {
@@ -259,22 +260,102 @@ watch([selectedTheoretical, selectedPractical], () => {
   updateSelectedShifts()
 }, { deep: true })
 
-// Função para salvar as alocações
-async function salvarAlocacoes() {
-  // Criar objeto com as alocações
-  const alocacoes = enrolledCourses.value.map((course, index) => {
-    return {
-      curso: course.name,
-      cursoId: course.id,
-      turnoTeorico: selectedTheoretical.value[index],
-      turnoPratico: selectedPractical.value[index]
+
+function hasConflictingShifts(shifts) {
+  for (let i = 0; i < shifts.length; i++) {
+    for (let j = i + 1; j < shifts.length; j++) {
+      const a = shifts[i]
+      const b = shifts[j]
+
+      // Same day?
+      if (a.day === b.day) {
+        // Check if time ranges overlap
+        const overlap = a.from < b.to && b.from < a.to
+        if (overlap) {
+          return true
+        }
+      }
     }
-  })
-  
-  // Implementar lógica para salvar as alocações
-  console.log('Alocações confirmadas:', alocacoes)
-  fecharOverlay()
+  }
+  return false
 }
+
+
+
+
+async function salvarAlocacoes() {
+  if (hasConflictingShifts(selectedShifts.value)) {
+    alert('Existem turnos em conflito')
+    return
+  }
+
+  try {
+    // Refresh allocations data to ensure we have the latest
+    const allocationsResponse = await axios.get('http://localhost:3000/allocations')
+    allAllocations.value = allocationsResponse.data
+    
+    const studentId = Number(studentData.value.id)
+    
+    // Track successful operations
+    let updatedCount = 0
+    let createdCount = 0
+
+    for (const shift of selectedShifts.value) {
+      const shiftId = Number(shift.id)
+      const courseId = Number(shift.courseId)
+      const shiftType = shift.type
+
+      // Find existing allocation for this student, course and shift type
+      const existingAllocation = allAllocations.value.find(allocation => {
+        // Find the shift data for this allocation
+        const allocationShift = allShifts.value.find(s => 
+          Number(s.id) === Number(allocation.shiftId)
+        )
+        
+        // Check if this allocation matches our criteria
+        return (
+          Number(allocation.studentId) === studentId && 
+          allocationShift && 
+          Number(allocationShift.courseId) === courseId && 
+          allocationShift.type === shiftType
+        )
+      })
+
+      if (existingAllocation) {
+        // Update existing allocation
+        console.log(`Updating allocation ${existingAllocation.id} for student ${studentId}, course ${courseId}, type ${shiftType} to shift ${shiftId}`)
+        
+        await axios.put(`http://localhost:3000/allocations/${existingAllocation.id}`, {
+          id: existingAllocation.id,
+          shiftId: shiftId,
+          studentId: studentId
+        })
+        updatedCount++
+      } else {
+        // Create new allocation
+        const newAllocationId = String(Math.floor(1000000 + Math.random() * 9000000))
+        console.log(`Creating new allocation ${newAllocationId} for student ${studentId}, course ${courseId}, type ${shiftType}, shift ${shiftId}`)
+        
+        await axios.post('http://localhost:3000/allocations', {
+          id: newAllocationId,
+          shiftId: shiftId,
+          studentId: studentId
+        })
+        createdCount++
+      }
+    }
+
+    alert(`Alocações guardadas com sucesso! (${updatedCount} atualizadas, ${createdCount} criadas)`)
+    fecharOverlay()
+  } catch (error) {
+    console.error('Erro ao salvar alocações:', error)
+    alert('Ocorreu um erro ao salvar as alocações: ' + error.message)
+  }
+}
+
+
+
+
 </script>
 
 <style scoped>
