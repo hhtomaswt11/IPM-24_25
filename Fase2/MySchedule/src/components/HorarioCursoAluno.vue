@@ -37,20 +37,23 @@ const students = ref([]);
 const courses = ref([]);
 const shifts = ref([]);
 const classrooms = ref([]);
+const buildings = ref([]);
 
 // Fetch dados
 onMounted(async () => {
-  const [resStudents, resCourses, resShifts, resClassrooms] = await Promise.all([
+  const [resStudents, resCourses, resShifts, resClassrooms, resBuildings] = await Promise.all([
     fetch('http://localhost:3000/students'),
     fetch('http://localhost:3000/courses'),
     fetch('http://localhost:3000/shifts'),
-    fetch('http://localhost:3000/classrooms')
+    fetch('http://localhost:3000/classrooms'),
+    fetch('http://localhost:3000/buildings')
   ]);
 
   students.value = await resStudents.json();
   courses.value = await resCourses.json();
   shifts.value = await resShifts.json();
   classrooms.value = await resClassrooms.json();
+  buildings.value = await resBuildings.json(); 
 });
 
 // Primeiro, descobrir quais são as UCs onde o aluno está inscrito
@@ -70,7 +73,8 @@ const horarioCurso = computed(() => ({
   horas,
   shifts: turnosCurso.value,
   courses: courses.value,
-  classrooms: classrooms.value
+  classrooms: classrooms.value,
+  buildings: buildings.value 
 }));
 </script>
   

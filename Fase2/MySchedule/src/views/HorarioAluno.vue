@@ -76,4 +76,21 @@ button:hover {
   background-color: #DF9898;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .horario-page-container {
+    padding: 1rem;
+  }
+
+  .botoes-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 </style>

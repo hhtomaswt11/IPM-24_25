@@ -10,13 +10,17 @@
         <span>Capacidade Parcial</span>
       </div>
     </div> 
-    <HorarioAno v-for="(horario, index) in processedHorarios" :key="index" :titulo="horario.titulo" :horario="horario"/>
+    <HorarioAno v-for="(horario, index) in processedHorarios" :key="index" :titulo="horario.titulo" :horario="horario" @navigate-to-course="handleNavigateToCourse"/>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import HorarioAno from './HorarioAno.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const emit = defineEmits(['navigate-to-course']);
 
 // Dias da semana para a tabela
 const dias = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -31,18 +35,21 @@ for (let i = 9; i <= 18; i++) {
 const courses = ref([]);
 const shifts = ref([]);
 const classrooms = ref([]);
+const buildings = ref([]);
 
 // Carregar os dados ao montar o componente
 onMounted(async () => {
-  const [resCourses, resShifts, resClassrooms] = await Promise.all([
+  const [resCourses, resShifts, resClassrooms, resBuildings] = await Promise.all([
     fetch('http://localhost:3000/courses'),
     fetch('http://localhost:3000/shifts'),
-    fetch('http://localhost:3000/classrooms')
+    fetch('http://localhost:3000/classrooms'),
+    fetch('http://localhost:3000/buildings')
   ]);
 
   courses.value = await resCourses.json();
   shifts.value = await resShifts.json();
   classrooms.value = await resClassrooms.json();
+  buildings.value = await resBuildings.json(); 
 });
 
 // Processar horários agrupados por ano/semestre
@@ -70,12 +77,17 @@ const processedHorarios = computed(() => {
       horas,
       shifts: yearShifts,
       courses: courses.value,
-      classrooms: classrooms.value
+      classrooms: classrooms.value,
+      buildings: buildings.value 
     });
   });
 
   return result;
 });
+
+const handleNavigateToCourse = (courseName) => {
+  router.push(`/unidades/director/${courseName}`);
+};
 </script>
 
   
@@ -117,4 +129,22 @@ const processedHorarios = computed(() => {
   .capacidade-parcial {
     background-color: #fde68a;
   }
+
+  @media (max-width: 768px) {
+  .pagina-horarios {
+    padding: 0.5rem;
+  }
+
+  .legenda {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .legenda-item {
+    min-width: auto;
+    font-size: 0.85rem;
+  }
+}
   </style>
