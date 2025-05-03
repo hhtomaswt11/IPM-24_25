@@ -29,20 +29,23 @@ const courses = ref([]);
 const shifts = ref([]);
 const classrooms = ref([]);
 const allocations = ref([]);
+const buildings = ref([]);
 
 // Fetch dados
 onMounted(async () => {
-  const [resCourses, resShifts, resClassrooms, resAllocations] = await Promise.all([
+  const [resCourses, resShifts, resClassrooms, resAllocations, resBuildings] = await Promise.all([
     fetch('http://localhost:3000/courses'),
     fetch('http://localhost:3000/shifts'),
     fetch('http://localhost:3000/classrooms'),
-    fetch('http://localhost:3000/allocations')
+    fetch('http://localhost:3000/allocations'),
+    fetch('http://localhost:3000/buildings')
   ]);
 
   courses.value = await resCourses.json();
   shifts.value = await resShifts.json();
   classrooms.value = await resClassrooms.json();
   allocations.value = await resAllocations.json();
+  buildings.value = await resBuildings.json(); 
 });
 
 // Processar horário pessoal
@@ -58,7 +61,8 @@ const horarioPessoal = computed(() => {
     horas,
     shifts: studentShifts,
     courses: courses.value,
-    classrooms: classrooms.value
+    classrooms: classrooms.value,
+    buildings: buildings.value 
   };
 });
 </script> 

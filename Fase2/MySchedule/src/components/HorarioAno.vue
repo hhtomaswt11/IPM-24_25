@@ -1,7 +1,7 @@
 <template>
   <div class="seccao-horario">
     <h2 class="titulo-horario">{{ titulo }}</h2>
-    <TabelaHorario :horario="horario" />
+    <TabelaHorario :horario="horario" @turno-click="handleTurnoClick"/>
   </div>
 </template>
 
@@ -12,6 +12,12 @@ defineProps({
   titulo: String,
   horario: Object
 });
+
+const emit = defineEmits(['navigate-to-course']);
+
+const handleTurnoClick = (courseId) => {
+  emit('navigate-to-course', courseId);
+};
 </script>
 
   <style scoped>

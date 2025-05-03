@@ -109,6 +109,7 @@ const enrolledCourses = ref([])
 const allShifts = ref([])
 const allClassrooms = ref([])
 const allAllocations = ref([])
+const allBuildings = ref([]);
 
 
 // Traduzir dias de inglês para português 
@@ -152,10 +153,11 @@ watch(() => props.aluno, async (newVal) => {
       if (student) {
         studentData.value = student
         
-        const [coursesResponse, shiftsResponse, classroomsResponse] = await Promise.all([
+        const [coursesResponse, shiftsResponse, classroomsResponse, buildingsResponse] = await Promise.all([
           axios.get('http://localhost:3000/courses'),
           axios.get('http://localhost:3000/shifts'),
           axios.get('http://localhost:3000/classrooms'),
+          axios.get('http://localhost:3000/buildings')
         ])
         
         // Filtrar apenas os cursos em que o estudante está inscrito
@@ -165,6 +167,7 @@ watch(() => props.aluno, async (newVal) => {
         
         allShifts.value = shiftsResponse.data
         allClassrooms.value = classroomsResponse.data
+        allBuildings.value = buildingsResponse.data;
       }
     } catch (error) {
       console.error('Erro ao buscar dados:', error)
@@ -246,6 +249,11 @@ function updateSelectedShifts() {
     ...cl,
     id: parseInt(cl.id)
   }))
+
+  horarioVazio.buildings = allBuildings.value.map(b => ({
+  ...b,
+  id: parseInt(b.id)
+}));
 
   console.log('Selected Shifts:', selectedShifts.value)
   console.log('Updated Schedule:', horarioVazio)

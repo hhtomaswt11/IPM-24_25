@@ -1,329 +1,356 @@
-<template>
-  <div class="perfil-container">
-    <div class="top-bar">
-      <div class="perfil-info">
-        <User class="user-icon" />
-        <span class="nome-utilizador">{{ diretor.name }}</span>
-        <div class="botao-editar">
-          <Botao
-            v-if="!editando"
-            label="Editar"
-            @click="ativarEdicao"
-          />
-          <Botao
-            v-else
-            label="Guardar"
-            @click="guardarAlteracoes"
-          />
+  <template>
+    <div class="perfil-container">
+      <div class="top-bar">
+        <div class="perfil-info">
+          <User class="user-icon" />
+          <span class="nome-utilizador">{{ diretor.name }}</span>
+          <div class="botao-editar">
+            <Botao
+              v-if="!editando"
+              label="Editar"
+              @click="ativarEdicao"
+            />
+            <Botao
+              v-else
+              label="Guardar"
+              @click="guardarAlteracoes"
+            />
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Conteúdo do perfil -->
-    <div class="perfil-conteudo">
-      <div class="perfil-colunas">
-        <!-- Coluna da esquerda -->
-        <div class="coluna">
-          <div class="campo">
-            <div class="label">Nome completo</div>
-            <div class="valor">{{ diretor.name }}</div>
-          </div>
-          <div class="campo">
-            <div class="label">Endereço eletrónico</div>
-            <div class="valor">
-              <input v-if="editando" v-model="novoEmail" />
-              <span v-else>{{ diretor.email }}</span>
+      <!-- Conteúdo do perfil -->
+      <div class="perfil-conteudo">
+        <div class="perfil-colunas">
+          <!-- Coluna da esquerda -->
+          <div class="coluna">
+            <div class="campo">
+              <div class="label">Nome completo</div>
+              <div class="valor">{{ diretor.name }}</div>
+            </div>
+            <div class="campo">
+              <div class="label">Endereço eletrónico</div>
+              <div class="valor">
+                <input v-if="editando" v-model="novoEmail" />
+                <span v-else>{{ diretor.email }}</span>
+              </div>
+            </div>
+            <div class="campo">
+              <div class="label">Data de nascimento</div>
+              <div class="valor">{{ diretor.nascimento }}</div>
+            </div>
+            <div class="campo">
+              <div class="label">Endereço postal</div>
+              <div class="valor">
+                <input v-if="editando" v-model="novaMorada" />
+                <span v-else v-html="diretorWithFormat.moradaFormatada"></span>
+              </div>
+            </div>
+            <div class="campo">
+              <div class="label">Sexo</div>
+              <div class="valor">{{ diretor.sexo }}</div>
             </div>
           </div>
-          <div class="campo">
-            <div class="label">Data de nascimento</div>
-            <div class="valor">{{ diretor.nascimento }}</div>
-          </div>
-          <div class="campo">
-            <div class="label">Endereço postal</div>
-            <div class="valor">
-              <input v-if="editando" v-model="novaMorada" />
-              <span v-else v-html="diretorWithFormat.moradaFormatada"></span>
-            </div>
-          </div>
-          <div class="campo">
-            <div class="label">Sexo</div>
-            <div class="valor">{{ diretor.sexo }}</div>
-          </div>
-        </div>
 
-        <!-- Coluna da direita -->
-        <div class="coluna">
-          <div class="campo">
-            <div class="label">Cargos</div>
-            <div class="valor">
-              <div v-for="(cargo, i) in diretor.cargos" :key="i">
-                {{ cargo }}
+          <!-- Coluna da direita -->
+          <div class="coluna">
+            <div class="campo">
+              <div class="label">Cargos</div>
+              <div class="valor">
+                <div v-for="(cargo, i) in diretor.cargos" :key="i">
+                  {{ cargo }}
+                </div>
+              </div>
+            </div>
+            <div class="campo">
+              <div class="label">Departamento</div>
+              <div class="valor">{{ diretor.departamento }}</div>
+            </div>
+            <div class="campo">
+              <div class="label">Telefone</div>
+              <div class="valor">
+                <input v-if="editando" v-model="novoTelefone" />
+                <span v-else>{{ diretor.telefone }}</span>
               </div>
             </div>
           </div>
-          <div class="campo">
-            <div class="label">Departamento</div>
-            <div class="valor">{{ diretor.departamento }}</div>
-          </div>
-          <div class="campo">
-            <div class="label">Telefone</div>
-            <div class="valor">
-              <input v-if="editando" v-model="novoTelefone" />
-              <span v-else>{{ diretor.telefone }}</span>
-            </div>
-          </div>
         </div>
       </div>
+
+      <!-- Círculo cinzento no canto inferior direito -->
+      <div class="circulo"></div>
     </div>
-
-    <!-- Círculo cinzento no canto inferior direito -->
-    <div class="circulo"></div>
-  </div>
-</template>
+  </template>
 
 
-<script setup>
-import { ref, onMounted, computed} from 'vue';
-import { User } from 'lucide-vue-next';
-import Botao from '@/components/Botao.vue';
-import { useSessionStorage } from '@/stores/session';
-import axios from 'axios';
+  <script setup>
+  import { ref, onMounted, computed} from 'vue';
+  import { User } from 'lucide-vue-next';
+  import Botao from '@/components/Botao.vue';
+  import { useSessionStorage } from '@/stores/session';
+  import axios from 'axios';
 
-const session = useSessionStorage();
+  const session = useSessionStorage();
 
-const diretor = ref({
-  name: '',
-  email: '',
-  nascimento: '',
-  morada: '',
-  sexo: '',
-  telefone: '',
-  departamento: '',
-  cargos: []
-});
+  const diretor = ref({
+    name: '',
+    email: '',
+    nascimento: '',
+    morada: '',
+    sexo: '',
+    telefone: '',
+    departamento: '',
+    cargos: []
+  });
 
-const editando = ref(false);
+  const editando = ref(false);
 
-const diretorWithFormat = computed(() => ({
-  ...diretor.value,
-  moradaFormatada: diretor.value.morada?.replace(',', ',<br>') || '',
-}));
+  const diretorWithFormat = computed(() => ({
+    ...diretor.value,
+    moradaFormatada: diretor.value.morada?.replace(',', ',<br>') || '',
+  }));
 
-// Campos editáveis
-const novoNome = ref('');
-const novoEmail = ref('');
-const novoNascimento = ref('');
-const novaMorada = ref('');
-const novoSexo = ref('');
-const novoTelefone = ref('');
-const novoDepartamento = ref('');
-const novosCargos = ref([]);
+  // Campos editáveis
+  const novoNome = ref('');
+  const novoEmail = ref('');
+  const novoNascimento = ref('');
+  const novaMorada = ref('');
+  const novoSexo = ref('');
+  const novoTelefone = ref('');
+  const novoDepartamento = ref('');
+  const novosCargos = ref([]);
 
-// Buscar dados do utilizador
-onMounted(async () => {
-  try {
-    if (!session.id) {
-      console.error('Nenhum ID de sessão encontrado.');
-      return;
-    }
+  // Buscar dados do utilizador
+  onMounted(async () => {
+    try {
+      if (!session.id) {
+        console.error('Nenhum ID de sessão encontrado.');
+        return;
+      }
 
-    // Primeiro tenta buscar nos directors
-    let response = await axios.get(`http://localhost:3000/directors?id=${session.id}`);
-    let data = response.data;
-
-    if (data.length > 0) {
-      diretor.value = data[0];
-    } else {
-      // Se não encontrou nos directors, procura nos students
-      response = await axios.get(`http://localhost:3000/students?id=${session.id}`);
-      data = response.data;
+      // Primeiro tenta buscar nos directors
+      let response = await axios.get(`http://localhost:3000/directors?id=${session.id}`);
+      let data = response.data;
 
       if (data.length > 0) {
-        const aluno = data[0];
-        diretor.value = {
-          name: aluno.name,
-          email: aluno.email,
-          nascimento: aluno.nascimento,
-          morada: aluno.morada,
-          sexo: aluno.sexo,
-          telefone: aluno.telefone,
-          departamento: aluno.departamento,
-          cargos: [aluno.cargo] // Atenção: no aluno é `cargo` (string), não `cargos` (array)
-        };
+        diretor.value = data[0];
       } else {
-        console.error('Utilizador não encontrado.');
+        // Se não encontrou nos directors, procura nos students
+        response = await axios.get(`http://localhost:3000/students?id=${session.id}`);
+        data = response.data;
+
+        if (data.length > 0) {
+          const aluno = data[0];
+          diretor.value = {
+            name: aluno.name,
+            email: aluno.email,
+            nascimento: aluno.nascimento,
+            morada: aluno.morada,
+            sexo: aluno.sexo,
+            telefone: aluno.telefone,
+            departamento: aluno.departamento,
+            cargos: [aluno.cargo] // Atenção: no aluno é `cargo` (string), não `cargos` (array)
+          };
+        } else {
+          console.error('Utilizador não encontrado.');
+        }
       }
+
+      // Inicializar campos editáveis
+      novoNome.value = diretor.value.name;
+      novoEmail.value = diretor.value.email;
+      novoNascimento.value = diretor.value.nascimento;
+      novaMorada.value = diretor.value.morada;
+      novoSexo.value = diretor.value.sexo;
+      novoTelefone.value = diretor.value.telefone;
+      novoDepartamento.value = diretor.value.departamento;
+      novosCargos.value = [...diretor.value.cargos];
+    } catch (error) {
+      console.error('Erro ao buscar dados do utilizador:', error);
     }
+  });
 
-    // Inicializar campos editáveis
-    novoNome.value = diretor.value.name;
-    novoEmail.value = diretor.value.email;
-    novoNascimento.value = diretor.value.nascimento;
-    novaMorada.value = diretor.value.morada;
-    novoSexo.value = diretor.value.sexo;
-    novoTelefone.value = diretor.value.telefone;
-    novoDepartamento.value = diretor.value.departamento;
-    novosCargos.value = [...diretor.value.cargos];
-  } catch (error) {
-    console.error('Erro ao buscar dados do utilizador:', error);
+  // Ativar modo de edição
+  function ativarEdicao() {
+    editando.value = true;
   }
-});
 
-// Ativar modo de edição
-function ativarEdicao() {
-  editando.value = true;
-}
+  // Guardar alterações no servidor
+  async function guardarAlteracoes() {
+    const atualizados = {
+      name: novoNome.value,
+      email: novoEmail.value,
+      nascimento: novoNascimento.value,
+      morada: novaMorada.value,  // Agora também salva a morada
+      sexo: novoSexo.value,
+      telefone: novoTelefone.value,
+      departamento: novoDepartamento.value,
+      cargos: [...novosCargos.value]
+    };
 
-// Guardar alterações no servidor
-async function guardarAlteracoes() {
-  const atualizados = {
-    name: novoNome.value,
-    email: novoEmail.value,
-    nascimento: novoNascimento.value,
-    morada: novaMorada.value,  // Agora também salva a morada
-    sexo: novoSexo.value,
-    telefone: novoTelefone.value,
-    departamento: novoDepartamento.value,
-    cargos: [...novosCargos.value]
-  };
+    try {
+      if (diretor.value.cargos.length === 1 && diretor.value.cargos[0].startsWith('Aluno')) {
+        // Atualizar no students
+        await axios.patch(`http://localhost:3000/students/${session.id}`, {
+          name: novoNome.value,
+          email: novoEmail.value,
+          nascimento: novoNascimento.value,
+          morada: novaMorada.value,  // Enviar morada para students
+          sexo: novoSexo.value,
+          telefone: novoTelefone.value,
+          departamento: novoDepartamento.value,
+          cargo: novosCargos.value[0] // Students têm cargo como string
+        });
+      } else {
+        // Atualizar no directors
+        await axios.patch(`http://localhost:3000/directors/${session.id}`, atualizados);
+      }
 
-  try {
-    if (diretor.value.cargos.length === 1 && diretor.value.cargos[0].startsWith('Aluno')) {
-      // Atualizar no students
-      await axios.patch(`http://localhost:3000/students/${session.id}`, {
-        name: novoNome.value,
-        email: novoEmail.value,
-        nascimento: novoNascimento.value,
-        morada: novaMorada.value,  // Enviar morada para students
-        sexo: novoSexo.value,
-        telefone: novoTelefone.value,
-        departamento: novoDepartamento.value,
-        cargo: novosCargos.value[0] // Students têm cargo como string
-      });
-    } else {
-      // Atualizar no directors
-      await axios.patch(`http://localhost:3000/directors/${session.id}`, atualizados);
+      // Atualizar localmente
+      diretor.value = { ...diretor.value, ...atualizados };
+      editando.value = false;
+    } catch (error) {
+      console.error('Erro ao salvar alterações:', error);
     }
-
-    // Atualizar localmente
-    diretor.value = { ...diretor.value, ...atualizados };
-    editando.value = false;
-  } catch (error) {
-    console.error('Erro ao salvar alterações:', error);
   }
-}
-</script>
+  </script>
 
-<style scoped>
-.perfil-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+  <style scoped>
+  .perfil-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+  }
 
-/* Top bar */
-.top-bar {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
+  /* Top bar */
+  .top-bar {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+  }
 
-/* Ícone + nome */
-.perfil-info {
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  /* Ícone + nome */
+  .perfil-info {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-/* Ícone User */
-.user-icon {
-  width: 60px;
-  height: 60px;
-  color: #02020299;
-}
+  /* Ícone User */
+  .user-icon {
+    width: 60px;
+    height: 60px;
+    color: #02020299;
+  }
 
-/* Nome do utilizador */
-.nome-utilizador {
-  font-size: 28px;
-  font-weight: bold;
-  color: #222;
-}
+  /* Nome do utilizador */
+  .nome-utilizador {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+  }
 
-/* Conteúdo do perfil */
-.perfil-conteudo {
-  margin-top: 30px;
-  padding: 20px 0;
-  margin-left: 50px; /* Aumenta espaço à esquerda */
-}
+  /* Conteúdo do perfil */
+  .perfil-conteudo {
+    margin-top: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
 
-/* Duas colunas */
-.perfil-colunas {
-  display: flex;
-  justify-content: space-between;
-  gap: 100px;
-}
+  /* Duas colunas */
+  .perfil-colunas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 100%;
+  }
 
+  .botao-editar {
+    margin-left: 20px;
+  }
 
-.botao-editar {
-  margin-left: 20px;
-}
+  .botao-editar :deep(button) {
+    font-size: 18px;
+    padding: 6px 12px;
+    background-color: #373737;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 
-.perfil-info {
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  .botao-editar :deep(button):hover {
+    background-color: #222;
+  }
 
-.botao-editar :deep(button) {
-  font-size: 18px;
-  padding: 6px 12px;
-  background-color: #373737;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
+  /* Cada coluna */
+  .coluna {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 
-.botao-editar :deep(button):hover {
-  background-color: #222; /* Tom um pouco mais claro no hover */
-}
+  /* Estilo dos campos */
+  .campo .label {
+    font-weight: bold;
+    color: #222;
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
 
-/* Cada coluna */
-.coluna {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
+  .campo .valor {
+    color: #444;
+    font-size: 18px;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
 
-/* Estilo dos campos */
-.campo .label {
-  font-weight: bold;
-  color: #222;
-  font-size: 22px;
-  margin-bottom: 5px;
-}
+  .campo input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
 
-.campo .valor {
-  color: #444;
-  font-size: 18px;
-}
+  .circulo {
+    position: fixed;
+    bottom: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background-color: #ebebeb;
+    border-radius: 50%;
+    z-index: 0;
+  }
 
-
-.circulo {
-  position: absolute;
-  bottom: -240px;
-  right: -200px;
-  width: 650px; /* Aumente o tamanho para 80px */
-  height: 600px; /* Aumente o tamanho para 80px */
-  background-color: #ebebeb; /* Cor cinza */
-  border-radius: 50%; /* Tornando o elemento um círculo */
-}
-
-
-</style>
+  @media (max-width: 768px) {
+    .perfil-colunas {
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .coluna {
+      min-width: auto;
+    }
+    
+    .circulo {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  </style>

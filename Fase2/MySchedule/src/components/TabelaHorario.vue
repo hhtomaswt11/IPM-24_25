@@ -18,11 +18,13 @@
                     'aula-parcial': aula.capacidade === 'parcial',
                     'aula-livre': !aula.capacidade || aula.capacidade === 'livre',
                     'aula-pessoal': props.tipo === 'pessoal'
-                  }"  
+                  }"
+                  :title="`Capacidade: ${aula.inscritos}/${aula.capacidadeMax}`"
+                  @click="handleTurnoClick(aula)"  
                 >
                   {{ aula.disciplina }}<br />
                   {{ aula.tp }}<br />
-                  {{ aula.sala }}
+                  Ed {{ aula.edificio }} - Sala {{ aula.sala }}
                 </div>
               </div>
             </td>
@@ -43,6 +45,8 @@ const props = defineProps({
     default: ''
   }
 });
+
+const emit = defineEmits(['turno-click']);
 
 // Matriz de células ocupadas por rowspans
 const celulaOcupada = computed(() => {
@@ -82,6 +86,7 @@ function getAulas(hora, dia) {
       // Encontrar informações relacionadas
       const course = props.horario.courses.find(c => Number(c.id) === shift.courseId) || {};
       const classroom = props.horario.classrooms.find(c => Number(c.id) === shift.classroomId) || {};
+      const building = props.horario.buildings.find(b => Number(b.id) == classroom.buildingId) || {};
       
       // Determinar capacidade com base em totalStudentsRegistered
       let capacidade = 'livre';
@@ -93,8 +98,11 @@ function getAulas(hora, dia) {
         disciplina: course.name || 'Unknown',
         tp: `${shift.name}`,
         sala: classroom.name || 'Unknown',
+        edificio: building.id || '',
         capacidade,
-        duracao: shift.to - shift.from
+        duracao: shift.to - shift.from,
+        inscritos: shift.totalStudentsRegistered || 0,
+        capacidadeMax: classroom.capacity || 0
       };
     });
 }
@@ -113,6 +121,12 @@ function getRowspan(horaIndex, diaIndex) {
   const horasRestantes = props.horario.horas.length - horaIndex;
   return Math.min(duracaoMaxima, horasRestantes);
 }
+
+// Função para lidar com o clique em um turno
+const handleTurnoClick = (aula) => {
+  emit('turno-click', aula.disciplina);
+};
+
 </script>
 
 <style scoped>
@@ -137,6 +151,7 @@ td {
   width: 120px;
   height: 60px;
   border: 1px solid #727272;
+  white-space: nowrap;
   overflow: hidden;
   padding: 6px;
   vertical-align: top;
@@ -175,6 +190,8 @@ td {
   justify-content: center;
   min-width: 0;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
   border: 1px solid #3E390A;
 }
 
