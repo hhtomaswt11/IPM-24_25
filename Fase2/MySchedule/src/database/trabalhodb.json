@@ -477,7 +477,7 @@
       "type": "PL",
       "name": "PL1",
       "teacherId": 5,
-      "totalStudentsRegistered": 26
+      "totalStudentsRegistered": 27
     },
     {
       "id": "6",
@@ -489,7 +489,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 2,
-      "totalStudentsRegistered": 21
+      "totalStudentsRegistered": 20
     },
     {
       "id": "7",
@@ -518,7 +518,7 @@
     {
       "id": "9",
       "courseId": 3,
-      "classroomId": 1,
+      "classroomId": 3,
       "day": "Thursday",
       "from": 9,
       "to": 11,
@@ -909,7 +909,7 @@
       "type": "PL",
       "name": "PL2",
       "teacherId": 1,
-      "totalStudentsRegistered": 49
+      "totalStudentsRegistered": 50
     },
     {
       "id": "47",
@@ -933,7 +933,7 @@
       "type": "PL",
       "name": "PL3",
       "teacherId": 1,
-      "totalStudentsRegistered": 11
+      "totalStudentsRegistered": 10
     },
     {
       "id": "49",
@@ -1842,7 +1842,7 @@
     },
     {
       "id": "4",
-      "shiftId": 6,
+      "shiftId": 200,
       "studentId": 1
     },
     {
@@ -1937,7 +1937,7 @@
     },
     {
       "id": "24",
-      "shiftId": 48,
+      "shiftId": 46,
       "studentId": 3
     },
     {
@@ -2006,7 +2006,28 @@
       "shiftId": "11"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    {
+      "id": "1",
+      "studentId": 1,
+      "shiftID": [
+        200,
+        13
+      ]
+    },
+    {
+      "id": "2",
+      "studentId": 3,
+      "shiftID": [
+        46,
+        83,
+        90,
+        93,
+        96,
+        99
+      ]
+    }
+  ],
   "buildings": [
     {
       "id": "1",
@@ -2034,15 +2055,15 @@
       "buildingId": 1
     }
   ],
-  "classroomRequests": [],
-  "shiftRequests": [
+  "classroomRequests": [
     {
-      "id": "42ee",
-      "shiftId": "53",
-      "studentId": "3",
-      "alternativeShiftId": "55"
+      "id": "1",
+      "classroomId": 1,
+      "shiftId": 9,
+      "teacherId": 1
     }
   ],
+  "shiftRequests": [],
   "mensagens": [
     {
       "id": "1",
@@ -2063,75 +2084,21 @@
       "lida": true
     },
     {
+      "id": "3",
+      "enviada": true,
+      "idPessoa": "d1",
+      "para": "Mafalda Ribeiro",
+      "assunto": "Troca de Turno - Programação Funcional T2→T1",
+      "conteudo": "Foi trocado.",
+      "lida": true
+    },
+    {
       "id": "4",
       "enviada": false,
       "idPessoa": "1",
       "de": "José Pedro Castro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Foi trocado.",
-      "lida": false
-    },
-    {
-      "id": "1c20",
-      "enviada": false,
-      "idPessoa": "João Pedro",
-      "de": "José Pedro Castro",
-      "assunto": "damdm",
-      "conteudo": "",
-      "lida": false
-    },
-    {
-      "id": "a3bc",
-      "enviada": false,
-      "idPessoa": "da",
-      "de": "José Pedro Castro",
-      "assunto": "da",
-      "conteudo": "",
-      "lida": false
-    },
-    {
-      "id": "e6d5",
-      "enviada": false,
-      "idPessoa": "da",
-      "de": "José Pedro Castro",
-      "assunto": "da",
-      "conteudo": "",
-      "lida": false
-    },
-    {
-      "id": "9698",
-      "enviada": false,
-      "idPessoa": "da",
-      "de": "José Pedro Castro",
-      "assunto": "da",
-      "conteudo": "",
-      "lida": false
-    },
-    {
-      "id": "5aff",
-      "enviada": false,
-      "idPessoa": "jose.pedro.castro@di.uminho.pt",
-      "de": "Joana Rocha",
-      "assunto": "Troca de Turno - Engenharia de Software - Turno PL2",
-      "conteudo": "OLA",
-      "lida": false
-    },
-    {
-      "id": "bdbc",
-      "enviada": true,
-      "idPessoa": "3",
-      "para": "José Pedro Castro",
-      "assunto": "damd",
-      "conteudo": "DKAdkad",
-      "lida": true
-    },
-    {
-      "id": "282d",
-      "enviada": false,
-      "idPessoa": "José Pedro Castro",
-      "de": "Joana Rocha",
-      "assunto": "damd",
-      "conteudo": "DKAdkad",
       "lida": false
     }
   ]
