@@ -6,6 +6,11 @@
       <button class="popup-ok-btn" @click="fecharPopup">OK</button>
     </div>
 
+    <!-- POP-UP de aviso -->
+    <div v-if="showWarningPopup" class="popup-warning">
+      <p>{{ warningMessage }}</p>
+      <button class="popup-ok-btn" @click="fecharWarningPopup">OK</button>
+    </div>
 
     <table class="uc-table">
       <thead>
@@ -53,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 const alunoId = Number(sessionStorage.getItem("userId"))
@@ -69,7 +74,10 @@ const classrooms = ref([])
 const buildings = ref([])
 const allShifts = ref([])
 const conflicts = ref([])
+
 const showSuccessPopup = ref(false)
+const showWarningPopup = ref(false)
+const warningMessage = ref("")
 
 onMounted(async () => {
   try {
@@ -148,13 +156,16 @@ async function pedirTroca(novoTurnoId, ucId) {
 
   const turnoAtual = alunoShifts.value.find(id => {
     const turno = allShifts.value.find(s => s.id.toString() === id.toString())
+    console.log("Verificando turno do aluno:", turno)
     return (
       turno &&
       turno.courseId.toString() === ucId.toString() &&
-      turno.type === tipoNovoTurno &&
-      (turno.type === "TP" || turno.type === "PL")
+      turno.type?.toUpperCase() === tipoNovoTurno.toUpperCase() &&
+      (tipoNovoTurno.toUpperCase() === "TP" || tipoNovoTurno.toUpperCase() === "PL")
+
     )
   })
+  console.log("Turno atual compatível encontrado:", turnoAtual)
 
   if (!turnoAtual) {
     alert("Não foi encontrado um turno prático atual compatível para esta troca.")
@@ -176,7 +187,8 @@ async function pedirTroca(novoTurnoId, ucId) {
     })
 
     if (pedidoDuplicado) {
-      alert("Já existe um pedido de troca pendente nesta unidade curricular. Aguarde a resolução antes de fazer outro.")
+      warningMessage.value = "Já existe um pedido de troca pendente nesta unidade curricular. Aguarde a resolução antes de fazer outro."
+      showWarningPopup.value = true
       return
     }
   } catch (e) {
@@ -186,13 +198,17 @@ async function pedirTroca(novoTurnoId, ucId) {
   }
 
   const conflitoDoAluno = conflicts.value.find(c => c.studentId.toString() === alunoId.toString())
+  console.log(" Conflitos do aluno:", conflitoDoAluno)
+  console.log(" ShiftIDs com conflito:", conflitoDoAluno?.shiftID)
   const haConflitoNaUC = conflitoDoAluno?.shiftID.some(conflictingShiftId => {
     const shift = allShifts.value.find(s => s.id.toString() === conflictingShiftId.toString())
+    console.log("Verificando conflito com shift:", shift)
     return shift && shift.courseId.toString() === ucId.toString()
   })
 
   if (haConflitoNaUC) {
-    alert("Não é possível fazer o pedido porque existem conflitos com turnos desta unidade curricular.")
+    warningMessage.value = "Não é possível fazer o pedido porque existem conflitos com turnos desta unidade curricular."
+    showWarningPopup.value = true
     return
   }
 
@@ -213,14 +229,16 @@ async function pedirTroca(novoTurnoId, ucId) {
   }
 }
 
-
 function fecharPopup() {
   showSuccessPopup.value = false
+}
+
+function fecharWarningPopup() {
+  showWarningPopup.value = false
 }
 </script>
 
 <style scoped>
-/* Pop-up de sucesso */
 .popup-success {
   position: fixed;
   top: 20px;
@@ -232,9 +250,45 @@ function fecharPopup() {
   font-weight: bold;
   box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-/* restante CSS já existente... (sem alterações) */
+.popup-warning {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #c77f4c;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.popup-ok-btn {
+  background-color: rgb(201, 191, 180);
+  color: #333;
+  border: 2px solid #645e5e;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.popup-ok-btn:hover {
+  background-color: #333;
+  color: white;
+}
+
 .uc-table-wrapper {
   position: relative;
   padding: 2rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <h1>Página não encontrada</h1>
-    <p>Desculpe, a página que você está a tentar acessar não existe ou então você não tem permissão para visualizá-la.</p>
+    <p>Desculpe, a página que você está a tentar aceder não existe ou então você não tem permissão para visualizá-la.</p>
     <div class="actions">
       <button @click="goHome" class="home-button">Regressar ao Login</button>
     </div>
