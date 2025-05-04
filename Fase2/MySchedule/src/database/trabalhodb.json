@@ -1999,11 +1999,6 @@
       "id": "35",
       "shiftId": 101,
       "studentId": 3
-    },
-    {
-      "id": "cbe0",
-      "studentId": "1",
-      "shiftId": "11"
     }
   ],
   "conflicts": [
@@ -2020,13 +2015,26 @@
       "studentId": 3,
       "shiftID": [
         46,
-        83,
+        83
+      ]
+    },
+    {
+      "id": "3",
+      "studentId": 3,
+      "shiftID": [
         90,
-        93,
+        93
+      ]
+    },
+    {
+      "id": "4",
+      "studentId": 3,
+      "shiftID": [
         96,
         99
       ]
     }
+
   ],
   "buildings": [
     {
