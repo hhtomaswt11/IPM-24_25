@@ -125,7 +125,25 @@ export default {
       }
       return "Sem docente atribuído";
     },
+    checkRoutePermissions() {
+      // Check if the route userType parameter matches the session type
+      const routeUserType = this.$route.params.userType;
+      if (routeUserType && routeUserType !== this.session.type) {
+        console.log('Unauthorized access detected in component');
+        this.$router.push('/not-found');
+      }
+    }
   },
+  created() {
+    // Check permissions when component is created
+    this.checkRoutePermissions();
+  },
+  watch: {
+    // Watch for route changes to re-check permissions
+    '$route'(to, from) {
+      this.checkRoutePermissions();
+    }
+  }
 };
 </script>
 

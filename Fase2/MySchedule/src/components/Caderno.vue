@@ -13,6 +13,7 @@
         <!-- Botão de Limpar -->
         <button @click="limparTexto" class="limpar-button">
           Limpar
+          <i class="fas fa-trash-alt" style="color: #8B0000"></i>
         </button>
       </div>
     </transition>
@@ -21,45 +22,40 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useSessionStorage } from '@/stores/session.ts'; 
-import axios from 'axios'; // <-- Importa o axios!
-import { updateCaderno } from '@/api.ts'; // <-- Agora importado corretamente
+import { useSessionStorage } from '@/stores/session.ts';
+import { updateCaderno, updateTeacherCaderno } from '../api.ts';  
 
 const session = useSessionStorage();
 const usuarioLogado = ref(session); 
 
-const texto = ref(''); // Inicialmente vazio  
+const texto = ref(usuarioLogado.value.caderno || ''); 
 const mostrar = ref(false);
 
+// determina se o user pode acessar as anotações
 const podeAcessar = computed(() => {
-  return usuarioLogado.value.type === 'director';
+  return usuarioLogado.value.type === 'teacher' || usuarioLogado.value.type === 'director';
 });
-
-
 
 const emit = defineEmits(['fechar']);
 
-onMounted(async () => {
+onMounted(() => {
   mostrar.value = true;
-
-  try {
-    if (usuarioLogado.value.type === 'director') {
-      const response = await axios.get(`http://localhost:3000/directors/${usuarioLogado.value.id}`);
-      texto.value = response.data.caderno || '';
-      session.updateCaderno(texto.value); // Atualiza também a sessão
-    }
-  } catch (error) {
-    console.error('Erro ao carregar o caderno:', error);
-  }
 });
 
 function fechar() {
   mostrar.value = false;
 
-  if (usuarioLogado.value.type === 'director') {
+  if (usuarioLogado.value.type === 'teacher') {
+    updateTeacherCaderno(usuarioLogado.value.id, texto.value).then(response => {
+      console.log('Caderno do professor atualizado:', response);
+      session.updateCaderno(texto.value);  // Atualiza o caderno na store local
+    }).catch(error => {
+      console.error('Erro ao atualizar caderno do professor:', error);
+    });
+  } else if (usuarioLogado.value.type === 'director') {
     updateCaderno(usuarioLogado.value.id, texto.value).then(response => {
       console.log('Caderno do diretor atualizado:', response);
-      session.updateCaderno(texto.value); 
+      session.updateCaderno(texto.value);  // Atualiza o caderno na store local
     }).catch(error => {
       console.error('Erro ao atualizar caderno do diretor:', error);
     });
@@ -68,8 +64,9 @@ function fechar() {
   setTimeout(() => emit('fechar'), 500);
 }
 
+// Função para limpar o texto
 function limparTexto() {
-  texto.value = ''; 
+  texto.value = ''; // Limpa o conteúdo da variável de texto
 }
 </script>
 
@@ -89,7 +86,6 @@ function limparTexto() {
 }
 
 .caderno {
-  
   width: 40%;
   height: 90%;
   margin: auto 0;
@@ -98,7 +94,7 @@ function limparTexto() {
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Isso vai garantir que o conteúdo seja distribuído ao longo da altura do caderno */
+  justify-content: space-between;
 }
 
 .cabecalho {
@@ -115,11 +111,9 @@ function limparTexto() {
   padding: 20px;
   overflow: hidden;
   display: flex;
-
 }
 
 .textarea-linhas {
-  
   width: 100%;
   height: 100%;
   resize: none;
@@ -133,28 +127,27 @@ function limparTexto() {
 }
 
 .limpar-button {
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  font-size: 16px;
-  width: 40%;
-  margin: 20px auto 0 auto;
-  padding: 10px;
+  width: 20%; /* Largura do botão */
+  margin: 0 auto; /* Centraliza o botão horizontalmente */
+  padding: 7px;
   background-color: white;
   color: black;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o conteúdo dentro do botão */
 }
 
 .limpar-button:hover {
-  background-color: #e7e7e7;
+  background-color: #cc0000;
 }
 
 .trash-icon {
   width: 16px;
   height: 16px;
-
+  margin-left: 8px;
   background-color: white;
   clip-path: url(#trash-icon);
 }
