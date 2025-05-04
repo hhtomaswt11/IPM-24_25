@@ -2072,7 +2072,7 @@
       "de": "João Pedro",
       "assunto": "Troca de Turno - Programação Funcional T2→T1",
       "conteudo": "Boa tarde. Seria possível trocar para o turno do turno T2 para o turno T1?",
-      "lida": true
+      "lida": false
     },
     {
       "id": "2",
