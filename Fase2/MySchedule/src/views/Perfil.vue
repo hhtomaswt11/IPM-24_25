@@ -149,7 +149,7 @@
             sexo: aluno.sexo,
             telefone: aluno.telefone,
             departamento: aluno.departamento,
-            cargos: [aluno.cargo] // Atenção: no aluno é `cargo` (string), não `cargos` (array)
+            cargos: [aluno.cargo] 
           };
         } else {
           console.error('Utilizador não encontrado.');
@@ -170,18 +170,17 @@
     }
   });
 
-  // Ativar modo de edição
   function ativarEdicao() {
     editando.value = true;
   }
 
-  // Guardar alterações no servidor
+  // guardar alterações no servidor
   async function guardarAlteracoes() {
     const atualizados = {
       name: novoNome.value,
       email: novoEmail.value,
       nascimento: novoNascimento.value,
-      morada: novaMorada.value,  // Agora também salva a morada
+      morada: novaMorada.value,  
       sexo: novoSexo.value,
       telefone: novoTelefone.value,
       departamento: novoDepartamento.value,
@@ -195,11 +194,11 @@
           name: novoNome.value,
           email: novoEmail.value,
           nascimento: novoNascimento.value,
-          morada: novaMorada.value,  // Enviar morada para students
+          morada: novaMorada.value,  
           sexo: novoSexo.value,
           telefone: novoTelefone.value,
           departamento: novoDepartamento.value,
-          cargo: novosCargos.value[0] // Students têm cargo como string
+          cargo: novosCargos.value[0] 
         });
       } else {
         // Atualizar no directors

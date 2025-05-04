@@ -31,7 +31,6 @@ const selectSemester = (semester) => {
 </script>
 
 <style scoped>
-/* Estilos mantidos iguais */
 .dropdown {
   position: relative;
   width: 315px;

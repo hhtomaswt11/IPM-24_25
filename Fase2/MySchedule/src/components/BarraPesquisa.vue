@@ -1,7 +1,6 @@
 <template>
   <div class="search-bar">
-    <!-- Adicionar cor rosa à lupa -->
-    <Search size="24" class="search-icon" color="#be7979" /> <!-- Cor rosa -->
+    <Search size="24" class="search-icon" color="#be7979" /> 
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -12,7 +11,7 @@
 </template>
 
 <script setup>
-import { Search } from 'lucide-vue-next'; // Importa o ícone de lupa da biblioteca
+import { Search } from 'lucide-vue-next'; 
 
 defineProps(['modelValue', 'placeholderText']); 
 defineEmits(['update:modelValue']);

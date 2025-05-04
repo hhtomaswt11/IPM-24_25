@@ -10,7 +10,6 @@
             placeholder="Escreva aqui as suas anotações..."
           ></textarea>
         </div>
-        <!-- Botão de Limpar -->
         <button @click="limparTexto" class="limpar-button">
           Limpar
           <i class="fas fa-trash-alt" style="color: #8B0000"></i>
@@ -64,9 +63,9 @@ function fechar() {
   setTimeout(() => emit('fechar'), 500);
 }
 
-// Função para limpar o texto
+
 function limparTexto() {
-  texto.value = ''; // Limpa o conteúdo da variável de texto
+  texto.value = ''; 
 }
 </script>
 
@@ -127,8 +126,8 @@ function limparTexto() {
 }
 
 .limpar-button {
-  width: 20%; /* Largura do botão */
-  margin: 0 auto; /* Centraliza o botão horizontalmente */
+  width: 20%; 
+  margin: 0 auto; 
   padding: 7px;
   background-color: white;
   color: black;
@@ -137,7 +136,7 @@ function limparTexto() {
   font-size: 16px;
   display: flex;
   align-items: center;
-  justify-content: center; /* Centraliza o conteúdo dentro do botão */
+  justify-content: center; 
 }
 
 .limpar-button:hover {

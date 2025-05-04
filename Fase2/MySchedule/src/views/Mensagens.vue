@@ -116,7 +116,7 @@ import EnviarMensagem from '@/components/EnviarMensagemDiretor.vue';
 import EnviarMensagemAluno from '@/components/EnviarMensagemAluno.vue';
 import Mensagem from '@/components/Mensagem.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
-import axios from 'axios'; // Importa o Axios
+import axios from 'axios'; 
 import { useSessionStorage } from '@/stores/session';
 
 
@@ -199,7 +199,7 @@ function responderMensagem(destinatario) {
   flex-direction: column;
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto; 
   box-sizing: border-box;
 }
 
@@ -215,9 +215,9 @@ function responderMensagem(destinatario) {
 .messages-boxes {
   display: flex;
   justify-content: center;
-  gap: 150px; /* Maintaining the same gap */
+  gap: 150px; 
   margin-top: 50px;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap;
 }
 
 .message-box {
@@ -227,7 +227,7 @@ function responderMensagem(destinatario) {
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   position: relative;
-  flex-shrink: 0; /* Prevent boxes from shrinking */
+  flex-shrink: 0;
 }
 
 /* Media query for medium screens */

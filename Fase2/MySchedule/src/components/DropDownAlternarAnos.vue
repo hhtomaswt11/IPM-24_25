@@ -29,7 +29,6 @@ const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Função para selecionar o ano ou "Todos os Anos"
 const selectYear = (year) => {
   selectedYear.value = year; // atualiza o ano selecionado ou "null" para todos os anos
   emit('update:year', year); // emite o evento para o componente pai
