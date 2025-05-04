@@ -31,52 +31,69 @@
   </div>
 </template>
   
-  <script setup>
-  import { defineProps } from 'vue'
-  import db from '@/database/trabalhodb.json'
-  
-  const props = defineProps({
-    shifts: Array
-  })
-  
-  function getClassroomName(classroomId) {
-    const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
-    const building = room ? db.buildings.find(b => b.id.toString() === room.buildingId.toString()) : null
-    return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  shifts: Array
+})
+
+const classrooms = ref([])
+const buildings = ref([])
+
+onMounted(async () => {
+  try {
+    const [classroomsRes, buildingsRes] = await Promise.all([
+      axios.get("http://localhost:3000/classrooms"),
+      axios.get("http://localhost:3000/buildings")
+    ])
+    classrooms.value = classroomsRes.data
+    buildings.value = buildingsRes.data
+  } catch (error) {
+    console.error("Erro ao carregar dados de salas e edifícios:", error)
   }
-  
-  function getClassroomCapacity(classroomId) {
-    const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
-    return room ? room.capacity : 0
+})
+
+function getClassroomName(classroomId) {
+  const room = classrooms.value.find(r => r.id.toString() === classroomId.toString())
+  const building = room ? buildings.value.find(b => b.id.toString() === room.buildingId.toString()) : null
+  return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
+}
+
+function getClassroomCapacity(classroomId) {
+  const room = classrooms.value.find(r => r.id.toString() === classroomId.toString())
+  return room ? room.capacity : 0
+}
+
+function calculateOccupancyRate(shift) {
+  const room = classrooms.value.find(r => r.id.toString() === shift.classroomId.toString())
+  if (!room || room.capacity === 0) return 0
+  return Math.round((shift.totalStudentsRegistered / room.capacity) * 100)
+}
+
+function getOccupancyClass(shift) {
+  const rate = calculateOccupancyRate(shift)
+  if (rate >= 80) return 'high-occupancy'
+  if (rate >= 50) return 'medium-occupancy'
+  return 'low-occupancy'
+}
+
+function formatTime(hour) {
+  return `${hour.toString().padStart(2, '0')}:00`
+}
+
+function translateDay(day) {
+  const dias = {
+    Monday: 'segunda-feira',
+    Tuesday: 'terça-feira',
+    Wednesday: 'quarta-feira',
+    Thursday: 'quinta-feira',
+    Friday: 'sexta-feira'
   }
-  
-  function calculateOccupancyRate(shift) {
-    const room = db.classrooms.find(r => r.id.toString() === shift.classroomId.toString())
-    if (!room || room.capacity === 0) return 0
-    return Math.round((shift.totalStudentsRegistered / room.capacity) * 100)
-  }
-  
-  function getOccupancyClass(shift) {
-    const rate = calculateOccupancyRate(shift)
-    if (rate >= 80) return 'high-occupancy'
-    if (rate >= 50) return 'medium-occupancy'
-    return 'low-occupancy'
-  }
-  
-  function formatTime(hour) {
-    return `${hour.toString().padStart(2, '0')}:00`
-  }
-  
-  function translateDay(day) {
-    const dias = {
-      Monday: 'segunda-feira',
-      Tuesday: 'terça-feira',
-      Wednesday: 'quarta-feira',
-      Thursday: 'quinta-feira',
-      Friday: 'sexta-feira'
-    }
-    return dias[day] || day
-  }
+  return dias[day] || day
+}
 </script>
 
 <style scoped>

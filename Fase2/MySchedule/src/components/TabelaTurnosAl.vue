@@ -1,5 +1,12 @@
 <template>
   <div class="uc-table-wrapper">
+    <!-- POP-UP de sucesso -->
+    <div v-if="showSuccessPopup" class="popup-success">
+      <p>O pedido de troca de turno foi efetuado com sucesso.</p>
+      <button class="popup-ok-btn" @click="fecharPopup">OK</button>
+    </div>
+
+
     <table class="uc-table">
       <thead>
         <tr>
@@ -10,7 +17,7 @@
           <th>Nº alunos</th>
           <th>Hora</th>
           <th>Dia</th>
-          <th></th> <!-- nova coluna para os botões -->
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -34,7 +41,7 @@
             <button
               v-if="!alunoInscrito(shift.id.toString())"
               class="swap-btn"
-              @click="pedirTroca(shift.id)"
+              @click="pedirTroca(shift.id, ucId)"
             >
               ⇄
             </button>
@@ -46,39 +53,64 @@
 </template>
 
 <script setup>
-import db from '@/database/trabalhodb.json'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios'
 
 const alunoId = Number(sessionStorage.getItem("userId"))
-console.log("ID do aluno em sessão:", alunoId);
+console.log("ID do aluno em sessão:", alunoId)
 
 defineProps({
   ucId: Number,
   shifts: Array
 })
 
-// Turnos onde o aluno está inscrito
-const alunoShifts = db.allocations
-  .filter(a => a.studentId.toString() === alunoId.toString()) 
-  .map(a => a.shiftId.toString()) 
+const alunoShifts = ref([])
+const classrooms = ref([])
+const buildings = ref([])
+const allShifts = ref([])
+const conflicts = ref([])
+const showSuccessPopup = ref(false)
 
+onMounted(async () => {
+  try {
+    const [allocationsRes, classroomsRes, buildingsRes, shiftsRes, conflictsRes] = await Promise.all([
+      axios.get("http://localhost:3000/allocations"),
+      axios.get("http://localhost:3000/classrooms"),
+      axios.get("http://localhost:3000/buildings"),
+      axios.get("http://localhost:3000/shifts"),
+      axios.get("http://localhost:3000/conflicts")
+    ])
+
+    alunoShifts.value = allocationsRes.data
+      .filter(a => a.studentId.toString() === alunoId.toString())
+      .map(a => a.shiftId.toString())
+
+    classrooms.value = classroomsRes.data
+    buildings.value = buildingsRes.data
+    allShifts.value = shiftsRes.data
+    conflicts.value = conflictsRes.data
+  } catch (error) {
+    console.error("Erro ao carregar dados:", error)
+  }
+})
 
 function alunoInscrito(shiftId) {
-  return alunoShifts.includes(shiftId)
+  return alunoShifts.value.includes(shiftId.toString())
 }
 
 function getClassroomName(classroomId) {
-  const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
-  const building = room ? db.buildings.find(b => b.id.toString() === room.buildingId.toString()) : null
+  const room = classrooms.value.find(r => r.id.toString() === classroomId.toString())
+  const building = room ? buildings.value.find(b => b.id.toString() === room.buildingId.toString()) : null
   return room && building ? `${building.abbreviation} - ${room.name}` : 'Desconhecida'
 }
 
 function getClassroomCapacity(classroomId) {
-  const room = db.classrooms.find(r => r.id.toString() === classroomId.toString())
+  const room = classrooms.value.find(r => r.id.toString() === classroomId.toString())
   return room ? room.capacity : 0
 }
 
 function calculateOccupancyRate(shift) {
-  const room = db.classrooms.find(r => r.id.toString() === shift.classroomId.toString())
+  const room = classrooms.value.find(r => r.id.toString() === shift.classroomId.toString())
   if (!room || room.capacity === 0) return 0
   return Math.round((shift.totalStudentsRegistered / room.capacity) * 100)
 }
@@ -105,30 +137,104 @@ function translateDay(day) {
   return dias[day] || day
 }
 
-async function pedirTroca(novoTurnoId) {
-  const turnoAtual = alunoShifts.find(id => {
-    const t = db.shifts.find(s => s.id === id)
-    return t?.courseId === ucId
+async function pedirTroca(novoTurnoId, ucId) {
+  const novoTurno = allShifts.value.find(s => s.id.toString() === novoTurnoId.toString())
+  if (!novoTurno) {
+    alert("O turno de destino não foi encontrado.")
+    return
+  }
+
+  const tipoNovoTurno = novoTurno.type
+
+  const turnoAtual = alunoShifts.value.find(id => {
+    const turno = allShifts.value.find(s => s.id.toString() === id.toString())
+    return (
+      turno &&
+      turno.courseId.toString() === ucId.toString() &&
+      turno.type === tipoNovoTurno &&
+      (turno.type === "TP" || turno.type === "PL")
+    )
   })
 
+  if (!turnoAtual) {
+    alert("Não foi encontrado um turno prático atual compatível para esta troca.")
+    return
+  }
+
+  try {
+    const pedidosExistentes = await axios.get("http://localhost:3000/shiftRequests")
+    const pedidoDuplicado = pedidosExistentes.data.some(pedido => {
+      if (pedido.studentId !== alunoId) return false
+
+      const turnoOrigem = allShifts.value.find(s => s.id.toString() === pedido.shiftId.toString())
+      const turnoDestino = allShifts.value.find(s => s.id.toString() === pedido.alternativeShiftId.toString())
+
+      return (
+        (turnoOrigem && turnoOrigem.courseId.toString() === ucId.toString()) ||
+        (turnoDestino && turnoDestino.courseId.toString() === ucId.toString())
+      )
+    })
+
+    if (pedidoDuplicado) {
+      alert("Já existe um pedido de troca pendente nesta unidade curricular. Aguarde a resolução antes de fazer outro.")
+      return
+    }
+  } catch (e) {
+    console.error("Erro ao verificar pedidos existentes:", e)
+    alert("Erro ao verificar pedidos existentes.")
+    return
+  }
+
+  const conflitoDoAluno = conflicts.value.find(c => c.studentId.toString() === alunoId.toString())
+  const haConflitoNaUC = conflitoDoAluno?.shiftID.some(conflictingShiftId => {
+    const shift = allShifts.value.find(s => s.id.toString() === conflictingShiftId.toString())
+    return shift && shift.courseId.toString() === ucId.toString()
+  })
+
+  if (haConflitoNaUC) {
+    alert("Não é possível fazer o pedido porque existem conflitos com turnos desta unidade curricular.")
+    return
+  }
+
+  // Criar pedido
   const novoPedido = {
-    shiftId: Number(turnoAtual),
+    shiftId: turnoAtual,
     studentId: alunoId,
     alternativeShiftId: novoTurnoId
   }
 
   try {
     await axios.post("http://localhost:3000/shiftRequests", novoPedido)
-    alert("Pedido de troca registado com sucesso!")
+    showSuccessPopup.value = true
+    console.log("Pedido de troca registado com sucesso!")
   } catch (e) {
     console.error("Erro ao criar pedido:", e)
     alert("Erro ao registar o pedido.")
   }
 }
 
+
+function fecharPopup() {
+  showSuccessPopup.value = false
+}
 </script>
 
 <style scoped>
+/* Pop-up de sucesso */
+.popup-success {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #10b981;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+/* restante CSS já existente... (sem alterações) */
 .uc-table-wrapper {
   position: relative;
   padding: 2rem;
@@ -179,23 +285,6 @@ async function pedirTroca(novoTurnoId) {
   font-weight: bold;
 }
 
-.swap-floating-btn {
-  position: absolute;
-  right: -40px;
-  background-color: #cda2a2;
-  color: white;
-  border: none;
-  padding: 10px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.swap-floating-btn:hover {
-  background-color: #ba7070;
-}
-
 .swap-btn {
   background-color: #cda2a2;
   color: #fff;
@@ -204,7 +293,7 @@ async function pedirTroca(novoTurnoId) {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;               
-  width: 100%;
+  width: 80%;
   border-radius: 3px;
   font-weight: bold;
 }
@@ -212,5 +301,4 @@ async function pedirTroca(novoTurnoId) {
 .swap-btn:hover {
   background-color: #ba7070;
 }
-
 </style>

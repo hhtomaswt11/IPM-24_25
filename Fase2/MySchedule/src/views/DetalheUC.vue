@@ -17,30 +17,47 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import db from '@/database/trabalhodb.json'
+import { onMounted, ref, computed } from 'vue'
 import TabelaTurnosAl from '@/components/TabelaTurnosAl.vue'
 import TabelaTurnosDC from '@/components/TabelaTurnosDC.vue'
+import axios from 'axios'
 
 const route = useRoute()
 const router = useRouter()
 
-const tipoUtilizador = route.params.userType // 'student' ou 'director'
+const uc = ref(null)
+const ucShifts = ref([])
+const teacherName = ref('Desconhecido')
+const tipoUtilizador = route.params.userType
 
-const nome = route.params.nome.toLowerCase()
-const uc = db.courses.find(c => c.name.toLowerCase().includes(nome))
+onMounted(async () => {
+  const [teachersRes, shiftsRes, coursesRes] = await Promise.all([
+    axios.get('http://localhost:3000/teachers'),
+    axios.get('http://localhost:3000/shifts'),
+    axios.get('http://localhost:3000/courses')
+  ])
 
-if (!uc) {
-  router.replace('/unidades')
-}
+  const shifts = shiftsRes.data
+  const courses = coursesRes.data
+  const teachers = teachersRes.data
 
-const ucShifts = db.shifts.filter(s => s.courseId.toString() === uc.id)
-const theoreticalShift = ucShifts.find(s => s.type === 'T')
-const teacher = theoreticalShift ? db.teachers.find(t => Number(t.id) === theoreticalShift.teacherId) : null
-const teacherName = teacher ? teacher.name : 'Desconhecido'
+  const nomeUc = route.params.nome
+  uc.value = courses.find(c => c.name === nomeUc)
+
+  if (uc.value) {
+    ucShifts.value = shifts.filter(s => s.courseId.toString() === uc.value.id.toString())
+    const theoreticalShift = ucShifts.value.find(s => s.type === 'T')
+    const teacher = theoreticalShift
+      ? teachers.find(t => Number(t.id) === theoreticalShift.teacherId)
+      : null
+    teacherName.value = teacher ? teacher.name : 'Desconhecido'
+  }
+})
 
 function irParaGestaoUC() {
-  router.push(`/gestao-uc/${uc.name}`)
+  if (uc.value) {
+    router.push(`/gestao-uc/${uc.value.name}`)
+  }
 }
 </script>
 
