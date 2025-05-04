@@ -12,7 +12,6 @@
         </div>
         <button @click="limparTexto" class="limpar-button">
           Limpar
-          <i class="fas fa-trash-alt" style="color: #8B0000"></i>
         </button>
       </div>
     </transition>
@@ -126,21 +125,24 @@ function limparTexto() {
 }
 
 .limpar-button {
-  width: 20%; 
-  margin: 0 auto; 
-  padding: 7px;
+  width: 35%; 
+  margin: 20px auto 0 auto; 
+  padding: 8px;
   background-color: white;
   color: black;
   border: none;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold; 
   display: flex;
   align-items: center;
   justify-content: center; 
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .limpar-button:hover {
-  background-color: #cc0000;
+  background-color: #a9a7a7;
 }
 
 .trash-icon {
