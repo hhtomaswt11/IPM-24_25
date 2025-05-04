@@ -4,7 +4,6 @@ import * as types from './types'
 const API = axios.create({
   baseURL: 'http://localhost:3000',
   responseType: 'json',
-  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -32,7 +32,7 @@ import BarraPesquisa from "@/components/BarraPesquisa.vue";
 import trabalhodb from "@/database/trabalhodb.json";
 import DropDownAlternarSem from "@/components/DropDownAlternarSem.vue";
 import DropDownAlternarAnos from "@/components/DropDownAlternarAnos.vue";
-import { useSessionStorage } from "@/stores/session.ts"; // importa a sessão
+import { useSessionStorage } from "@/stores/session.ts";
 
 export default {
   components: {
@@ -49,7 +49,7 @@ export default {
       students: trabalhodb.students, // necessário para buscar o enrolled
       selectedYear: null,
       selectedSemester: null,
-      session: useSessionStorage(), // guarda a sessão aqui
+      session: useSessionStorage(), 
     };
   },
   computed: {
@@ -126,7 +126,6 @@ export default {
       return "Sem docente atribuído";
     },
     checkRoutePermissions() {
-      // Check if the route userType parameter matches the session type
       const routeUserType = this.$route.params.userType;
       if (routeUserType && routeUserType !== this.session.type) {
         console.log('Unauthorized access detected in component');
@@ -135,11 +134,9 @@ export default {
     }
   },
   created() {
-    // Check permissions when component is created
     this.checkRoutePermissions();
   },
   watch: {
-    // Watch for route changes to re-check permissions
     '$route'(to, from) {
       this.checkRoutePermissions();
     }
@@ -159,12 +156,12 @@ export default {
     display: flex;
     justify-content: flex-end;  
     align-items: center;
-    margin-bottom: 62px; /* ajustar ? */ 
+    margin-bottom: 62px; 
     width: 100%;
 }
 
 .header > * {
-  margin-right: 40px; /* Espaçamento entre os componentes */
+  margin-right: 40px; 
 }
 
 .year-container {

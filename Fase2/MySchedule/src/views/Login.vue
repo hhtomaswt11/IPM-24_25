@@ -20,7 +20,7 @@
           <div class="input-group">
             <label for="email" class="sr-only">Email</label>
             <div class="input-wrapper">
-              <i class="fas fa-user"></i>
+           
               <input
                 type="email"
                 id="email"
@@ -37,7 +37,7 @@
           <div class="input-group">
             <label for="password" class="sr-only">Password</label>
             <div class="input-wrapper">
-              <i class="fas fa-key"></i>
+            
               <input
                 type="password"
                 id="password"
@@ -68,9 +68,9 @@
 
 
 <script lang="ts">
-import * as api from '../api.ts'; // API login functions
-import { useSessionStorage } from '@/stores/session.ts'; // session store to save login
-import { useMensagensStore } from '@/stores/useMensagensStore'; // messages store
+import * as api from '../api.ts'; 
+import { useSessionStorage } from '@/stores/session.ts'; 
+import { useMensagensStore } from '@/stores/useMensagensStore';
 
 export default {
   data() {
@@ -84,32 +84,22 @@ export default {
   computed: {
     mensagemTemp() {
       const store = useMensagensStore();
-      return store.mensagemTemp; // Temporary message from store
+      return store.mensagemTemp;
     }
   },
 
   methods: {
     async login() {
-      this.error = '';  // reset error when trying to login
+      this.error = ''; 
       try {
         let user = null;
         let userType = '';
 
-        // Try to authenticate as student
         user = await api.loginStudent(this.email, this.password);
         if (user) {
           userType = 'student';
         }
 
-        // If not a student, try to authenticate as teacher
-        if (!user) {
-          user = await api.loginTeacher(this.email, this.password);
-          if (user) {
-            userType = 'teacher';
-          }
-        }
-
-        // If not a student or teacher, try to authenticate as director
         if (!user) {
           user = await api.loginDirector(this.email, this.password);
           if (user) {
@@ -117,15 +107,12 @@ export default {
           }
         }
 
-        // If any user type was found, login and redirect
         if (user) {
           this.handleLogin(user, userType);
         } else {
-          // If login not possible, display error message
           this.error = 'Endereço eletrónico ou palavra-passe inválidos';
         }
       } catch (error) {
-        // If there's an error during login, display error message
         this.error = 'Ocorreu um erro ao tentar fazer login. Tente novamente.';
       }
     },
@@ -146,7 +133,7 @@ export default {
 
       this.error = '';
 
-      if (type === 'student' || type === 'director'){// } || type === 'director') {
+      if (type === 'student' || type === 'director'){
         this.$router.push(`/unidades/${type}`);
       } else {
         this.$router.push('/login');
@@ -156,7 +143,7 @@ export default {
 
   beforeDestroy() {
     const store = useMensagensStore();
-    store.limparMensagemTemp(); // Clear temporary message after display
+    store.limparMensagemTemp(); 
   }
 };
 </script>
@@ -175,7 +162,6 @@ html, body {
   overflow-x: hidden; 
 }
 
-/* Main container */
 .container {
   display: flex;
   height: 100vh;
@@ -183,7 +169,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Left side with image */
 .left {
   display: none;
   width: 50%;
@@ -196,7 +181,6 @@ html, body {
   object-fit: cover;
 }
 
-/* Right side with form */
 .right {
   display: flex;
   justify-content: center;
@@ -215,7 +199,6 @@ html, body {
   gap: 1.5rem;
 }
 
-/* Logo + Title */
 .title {
   text-align: center;
   width: 100%;
@@ -245,7 +228,6 @@ html, body {
   margin-top: 0.5rem;
 }
 
-/* Form */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -322,7 +304,6 @@ html, body {
   background-color: #4b5563;
 }
 
-/* Errors */
 .error-message {
   color: #be0000;
   font-size: 0.9rem;
@@ -330,7 +311,6 @@ html, body {
   width: 100%;
 }
 
-/* Success message (session ended) */
 .success-message {
   font-size: 1rem;
   color: #c5bda6;
@@ -358,7 +338,6 @@ html, body {
   border-width: 0;
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) {
   .left {
     display: block;

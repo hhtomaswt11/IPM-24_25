@@ -5,7 +5,7 @@ import Sidebar from '@/components/Navegacao.vue';
 import Caderno from '@/components/Caderno.vue';
 import TerminarSessao from '@/components/TerminarSessao.vue';
 import { useMensagensStore } from '@/stores/useMensagensStore';
-import { useSessionStorage } from '@/stores/session.ts'; // IMPORTAR a session
+import { useSessionStorage } from '@/stores/session.ts';
 
 const store = useMensagensStore();
 const session = useSessionStorage(); // Aceder à sessão
@@ -77,7 +77,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Layout base seguro */
+/* Layout base */
 .app-container {
   display: flex;
   min-height: 100vh;
@@ -98,7 +98,7 @@ onUnmounted(() => {
   padding: 0;
 }
 
-/* Componente Caderno (se necessário) */
+
 .caderno-wrapper {
   position: fixed;
   right: 0;

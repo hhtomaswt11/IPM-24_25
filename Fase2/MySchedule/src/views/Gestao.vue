@@ -178,7 +178,7 @@ async function acaoRejeitar(item) {
 .dropdown {
   position: relative;
   display: inline-block;
-  width: 200px; /* ou o valor que deseja */
+  width: 200px; 
   margin-top: 0.75rem;
 }
 
@@ -206,13 +206,13 @@ async function acaoRejeitar(item) {
 }
 
 ::v-deep(.uc-cell) {
-  width: 13.75rem; /* 220px */
+  width: 13.75rem; 
   white-space: normal;
   overflow: visible;
   text-overflow: initial;
 }
 
 ::v-deep(th:nth-child(4)) {
-  width: 13.75rem; /* 220px */
+  width: 13.75rem; 
 }
 </style>
