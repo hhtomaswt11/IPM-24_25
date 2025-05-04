@@ -3,14 +3,12 @@
     <div class="decoracao-fundo"></div>
     <div v-if="isLoading"></div>
 
-<!-- SEM DADOS: mostra overlay -->
     <div v-else-if="dadosFiltrados.length === 0" class="overlay">
       <div class="overlay-content">
         <p>De momento, esta Unidade Curricular não apresenta conflitos, trocas de turnos nem trocas de sala!</p>
       </div>
     </div>
 
-<!-- COM DADOS: mostra tabela -->
     <Tabela
       v-else
       titulo="Conflitos, Trocas de Turnos e Salas"
@@ -30,7 +28,8 @@ const isLoading = ref(true)
 import { useRoute } from 'vue-router'
 import Tabela from '@/components/Tabela.vue'
 import { useGestaoStore } from '@/stores/capacidade'; 
-import { aceitarTrocaTurno, rejeitarTrocaTurno, atualizarAlocacao } from '@/utils/gestaoAcoes';
+import { prepararTrocasDeSala } from '@/utils/prepararTrocasdeSalas';
+import { aceitarTrocaTurno, rejeitarTrocaTurno, atualizarAlocacao} from '@/utils/gestaoAcoes';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
@@ -62,14 +61,18 @@ onMounted(async () => {
     coursesRes,
     studentsRes,
     classroomsRes,
-    shiftRequestsRes
+    classroomRequestsRes,
+    shiftRequestsRes,
+    teachersRes
   ] = await Promise.all([
     axios.get('http://localhost:3000/conflicts'),
     axios.get('http://localhost:3000/shifts'),
     axios.get('http://localhost:3000/courses'),
     axios.get('http://localhost:3000/students'),
     axios.get('http://localhost:3000/classrooms'),
-    axios.get('http://localhost:3000/shiftRequests')
+    axios.get('http://localhost:3000/classroomRequests'),
+    axios.get('http://localhost:3000/shiftRequests'),
+    axios.get('http://localhost:3000/teachers')
   ]);
 
   const conflitos = conflictsRes.data;
@@ -78,7 +81,8 @@ onMounted(async () => {
   estudantes = studentsRes.data;
   const classrooms = classroomsRes.data;
   const shiftRequests = shiftRequestsRes.data;
-
+  const classroomRequests = classroomRequestsRes.data;
+  const teachers = teachersRes.data; 
   const nomeParam = route.params.nome?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   const uc = courses.find(c =>
     c.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === nomeParam
@@ -109,7 +113,7 @@ onMounted(async () => {
       alteracao: altShift.name,
       capacidade: `${shift.totalStudentsRegistered}/${sala?.capacity || '?'}`,
       decisao: 'Atualizar',
-      uc: course.id.toString(),
+      ucId: course.id.toString(),
       studentId: student.id,
       turnoAtualId: shift.id,
       alternativeShiftId: altShift,
@@ -152,7 +156,7 @@ onMounted(async () => {
           escolha: '',
           capacidade: '',
           decisao: 'Atualizar',
-          uc: courseId.toString(),
+          ucId: courseId.toString(),
           studentId: studentId,
           turnoAtualId: shiftID, 
           conflitoId: conflito.id, 
@@ -162,13 +166,15 @@ onMounted(async () => {
     }
   }
 
-  dadosFiltrados.value = [...todasTrocas, ...conflitosCompletos].filter(d => d.uc === uc?.id?.toString());
+  const pedidosSala = prepararTrocasDeSala({ classroomRequests, shifts, classrooms, teachers, courses });
+  console.log (pedidosSala)
+
+  dadosFiltrados.value = [...todasTrocas, ...conflitosCompletos, ...pedidosSala].filter(d => d.ucId === uc?.id?.toString());
   isLoading.value = false
 })
 
-
 async function acaoAtualizar(item) {
-  await atualizarAlocacao(item, dados, notifyAllocationUpdated);
+  await atualizarAlocacao(item, dadosFiltrados, notifyAllocationUpdated);
 }
 
 async function acaoAceitar(item) {

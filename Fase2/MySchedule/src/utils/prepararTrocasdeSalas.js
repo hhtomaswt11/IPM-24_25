@@ -9,6 +9,7 @@ export function prepararTrocasDeSala({ classroomRequests, shifts, classrooms, te
     const novaSala = classrooms.find(c => c.id == pedido.classroomId);
     const salaAtual = classrooms.find(c => c.id == shift?.classroomId);
     const uc = courses.find(c => c.id == shift?.courseId)?.name || '---';
+    const ucId = courses.find(c => c.id == shift?.courseId)?.id || NaN;
 
     if (!teacher || !shift || !novaSala || !salaAtual) continue;
 
@@ -16,7 +17,8 @@ export function prepararTrocasDeSala({ classroomRequests, shifts, classrooms, te
       tipo: 'Troca de Sala',
       numero: teacher.numero || '---',
       estatuto: '---',
-      uc: uc, // Pode ser ajustado se necessário
+      uc: uc, 
+      ucId: ucId.toString(),
       turnoAtual: salaAtual.name,
       alteracao: novaSala.name,
       capacidade: novaSala.capacity,
