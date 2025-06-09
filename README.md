@@ -4,6 +4,8 @@ Universidade do Minho
 
 (Ano letivo 2024/2025)
 
+#### Nota Final - 18/20 💎
+
 ### Equipa - _Grupo 30_ 
 
 Tomás Henrique Alves Melo (A104529) \
